@@ -1,0 +1,18 @@
+<div class="row">
+  <div class="md-12">
+    <form #scheduleDays='ngForm' (ngSubmit)=saveSchedule(scheduleDays)>
+<div class="form-group" *ngFor ='let items of days'>
+  <input type="checkbox" name='{{ items }}' ngModel/>{{items}}
+  <select name='hrs_{{items}}' ngModel>
+    <option *ngFor="let hr of hours">{{("0"+hr).slice(-2)}}</option>
+  </select>
+  <select name='mins_{{items}}' ngModel>
+    <option *ngFor="let min of mins">{{("0"+min).slice(-2)}}</option>
+  </select>
+  </div>
+  <div class="form-group d-flex justify-content-center">
+    <button mat-raised-button color="primary" type="submit" [disabled]="scheduleDays.invalid">Save</button>
+    </div>
+    </form>
+  </div>
+</div>

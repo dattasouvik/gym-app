@@ -1,0 +1,64 @@
+   <div class="row">
+      <div class="col-md-3"></div>
+      <div class="col-md-6">
+<form [formGroup]='regForm'  class="normal-form">
+  <div class="controles-container">
+    <div class="form-group">
+
+            <button mat-button color="warn">
+                <mat-icon>file_upload</mat-icon>
+                Upload
+            </button>
+            <input type="file" #fileInput id="fileUpload" name="fileUpload" multiple="multiple" accept="image/*" style="display:none;" />
+    </div>
+      <div class="form-group">
+        <mat-form-field>
+          <input formControlName="fname" matInput placeholder="First Name*">
+          <mat-error>This field is mandatory.</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <mat-form-field>
+          <input formControlName="lname" matInput placeholder="last Name*">
+          <mat-error>This field is mandatory.</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <mat-form-field>
+          <input formControlName="uemail" matInput placeholder="Email">
+          <mat-error>Invalid email address.</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <mat-form-field>
+          <input formControlName="uphone" matInput placeholder="Mobile*">
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <mat-form-field>
+          <textarea formControlName="uaddress" matInput rows="5" placeholder="Address" style="resize: none;"></textarea>
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+          <mat-radio-group formControlName="ugender">
+            <mat-radio-button value="1">Male</mat-radio-button>
+            <mat-radio-button value="2">Female</mat-radio-button>
+            <mat-radio-button value="3">Other</mat-radio-button>
+          </mat-radio-group>
+        </div>
+        <div class="form-group">
+        <mat-form-field [style.width.px]=250>
+          <input formControlName="udob" matInput [matDatepicker]="picker" placeholder="Date of birth">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+      <button mat-raised-button color="primary" type="submit" [disabled]="regForm.invalid">Submit</button>
+      </div>
+  </div>
+    </form>
+
+
+    <div class="col-md-3"></div> </div>
+</div>

@@ -1,0 +1,35 @@
+.header-part{
+  display: grid;
+  grid-template-columns: auto auto auto auto auto auto;
+  background-color: #2196F3;
+}
+
+.header-part > div {
+  background-color: #2196F3;
+}
+
+.pop-head-content {
+  grid-column: 1 / 6;
+  padding:3px;
+  color: white;
+  background-color: #5799ce;
+  display: flex;
+  align-items: center;
+}
+
+.pop-head-close{
+  text-align: right;
+}
+.pop-head-close .close-button{
+  background-color: black;
+  cursor: pointer;
+  color: white;
+  padding: 5px;
+  width: auto;
+  font-size: 15px;
+  border: none;
+  border-radius: 0px;
+  outline: none;
+}
+
+

@@ -1,0 +1,21 @@
+<div class="row">
+  <div class="col-md-3"></div>
+  <div class="col-md-6">
+<form #addtrainer ='ngForm' class="normal-form" (ngSubmit) = onSubmit(addtrainer) >
+<div class="controles-container">
+  <label>Choose Trainer</label>
+  <ng-multiselect-dropdown
+  [placeholder]="'Choose'"
+  [data]="alltrainer"
+  [(ngModel)]="seltrainer"
+  [settings]="dropdownSettings"
+  name="trainerid"
+  >
+</ng-multiselect-dropdown>
+  <div class="form-group d-flex justify-content-center mt-5">
+  <button mat-raised-button color="primary" type="submit" [disabled]="addtrainer.invalid">Submit</button>
+  </div>
+</div>
+</form>
+</div>
+</div>

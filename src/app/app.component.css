@@ -1,0 +1,15 @@
+mat-sidenav {
+  width: 280px;
+}
+body {
+  margin: 0;
+}
+.main-content {
+  padding:20px;
+}
+.toolbar-spacer {
+  flex: 1 1 auto;
+}
+.hand-icon{
+  cursor: pointer;
+}
