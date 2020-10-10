@@ -6,8 +6,8 @@ import { ScheduleDaysComponent } from './user-attendence/schedule-days/schedule-
 
 
 const routes: Routes = [
-  { path: 'registration', loadChildren: './registration-form/registration-form.module#RegistrationFormModule' },
-  { path: 'users', loadChildren: './user-data/user-data.module#UserDataModule' },
+  { path: 'registration', loadChildren: () => import('./registration-form/registration-form.module').then(m => m.RegistrationFormModule) },
+  { path: 'users', loadChildren: () => import('./user-data/user-data.module').then(m => m.UserDataModule) },
   // { path: 'attendence',loadChildren:'./user-attendence/user-attendence.module#UserAttendenceModule'}
   { path: 'attendence', component: AttendenceListComponent },
   { path: 'schedule', component: ScheduleDaysComponent }

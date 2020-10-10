@@ -6,7 +6,7 @@ import { IDropdownSettings } from 'ng-multiselect-dropdown/public_api';
 @Component({
   selector: 'app-add-remove-trainer',
   templateUrl: './add-remove-trainer.component.html',
-  styleUrls: ['./add-remove-trainer.component.css']
+  styleUrls: ['./add-remove-trainer.component.scss']
 })
 export class AddRemoveTrainerComponent implements OnInit {
   dropdownSettings: IDropdownSettings  = {};

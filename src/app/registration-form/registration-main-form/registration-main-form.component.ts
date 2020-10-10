@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, EmailValidator, FormContro
 @Component({
   selector: 'app-registration-main-form',
   templateUrl: './registration-main-form.component.html',
-  styleUrls: ['./registration-main-form.component.css']
+  styleUrls: ['./registration-main-form.component.scss']
 })
 export class RegistrationMainFormComponent implements OnInit {
   regForm: FormGroup;

@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { CalendarOptions } from '@fullcalendar/angular';
-import { MatDialog, MatDialogConfig } from '@angular/material';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { SaveAttendenceComponent } from '../save-attendence/save-attendence.component';
 
 
 @Component({
   selector: 'app-attendence-list',
   templateUrl: './attendence-list.component.html',
-  styleUrls: ['./attendence-list.component.css']
+  styleUrls: ['./attendence-list.component.scss']
 })
 export class AttendenceListComponent implements OnInit {
   attended: any;
