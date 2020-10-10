@@ -10,8 +10,8 @@ const routes: Routes = [
   { path: 'users', loadChildren: () => import('./user-data/user-data.module').then(m => m.UserDataModule) },
   // { path: 'attendence',loadChildren:'./user-attendence/user-attendence.module#UserAttendenceModule'}
   { path: 'attendence', component: AttendenceListComponent },
-  { path: 'schedule', component: ScheduleDaysComponent }
-
+  { path: 'schedule', component: ScheduleDaysComponent },
+  { path: 'profile', loadChildren: () => import('./modules/user-profile/user-profile.module').then(m => m.UserProfileModule) }
 ];
 
 @NgModule({
