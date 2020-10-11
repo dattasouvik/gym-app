@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  serverApiUrl: `http://localhost:4200/`
+  serverApiUrl: `http://www.drupalone.org/`
 };

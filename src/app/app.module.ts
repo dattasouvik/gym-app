@@ -5,18 +5,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatIconModule } from '@angular/material/icon';
-import { MatListModule } from '@angular/material/list';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { MatSliderModule } from '@angular/material/slider';
-import { MatToolbarModule } from '@angular/material/toolbar';
 import { UserAttendenceModule } from './user-attendence/user-attendence.module';
 // import { SaveAttendenceComponent } from './user-attendence/save-attendence/save-attendence.component';
 import { AttendenceListComponent } from './user-attendence/attendence-list/attendence-list.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
+import { MaterialDesignModule } from 'src/app/modules/material-design/material-design.module';
+import { LoadingService } from 'src/app/modules/shared/services/loading.service';
+import { SharedModule } from 'src/app/modules/shared/shared.module';
+import { MessagesService } from 'src/app/modules/shared/services/messages.service';
 
 
 @NgModule({
@@ -30,18 +26,15 @@ import { FullCalendarModule } from '@fullcalendar/angular';
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MatSliderModule,
-    MatFormFieldModule,
-    MatIconModule,
-    MatMenuModule,
-    MatToolbarModule,
-    MatSlideToggleModule,
-    MatSidenavModule,
-    MatListModule,
+    MaterialDesignModule,
+    SharedModule,
     UserAttendenceModule,
     FullCalendarModule
   ],
-  providers: [],
+  providers: [
+    LoadingService,
+    MessagesService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
