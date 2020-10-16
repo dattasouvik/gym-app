@@ -32,3 +32,6 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 --------------------------------------------------------------------------
 ng generate module <module_name> --route <path_name> --module app.module
 ---------------------------------------------------------------------------
+
+## SCSS Artifacts
+<b>https://miro.medium.com/max/958/1*0MP59mq0K_Hi2ECSb_Zwhg.png</b>
