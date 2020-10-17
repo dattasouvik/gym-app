@@ -6,7 +6,7 @@
                   <div class="card-header card-header-danger d-flex">
                       <!-- Avatar -->
                       <div class="card-avatar">
-                        <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-8.jpg" class="rounded-circle mr-3" height="50px" width="50px" alt="avatar">
+                        <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-8.jpg" class="rounded-circle mr-3" width="100px" alt="avatar">
                       </div>
                       <div class="card-title">
                         <h4 class="card-title">Edit Profile</h4>
@@ -15,21 +15,7 @@
                   </div>
                   <div class="card-body">
                       <form>
-                          <div class="row">
-                              <div class="col-md-6">
-                                <mat-form-field class="example-full-width">
-                                  <mat-label>Username</mat-label>
-                                  <input matInput value="username" disabled>
-                                </mat-form-field>
-                              </div>
-                              <div class="col-md-6">
-                                <mat-form-field class="example-full-width">
-                                  <mat-label>Email</mat-label>
-                                  <input matInput value="email" disabled>
-                                </mat-form-field>
-                              </div>
-                          </div>
-                          <div class="row">
+                            <div class="row">
                               <div class="col-md-4">
                                 <mat-form-field class="example-full-width">
                                   <mat-label>Fist Name</mat-label>
@@ -46,6 +32,28 @@
                                 <mat-form-field class="example-full-width">
                                   <mat-label>Last Name</mat-label>
                                   <input matInput value="Last Name" disabled>
+                                </mat-form-field>
+                              </div>
+                          </div>
+                          <div class="row">
+                              <div class="col-md-4">
+                                <mat-form-field class="example-full-width">
+                                  <mat-label>Username</mat-label>
+                                  <input matInput value="username" disabled>
+                                </mat-form-field>
+                              </div>
+                              <div class="col-md-4">
+                                <mat-form-field class="example-full-width">
+                                  <mat-label>Email</mat-label>
+                                  <input matInput value="email" disabled>
+                                </mat-form-field>
+                              </div>
+                              <div class="col-md-4">
+                                <mat-form-field >
+                                  <mat-label>DOB</mat-label>
+                                  <input matInput [matDatepicker]="picker3" value="2020-10-17" disabled>
+                                  <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+                                  <mat-datepicker #picker3></mat-datepicker>
                                 </mat-form-field>
                               </div>
                           </div>
