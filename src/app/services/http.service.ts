@@ -9,27 +9,13 @@ import { environment } from '../../environments/environment';
 export class HttpService {
 
   constructor(private http: HttpClient) { }
-
-  private serverUrl: string = environment.serverApiUrl;
   private httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
     })
   };
-  private httpOptions_1 = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/x-www-form-urlencoded'
-    })
-  };
-  private tokenCredentials: object = {
-    "client_secret": "abc123",
-    "grant_type": "password",
-    "client_id": "e0aa8076-6c49-466a-b2a9-ad3276917d70",
-    "scope": "gymadmin",
-    "username": "cchowdh1",
-    "password": "123456",
 
-  }
+  private serverUrl: string = environment.serverApiUrl;
 
   /**
   * Generates url
@@ -47,22 +33,7 @@ export class HttpService {
     return this.http.get(url, this.httpOptions);
   }
 
-  getLogin(endpoint: string, credentials: any): Observable<any> {
-    let url = endpoint;
-    let body = {
-      "name": credentials.username,
-      "pass": credentials.password
-    }
 
-    return this.http.post(url, body, this.httpOptions);
-  }
-
-  getToken(endpoint: string,credentials:any): Observable<any> {
-    console.log(credentials);
-    let body=`username=${credentials.username}&password=${credentials.password}&client_secret=abc123&grant_type=password&client_id=e0aa8076-6c49-466a-b2a9-ad3276917d70&scope=gymadmin`
-    let url = endpoint;
-    return this.http.post(url, body, this.httpOptions_1);
-  }
   /**
   * Post request
   **/

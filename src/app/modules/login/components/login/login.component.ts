@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { HttpService } from 'src/app/services/http.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
   });
   details: any;
 
-  constructor(private fb: FormBuilder, private httpservice: HttpService, private router: Router) { }
+  constructor(private fb: FormBuilder, private authservice: AuthService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -24,14 +24,18 @@ export class LoginComponent implements OnInit {
   onSubmit() {
 
     // console.log(this.loginForm.value);
-    this.httpservice.getLogin("http://www.drupalone.org/user-login?_format=json", this.loginForm.value)
+    this.authservice.getLogin("http://www.drupalone.org/user-login?_format=json", this.loginForm.value)
       .subscribe(arg => {
         this.details = arg;
         console.log(arg)
         if (this.details.userId) {
           //generate token
-          this.httpservice.getToken("http://www.drupalone.org/oauth/token",this.loginForm.value)
-            .subscribe(val => console.log(val));
+          this.authservice.getToken("http://www.drupalone.org/oauth/token", this.loginForm.value)
+            .subscribe(val => {
+              console.log(val);
+              localStorage.setItem('access_token', val.access_token);
+              localStorage.setItem('refresh_token', val.refresh_token);
+            });
 
           this.router.navigate(['/']);
         }
