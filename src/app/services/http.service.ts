@@ -13,8 +13,7 @@ export class HttpService {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
     })
-  }; 
-
+  };
   private serverUrl: string = environment.serverApiUrl;
 
   /**
