@@ -10,6 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class LoginComponent implements OnInit {
 
+  hide = true;
   loginForm = this.fb.group({
     username: ['', Validators.required],
     password: ['', Validators.required],

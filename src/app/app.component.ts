@@ -17,5 +17,4 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
 })
 export class AppComponent {
   title = 'GymManagement';
-
 }
