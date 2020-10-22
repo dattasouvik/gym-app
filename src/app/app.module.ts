@@ -12,6 +12,7 @@ import { FullCalendarModule } from '@fullcalendar/angular';
 import { MaterialDesignModule } from 'src/app/modules/material-design/material-design.module';
 import { LoadingService } from 'src/app/modules/shared/services/loading.service';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
+import { ThemeSwitcherModule } from 'src/app/modules/theme-switcher/theme-switcher.module';
 import { MessagesService } from 'src/app/modules/shared/services/messages.service';
 
 
@@ -28,6 +29,7 @@ import { MessagesService } from 'src/app/modules/shared/services/messages.servic
     BrowserAnimationsModule,
     MaterialDesignModule,
     SharedModule,
+    ThemeSwitcherModule,
     UserAttendenceModule,
     FullCalendarModule
   ],

@@ -19,6 +19,9 @@
     .main-toolbar {
       flex: 0 0 auto;
       z-index: 999;
+      .flex-spacer{
+        flex-grow: 1;
+      }
     }
     // uses flexbox to push the inner content area, where the router-outlet lives below the toolbar and grants
     // it the rest of the available space with the ability to scroll
@@ -28,6 +31,7 @@
       overflow-y: auto;
 
       .content-area {
+        // min-height: 100%;
         height: 100%;
       }
     }

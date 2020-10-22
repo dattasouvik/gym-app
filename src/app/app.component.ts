@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+
 
 import { FullCalendarModule } from '@fullcalendar/angular'; // the main connector. must go first
 import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin
@@ -15,6 +16,10 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'GymManagement';
+  constructor() {}
+
+  ngOnInit(): void {}
+
 }

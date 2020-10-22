@@ -12,7 +12,7 @@
 @import 'layout/grid';
 
 
-@import 'themes/dark';
+@import 'themes/theme';
 
 
 @import './override';
@@ -30,17 +30,17 @@ html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 /* You can add global styles to this file, and also import other style files */
 
-td.fc-daygrid-day {
-  cursor: pointer!important;
-}
-.selected-date{
-  background-color: mediumseagreen;
-}
-.custom-dialog-container .mat-dialog-container {
-  /* add your styles */
-  padding: 0 0 24px 0 ;
-  border-radius: 0px;
-}
+// td.fc-daygrid-day {
+//   cursor: pointer!important;
+// }
+// .selected-date{
+//   background-color: mediumseagreen;
+// }
+// .custom-dialog-container .mat-dialog-container {
+//   /* add your styles */
+//   padding: 0 0 24px 0 ;
+//   border-radius: 0px;
+// }
 
 
 

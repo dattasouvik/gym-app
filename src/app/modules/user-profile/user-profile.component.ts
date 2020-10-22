@@ -19,6 +19,7 @@ export class UserProfileComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    // this.loadingService.loadingOn();
     const profile$ = this.httpService.get(`assets/data/profile.json`);
     const loadProfile$ = this.loadingService.showLoaderUntilCompleted(profile$);
     loadProfile$.subscribe(d => console.log(d), err => {

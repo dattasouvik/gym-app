@@ -8,7 +8,6 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 
-
 @NgModule({
   declarations: [UserProfileComponent, EditProfileComponent],
   imports: [
