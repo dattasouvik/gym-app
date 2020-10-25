@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  serverApiUrl: `http://www.drupalone.org/`
+  serverApiUrl: `https://www.drupalone.org/`
 };
 
 /*

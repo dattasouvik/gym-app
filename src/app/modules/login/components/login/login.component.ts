@@ -25,13 +25,13 @@ export class LoginComponent implements OnInit {
   onSubmit() {
 
     // console.log(this.loginForm.value);
-    this.authservice.getLogin("http://www.drupalone.org/user-login?_format=json", this.loginForm.value)
+    this.authservice.getLogin("https://www.drupalone.org/user-login?_format=json", this.loginForm.value)
       .subscribe(arg => {
         this.details = arg;
         console.log(arg)
         if (this.details.userId) {
           //generate token
-          this.authservice.getToken("http://www.drupalone.org/oauth/token", this.loginForm.value)
+          this.authservice.getToken("https://www.drupalone.org/oauth/token", this.loginForm.value)
             .subscribe(val => {
               console.log(val);
               localStorage.setItem('access_token', val.access_token);
