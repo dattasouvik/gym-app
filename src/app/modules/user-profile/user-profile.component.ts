@@ -29,7 +29,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   editProfile(){
-
+    
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.disableClose = true;

@@ -37,11 +37,14 @@ export class LoginComponent implements OnInit {
               localStorage.setItem('access_token', val.access_token);
               localStorage.setItem('refresh_token', val.refresh_token);
             });
-          this.router.navigate(['/profile']);
+
+          this.router.navigate(['/']);
         }
         else {
           console.log(2);
         }
+
+
       },
         err => alert("error")
       );
