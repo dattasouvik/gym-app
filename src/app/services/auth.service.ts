@@ -78,9 +78,10 @@ export class AuthService {
     let body = `client_secret=abc123&grant_type=refresh_token&client_id=e0aa8076-6c49-466a-b2a9-ad3276917d70&scope=gymadmin&refresh_token=${this.getRefreshToken()}`
     let url = environment.serverApiUrl + 'oauth/token';
     return this.http.post(url, body, this.httpOptions_1)
-    .pipe(tap((tokens: Tokens) => {
-      this.storeJwtToken(tokens.access_token);
-    }));
+      .pipe(tap((tokens: Tokens) => {
+        this.storeJwtToken(tokens.access_token);
+        this.storeJwtToken(tokens.refresh_token);
+      }));
   }
 
   getJwtToken() {
