@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
 
 
 import { FullCalendarModule } from '@fullcalendar/angular'; // the main connector. must go first
@@ -18,8 +19,9 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
 })
 export class AppComponent implements OnInit {
   title = 'GymManagement';
-  constructor() {}
+  constructor(private authService: AuthService) {}
 
+  isLoggedIn = this.authService.isLoggedIn();
   ngOnInit(): void {}
 
 }

@@ -48,10 +48,12 @@ export class LoginComponent implements OnInit {
     //   },
     //     err => alert("error")
     //   );
-    this.authservice.Login({username:this.loginForm.value.username,password:this.loginForm.value.password})
-      .subscribe(arg => console.log(arg));
-    
-
+    this.authservice.Login(
+      { username:this.loginForm.value.username,
+        password:this.loginForm.value.password
+      }
+    )
+    .subscribe(arg => console.log(arg));
   }
 
 }

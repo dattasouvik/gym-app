@@ -25,7 +25,7 @@ export class UserProfileComponent implements OnInit {
     loadProfile$.subscribe(d => console.log(d), err => {
       this.messagesService.showErrors("Hi Error ocuured here");
     })
-    // this.httpService.get(`user-data?_format=json`).subscribe(d => console.log(d))
+    // this.httpService.get(`edit-profile?_format=json`).subscribe(d => console.log(d))
   }
 
   editProfile(){

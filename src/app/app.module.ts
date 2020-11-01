@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,6 +14,7 @@ import { LoadingService } from 'src/app/modules/shared/services/loading.service'
 import { SharedModule } from 'src/app/modules/shared/shared.module';
 import { ThemeSwitcherModule } from 'src/app/modules/theme-switcher/theme-switcher.module';
 import { MessagesService } from 'src/app/modules/shared/services/messages.service';
+import { TokenInterceptor } from 'src/app/services/token.interceptor';
 
 
 @NgModule({
@@ -35,7 +36,12 @@ import { MessagesService } from 'src/app/modules/shared/services/messages.servic
   ],
   providers: [
     LoadingService,
-    MessagesService
+    MessagesService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })
