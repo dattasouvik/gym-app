@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   serverApiUrl: `https://www.drupalone.org/`
+  // serverApiUrl: `http://localhost:4200/`
 };
 
 /*

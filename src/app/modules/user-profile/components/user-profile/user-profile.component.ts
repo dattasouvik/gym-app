@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { LoadingService } from 'src/app/modules/shared/services/loading.service';
-import { MessagesService } from 'src/app/modules/shared/services/messages.service';
-import { EditProfileComponent } from 'src/app/modules/user-profile/components/edit-profile/edit-profile.component';
-import { HttpService } from 'src/app/services/http.service';
+import { Observable } from 'rxjs';
+import { UserProfile } from 'src/app/modules/user-profile/model/user-profile.model';
+import { UserProfileStore } from 'src/app/modules/user-profile/services/user-profile.store';
+
 
 @Component({
   selector: 'app-user-profile',
@@ -12,33 +11,18 @@ import { HttpService } from 'src/app/services/http.service';
 })
 export class UserProfileComponent implements OnInit {
 
-  constructor(private httpService: HttpService,
-    private dialog: MatDialog,
-    private loadingService: LoadingService,
-    private messagesService: MessagesService
+  constructor(
+    private userProfileStore: UserProfileStore
   ) { }
 
+  userProfile$: Observable<UserProfile[]>;
+
   ngOnInit(): void {
-    // this.loadingService.loadingOn();
-    const profile$ = this.httpService.get(`assets/data/profile.json`);
-    const loadProfile$ = this.loadingService.showLoaderUntilCompleted(profile$);
-    loadProfile$.subscribe(d => console.log(d), err => {
-      this.messagesService.showErrors("Hi Error ocuured here");
-    })
-    // this.httpService.get(`edit-profile?_format=json`).subscribe(d => console.log(d))
+    this.reloadUserProfile();
   }
 
-  editProfile(){
-
-    const dialogConfig = new MatDialogConfig();
-
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-    dialogConfig.width = "400px";
-
-    //tbd
-    dialogConfig.data = {firstName: 'abc',lastName: 'abc', address: 'abc' };
-    const dialogRef = this.dialog.open(EditProfileComponent, dialogConfig);
-
+  reloadUserProfile(){
+    this.userProfile$ = this.userProfileStore.viewUserProfile();
   }
+
 }

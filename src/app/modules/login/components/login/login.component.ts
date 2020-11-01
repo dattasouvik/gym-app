@@ -53,7 +53,9 @@ export class LoginComponent implements OnInit {
         password:this.loginForm.value.password
       }
     )
-    .subscribe(arg => console.log(arg));
+    .subscribe(success => {
+      this.router.navigate(['/profile']);
+    });
   }
 
 }
