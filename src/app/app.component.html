@@ -31,6 +31,7 @@
   </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content class="main-content">
+    <loading></loading>
     <mat-toolbar color="primary" class="main-toolbar">
       <mat-toolbar-row>
         <button mat-icon-button (click)="sidenav.toggle()">
@@ -46,7 +47,6 @@
     <main class="main-content-inner">
       <section class="content-area">
         <messages></messages>
-        <loading></loading>
         <router-outlet></router-outlet>
       </section>
     </main>
