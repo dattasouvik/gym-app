@@ -17,12 +17,12 @@ export class EditProfileComponent implements OnInit {
     private fb: FormBuilder,
     private dialogRef: MatDialogRef<EditProfileComponent>,
     @Inject(MAT_DIALOG_DATA) profile:UserProfile,
-  ) { 
+  ) {
     this.profile = profile;
 
     this.form = fb.group({
-      firstName: [profile.firstName, Validators.required],
-      lastName: [profile.lastName,Validators.required],
+      firstName: [profile.first_name, Validators.required],
+      lastName: [profile.last_name,Validators.required],
       address: [profile.address,Validators.required]
     });
   }

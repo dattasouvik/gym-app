@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { LoadingService } from 'src/app/modules/shared/services/loading.service';
 import { MessagesService } from 'src/app/modules/shared/services/messages.service';
-import { EditProfileComponent } from 'src/app/modules/user-profile/edit-profile/edit-profile.component';
+import { EditProfileComponent } from 'src/app/modules/user-profile/components/edit-profile/edit-profile.component';
 import { HttpService } from 'src/app/services/http.service';
 
 @Component({
@@ -29,7 +29,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   editProfile(){
-    
+
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.disableClose = true;
