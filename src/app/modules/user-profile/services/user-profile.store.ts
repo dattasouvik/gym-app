@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
+import { catchError, shareReplay, tap } from 'rxjs/operators';
 import { LoadingService } from 'src/app/modules/shared/services/loading.service';
 import { MessagesService } from 'src/app/modules/shared/services/messages.service';
 import { UserProfile } from 'src/app/modules/user-profile/model/user-profile.model';
@@ -44,5 +44,32 @@ export class UserProfileStore {
   viewUserProfile(): Observable<UserProfile[]> {
     return this.profile$;
   }
+
+  saveUserProfile(changes: Partial<UserProfile>): Observable<any> {
+
+    const profile = this.subject.getValue();
+
+    const newProfile: any = {
+      ...profile[0],
+      ...changes
+    };
+
+    /* Merge old data with the updated one */
+    const updatedUserProfile: UserProfile[] = [];
+    updatedUserProfile[0] = newProfile;
+
+    this.subject.next(updatedUserProfile);
+
+    return this.httpService.post(`edit-profile?_format=json`, changes)
+      .pipe(
+          catchError(err => {
+              const message = "Unable to update data";
+              console.log(message, err);
+              this.messages.showErrors(message);
+              return throwError(err);
+          }),
+          shareReplay()
+      );
+    }
 
 }
