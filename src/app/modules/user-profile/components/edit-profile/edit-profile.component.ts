@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { UserProfile } from 'src/app/modules/user-profile/model/user-profile.model';
+import { UserProfileStore } from 'src/app/modules/user-profile/services/user-profile.store';
 
 @Component({
   selector: 'app-edit-profile',
@@ -14,6 +15,7 @@ export class EditProfileComponent implements OnInit {
   profile: UserProfile;
 
   constructor(
+    private userProfileStore: UserProfileStore,
     private fb: FormBuilder,
     private dialogRef: MatDialogRef<EditProfileComponent>,
     @Inject(MAT_DIALOG_DATA) profile:UserProfile,
@@ -21,8 +23,8 @@ export class EditProfileComponent implements OnInit {
     this.profile = profile;
 
     this.form = fb.group({
-      firstName: [profile.first_name, Validators.required],
-      lastName: [profile.last_name,Validators.required],
+      first_name: [profile.first_name, Validators.required],
+      last_name: [profile.last_name,Validators.required],
       address: [profile.address,Validators.required]
     });
   }
@@ -33,6 +35,9 @@ export class EditProfileComponent implements OnInit {
 
   save() {
     const changes = this.form.value;
+    this.userProfileStore.saveUserProfile(changes).subscribe();
+
+    this.dialogRef.close(changes);
   }
 
   close() {
