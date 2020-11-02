@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { LoadingService } from 'src/app/modules/shared/services/loading.service';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -17,45 +18,23 @@ export class LoginComponent implements OnInit {
   });
   details: any;
 
-  constructor(private fb: FormBuilder, private authservice: AuthService, private router: Router) { }
+  constructor(
+    private fb: FormBuilder, 
+    private authservice: AuthService, 
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
   }
 
   onSubmit() {
-
-    console.log(this.loginForm.value.username);
-    // this.authservice.getLogin("https://www.drupalone.org/user-login?_format=json", this.loginForm.value)
-    //   .subscribe(arg => {
-    //     this.details = arg;
-    //     console.log(arg)
-    //     if (this.details.userId) {
-    //       //generate token
-    //       this.authservice.getToken("https://www.drupalone.org/oauth/token", this.loginForm.value)
-    //         .subscribe(val => {
-    //           console.log(val);
-    //           localStorage.setItem('access_token', val.access_token);
-    //           localStorage.setItem('refresh_token', val.refresh_token);
-    //         });
-
-    //       this.router.navigate(['/']);
-    //     }
-    //     else {
-    //       console.log(2);
-    //     }
-
-
-    //   },
-    //     err => alert("error")
-    //   );
     this.authservice.Login(
       { username:this.loginForm.value.username,
         password:this.loginForm.value.password
       }
-    )
-    .subscribe(success => {
+    ).subscribe(success => {
       this.router.navigate(['/profile']);
-    });
+    });;
   }
 
 }

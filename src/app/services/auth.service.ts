@@ -53,6 +53,7 @@ export class AuthService {
         tap(tokens => this.doLoginUser(user.username, tokens as Tokens)),
         mapTo(true),
         catchError(error => {
+          console.log("called from auth", error);
           alert(error.error);
           return of(false);
         }));

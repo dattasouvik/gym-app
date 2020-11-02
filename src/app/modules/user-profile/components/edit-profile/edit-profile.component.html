@@ -35,7 +35,8 @@
           (click)="close()">
     Close
   </button>
-  <button class="mat-raised-button mat-primary" #saveButton (click)="save()">
+  <button class="mat-raised-button mat-primary" #saveButton 
+    [disabled]="form.invalid" (click)="save()">
     Update
   </button>
 </mat-dialog-actions>
