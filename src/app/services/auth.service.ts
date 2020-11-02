@@ -74,6 +74,14 @@ export class AuthService {
     return !!this.getJwtToken();
   }
 
+  isAuthenticated() {
+    let token = this.getJwtToken();
+    if (token) {
+        return true;
+    }
+    return false;
+  }
+
   refreshToken() {
     let body = `client_secret=abc123&grant_type=refresh_token&client_id=e0aa8076-6c49-466a-b2a9-ad3276917d70&scope=gymadmin&refresh_token=${this.getRefreshToken()}`
     let url = environment.serverApiUrl + 'oauth/token';

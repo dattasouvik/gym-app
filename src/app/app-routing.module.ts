@@ -3,6 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { UserAttendenceModule } from './user-attendence/user-attendence.module';
 import { AttendenceListComponent } from './user-attendence/attendence-list/attendence-list.component';
 import { ScheduleDaysComponent } from './user-attendence/schedule-days/schedule-days.component';
+import { LoginGuard } from 'src/app/guards/login.guard';
+import { AuthGuard } from 'src/app/guards/auth.guard';
 
 
 const routes: Routes = [
@@ -11,8 +13,14 @@ const routes: Routes = [
   // { path: 'attendence',loadChildren:'./user-attendence/user-attendence.module#UserAttendenceModule'}
   { path: 'attendence', component: AttendenceListComponent },
   { path: 'schedule', component: ScheduleDaysComponent },
-  { path: 'profile', loadChildren: () => import('./modules/user-profile/user-profile.module').then(m => m.UserProfileModule) },
-  { path: 'login', loadChildren: () => import('./modules/login/login.module').then(m => m.LoginModule) },
+  { path: 'profile', 
+    canActivate: [AuthGuard],
+    loadChildren: () => import('./modules/user-profile/user-profile.module').then(m => m.UserProfileModule) 
+  },
+  { path: 'login', 
+    canActivate: [LoginGuard],
+    loadChildren: () => import('./modules/login/login.module').then(m => m.LoginModule) 
+  },
   { path: 'register', loadChildren: () => import('./modules/user-registration/user-registration.module').then(m => m.UserRegistrationModule) },
   {path: '', redirectTo:'login', pathMatch:'full'}
 ];
