@@ -1,0 +1,21 @@
+:host {
+    display: flex;
+    justify-content: center;
+    min-height: 100%;
+    align-items: center;
+  }
+  
+  .login-card{
+    .field-full-width{
+      width: 100%;
+      min-width: 15rem;
+    }
+    .show-password{
+      cursor: pointer;
+    }
+    .button {
+      display: flex;
+      justify-content: center;
+    }
+  }
+  

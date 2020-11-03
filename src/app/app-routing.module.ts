@@ -13,16 +13,19 @@ const routes: Routes = [
   // { path: 'attendence',loadChildren:'./user-attendence/user-attendence.module#UserAttendenceModule'}
   { path: 'attendence', component: AttendenceListComponent },
   { path: 'schedule', component: ScheduleDaysComponent },
-  { path: 'profile', 
+  {
+    path: 'profile',
     canActivate: [AuthGuard],
-    loadChildren: () => import('./modules/user-profile/user-profile.module').then(m => m.UserProfileModule) 
+    loadChildren: () => import('./modules/user-profile/user-profile.module').then(m => m.UserProfileModule)
   },
-  { path: 'login', 
+  {
+    path: 'login',
     canActivate: [LoginGuard],
-    loadChildren: () => import('./modules/login/login.module').then(m => m.LoginModule) 
+    loadChildren: () => import('./modules/login/login.module').then(m => m.LoginModule)
   },
-  { path: 'register', loadChildren: () => import('./modules/user-registration/user-registration.module').then(m => m.UserRegistrationModule) },
-  {path: '', redirectTo:'login', pathMatch:'full'}
+  { path: 'register', canActivate: [LoginGuard], loadChildren: () => import('./modules/user-registration/user-registration.module').then(m => m.UserRegistrationModule) },
+
+  { path: '', redirectTo: 'login', pathMatch: 'full' }
 ];
 
 @NgModule({

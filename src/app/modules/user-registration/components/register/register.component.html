@@ -1,1 +1,63 @@
-<p>register works!</p>
+<mat-card class="login-card">
+    <mat-card-title class="d-flex justify-content-center">Register</mat-card-title>
+    <mat-card-content>
+        <form [formGroup]="regForm" (ngSubmit)="onSubmit()">
+            <p>
+                <mat-form-field class="field-full-width">
+                    <mat-label>First Name</mat-label>
+                    <input matInput placeholder="Enter firstname" formControlName="first_name">
+                </mat-form-field>
+            </p>
+
+            <p>
+                <mat-form-field class="field-full-width">
+                    <mat-label>Last Name</mat-label>
+                    <input matInput placeholder="Enter firstname" formControlName="last_name">
+                </mat-form-field>
+            </p>
+
+            <p>
+                <mat-form-field class="field-full-width">
+                    <mat-label>Email</mat-label>
+                    <input matInput placeholder="Enter firstname" formControlName="email">
+                </mat-form-field>
+            </p>
+
+            <p>
+                <mat-form-field class="field-full-width">
+                    <mat-label>Phone</mat-label>
+                    <input matInput placeholder="Enter phone" formControlName="phone">
+                </mat-form-field>
+            </p>
+
+            <p>
+                <mat-radio-group aria-label="Select an option" formControlName="gender">
+                    <mat-radio-button value="Male">Male</mat-radio-button>
+                    <mat-radio-button value="Female">Female</mat-radio-button>
+                    <mat-radio-button value="Others">Others</mat-radio-button>
+                </mat-radio-group>
+            </p>
+
+
+
+            <p>
+                <mat-form-field class="field-full-width">
+                    <mat-label>Enter Password</mat-label>
+                    <input matInput type="password" placeholder="Enter password" formControlName="password">
+                </mat-form-field>
+            </p>
+
+            <p>
+                <mat-form-field class="field-full-width">
+                    <mat-label>Address</mat-label>
+                    <textarea matInput placeholder="Ex. It makes me feel..." formControlName="address"></textarea>
+                </mat-form-field>
+            </p>
+
+            <div class="button">
+                <button mat-raised-button color="primary" [disabled]="regForm.invalid">Submit</button>
+            </div>
+
+        </form>
+    </mat-card-content>
+</mat-card>
