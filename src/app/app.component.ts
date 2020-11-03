@@ -19,9 +19,14 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
 })
 export class AppComponent implements OnInit {
   title = 'GymManagement';
-  constructor(private authService: AuthService) {}
+  constructor(public authService: AuthService) {}
 
-  isLoggedIn = this.authService.isLoggedIn();
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.authService.autoLogin();
+  }
+
+  logout(){
+    this.authService.logout();
+  }
 
 }

@@ -1,7 +1,8 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { mapTo, tap, catchError } from 'rxjs/operators';
+import { Router } from '@angular/router';
+import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
+import { mapTo, tap, catchError, map } from 'rxjs/operators';
 import { Tokens } from 'src/app/models/tokens';
 import { environment } from 'src/environments/environment';
 
@@ -10,11 +11,26 @@ import { environment } from 'src/environments/environment';
 })
 export class AuthService {
 
-  constructor(private http: HttpClient) { }
-
   private readonly ACCESS_TOKEN = 'ACCESS_TOKEN';
   private readonly REFRESH_TOKEN = 'REFRESH_TOKEN';
+  private readonly EXPIRES_IN = 'EXPIRES_IN';
+  private readonly EXPIRY_DATE = 'EXPIRY_DATE';
   private loggedUser: string;
+
+  private authStatusListenerSubject = new BehaviorSubject<boolean>(false);
+  private tokenExpirationTimer: any;
+
+  isLoggedIn$ : Observable<boolean>;
+  isLoggedOut$ : Observable<boolean>;
+  authStatus$: Observable<boolean> = this.authStatusListenerSubject.asObservable();
+
+  constructor(
+    private http: HttpClient,
+    private router: Router
+  ) {
+    this.isLoggedIn$ = this.authStatus$.pipe(map(response => !!response));
+    this.isLoggedOut$ = this.isLoggedIn$.pipe(map(loggedIn => !loggedIn));
+  }
 
   private httpOptions = {
     headers: new HttpHeaders({
@@ -48,15 +64,14 @@ export class AuthService {
   Login(user: { username: string, password: string }): Observable<boolean> {
     let body = `username=${user.username}&password=${user.password}&client_secret=abc123&grant_type=password&client_id=e0aa8076-6c49-466a-b2a9-ad3276917d70&scope=gymadmin`
     let url = environment.serverApiUrl + 'oauth/token';
-    return this.http.post(url, body, this.httpOptions_1)
+    return this.http.post<any>(url, body, this.httpOptions_1)
       .pipe(
-        tap(tokens => this.doLoginUser(user.username, tokens as Tokens)),
-        mapTo(true),
-        catchError(error => {
-          console.log("called from auth", error);
-          alert(error.error);
-          return of(false);
-        }));
+        catchError(this.handleError),
+        tap(
+          tokens => {
+            this.handleAuthentication(tokens as Tokens)
+          }
+        ));
   }
 
   // logout() {
@@ -71,16 +86,21 @@ export class AuthService {
   //     }));
   // }
 
-  isLoggedIn() {
-    return !!this.getJwtToken();
+  //To be Modified
+  logout() {
+    this.removeTokens();
+    this.authStatusListenerSubject.next(false);
+    //navigate to login
+    this.router.navigate(['/login']);
+    //clear timer
+    if (this.tokenExpirationTimer) {
+      clearTimeout(this.tokenExpirationTimer);
+    }
+    this.tokenExpirationTimer = null;
   }
 
-  isAuthenticated() {
-    let token = this.getJwtToken();
-    if (token) {
-        return true;
-    }
-    return false;
+  isLoggedIn() {
+    return !!this.getJwtToken();
   }
 
   refreshToken() {
@@ -88,8 +108,7 @@ export class AuthService {
     let url = environment.serverApiUrl + 'oauth/token';
     return this.http.post(url, body, this.httpOptions_1)
       .pipe(tap((tokens: Tokens) => {
-        this.storeJwtToken(tokens.access_token);
-        this.storeJwtToken(tokens.refresh_token);
+        this.handleAuthentication(tokens);
       }));
   }
 
@@ -97,14 +116,24 @@ export class AuthService {
     return localStorage.getItem(this.ACCESS_TOKEN);
   }
 
-  private doLoginUser(username: string, tokens: Tokens) {
-    this.loggedUser = username;
-    this.storeTokens(tokens);
-  }
+  isTokenExpired():boolean{
+    const access_token = localStorage.getItem(this.ACCESS_TOKEN);
+    const expirationDate = localStorage.getItem(this.EXPIRY_DATE);
+    const refresh_token = localStorage.getItem(this.REFRESH_TOKEN);
 
-  private doLogoutUser() {
-    this.loggedUser = null;
-    this.removeTokens();
+    if (!access_token || !expirationDate || !refresh_token) {
+      this.authStatusListenerSubject.next(false);
+      return true;
+    }
+    const now = new Date();
+    const expiresIn = new Date(expirationDate).getTime() - now.getTime();
+    if (expiresIn > 0) {
+      console.log("Token expires in", expiresIn);
+      this.authStatusListenerSubject.next(true);
+      return false;
+    }
+    this.authStatusListenerSubject.next(false);
+    return true;
   }
 
   private getRefreshToken() {
@@ -118,11 +147,61 @@ export class AuthService {
   private storeTokens(tokens: Tokens) {
     localStorage.setItem(this.ACCESS_TOKEN, tokens.access_token);
     localStorage.setItem(this.REFRESH_TOKEN, tokens.refresh_token);
+    localStorage.setItem(this.EXPIRES_IN, JSON.stringify(tokens.expires_in));
+  }
+
+  private storeTokenExpiryDate(expiry_date: Date) {
+    localStorage.setItem(this.EXPIRY_DATE, expiry_date.toISOString());
   }
 
   private removeTokens() {
     localStorage.removeItem(this.ACCESS_TOKEN);
     localStorage.removeItem(this.REFRESH_TOKEN);
+    localStorage.removeItem(this.EXPIRES_IN);
+    localStorage.removeItem(this.EXPIRY_DATE);
   }
 
+  private handleAuthentication(
+    tokens: Tokens
+  ){
+    const expirationDate = new Date(new Date().getTime() + tokens.expires_in * 1000);
+    //Notify user is authenticated
+    this.authStatusListenerSubject.next(true);
+    this.autoLogout(tokens.expires_in * 1000);
+    this.storeTokens(tokens);
+    this.storeTokenExpiryDate(expirationDate);
+  }
+
+  private handleError(errorRes: HttpErrorResponse) {
+    console.log(errorRes);
+    let errorMessage = 'An unknown error occurred!';
+    if (!errorRes.error || !errorRes.error.error) {
+      return throwError(errorMessage);
+    }
+    console.log("Coming from error", errorRes.error.error.message)
+    switch (errorRes.error.error.message) {
+      case 'EMAIL_EXISTS':
+        errorMessage = 'This email exists already';
+        break;
+    }
+    return throwError(errorMessage);
+  }
+
+  autoLogin(){
+    if(this.isTokenExpired){
+      this.removeTokens();
+    }else{
+      this.authStatusListenerSubject.next(true);
+      const expirationDate = localStorage.getItem(this.EXPIRY_DATE);
+      const expirationDuration =
+      new Date(expirationDate).getTime() - new Date().getTime();
+      this.autoLogout(expirationDuration);
+    }
+  }
+
+  autoLogout(expirationDuration: number) {
+    this.tokenExpirationTimer = setTimeout(() => {
+      this.logout();
+    }, expirationDuration);
+  }
 }
