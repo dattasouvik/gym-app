@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { UserProfile } from 'src/app/modules/user-profile/model/user-profile.model';
 import { UserProfileStore } from 'src/app/modules/user-profile/services/user-profile.store';
@@ -9,7 +9,7 @@ import { UserProfileStore } from 'src/app/modules/user-profile/services/user-pro
   templateUrl: './user-profile.component.html',
   styleUrls: ['./user-profile.component.scss']
 })
-export class UserProfileComponent implements OnInit {
+export class UserProfileComponent {
 
   constructor(
     private userProfileStore: UserProfileStore
@@ -24,5 +24,4 @@ export class UserProfileComponent implements OnInit {
   reloadUserProfile(){
     this.userProfile$ = this.userProfileStore.viewUserProfile();
   }
-
 }

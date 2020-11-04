@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { UserProfileComponent } from 'src/app/modules/user-profile/components/user-profile/user-profile.component';
 import { EditProfileComponent } from 'src/app/modules/user-profile/components/edit-profile/edit-profile.component';
 import { ViewProfileComponent } from './components/view-profile/view-profile.component';
+import { UserProfileStore } from 'src/app/modules/user-profile/services/user-profile.store';
 
 @NgModule({
   declarations: [UserProfileComponent,EditProfileComponent, ViewProfileComponent],
@@ -17,6 +18,7 @@ import { ViewProfileComponent } from './components/view-profile/view-profile.com
     FormsModule,
     MaterialDesignModule
   ],
+  providers:[UserProfileStore],
   entryComponents: [EditProfileComponent]
 })
 export class UserProfileModule { }

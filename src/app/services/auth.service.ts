@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
 import { mapTo, tap, catchError, map } from 'rxjs/operators';
 import { Tokens } from 'src/app/models/tokens';
+import { HttpService } from 'src/app/services/http.service';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -26,7 +27,8 @@ export class AuthService {
 
   constructor(
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private httpService: HttpService
   ) {
     this.isLoggedIn$ = this.authStatus$.pipe(map(response => !!response));
     this.isLoggedOut$ = this.isLoggedIn$.pipe(map(loggedIn => !loggedIn));
@@ -88,15 +90,20 @@ export class AuthService {
 
   //To be Modified
   logout() {
-    this.removeTokens();
-    this.authStatusListenerSubject.next(false);
-    //navigate to login
-    this.router.navigate(['/login']);
-    //clear timer
-    if (this.tokenExpirationTimer) {
-      clearTimeout(this.tokenExpirationTimer);
-    }
-    this.tokenExpirationTimer = null;
+    return this.httpService.get('user-logout?_format=json').pipe(
+      tap((response)=>{
+        //TBD
+        this.removeTokens();
+        this.authStatusListenerSubject.next(false);
+        //navigate to login
+        this.router.navigate(['/login']);
+        //clear timer
+        if (this.tokenExpirationTimer) {
+          clearTimeout(this.tokenExpirationTimer);
+        }
+        this.tokenExpirationTimer = null;
+      })
+    )
   }
 
   isLoggedIn() {
@@ -201,7 +208,7 @@ export class AuthService {
 
   autoLogout(expirationDuration: number) {
     this.tokenExpirationTimer = setTimeout(() => {
-      this.logout();
+      this.logout().subscribe();
     }, expirationDuration);
   }
 }

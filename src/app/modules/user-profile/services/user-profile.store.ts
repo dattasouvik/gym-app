@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError, shareReplay, tap } from 'rxjs/operators';
 import { LoadingService } from 'src/app/modules/shared/services/loading.service';
@@ -7,11 +7,9 @@ import { UserProfile } from 'src/app/modules/user-profile/model/user-profile.mod
 import { HttpService } from 'src/app/services/http.service';
 
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 
-export class UserProfileStore {
+export class UserProfileStore{
 
   private subject = new BehaviorSubject<UserProfile[]>([]);
 
@@ -34,7 +32,9 @@ export class UserProfileStore {
             console.log(message, err);
             return throwError(err);
         }),
-        tap(profileData => this.subject.next(profileData))
+        tap(profileData => {
+          this.subject.next(profileData);
+        })
     );
 
     this.loading.showLoaderUntilCompleted(loadProfile$)
@@ -42,6 +42,7 @@ export class UserProfileStore {
   }
 
   viewUserProfile(): Observable<UserProfile[]> {
+    this.loadUserProfile();
     return this.profile$;
   }
 
@@ -71,5 +72,4 @@ export class UserProfileStore {
           shareReplay()
       );
     }
-
 }
