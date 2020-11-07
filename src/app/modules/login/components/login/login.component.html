@@ -16,7 +16,10 @@
       (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
     </mat-form-field>
   </p>
-  <div class="button">
+  <div class="actions">
+    <button mat-raised-button color="gray" routerLink="/register">
+      Register
+    </button>
     <button mat-raised-button color="primary" [disabled]="loginForm.invalid">Submit</button>
   </div>
 </form>

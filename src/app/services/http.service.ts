@@ -3,17 +3,23 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 
+interface IRequestOptions {
+  headers?: HttpHeaders;
+  observe?: 'body';
+  params?: HttpParams;
+  reportProgress?: boolean;
+  responseType?: 'json';
+  withCredentials?: boolean;
+  body?: any;
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class HttpService {
 
   constructor(private http: HttpClient) { }
-  private httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json'
-    })
-  };
+
   private serverUrl: string = environment.serverApiUrl;
 
   /**
@@ -27,26 +33,26 @@ export class HttpService {
   /**
   * Fetch request
   **/
-  get(endpoint: string): Observable<any> {
+  get<T>(endpoint: string, options?: IRequestOptions): Observable<any> {
     let url = this.getUrl(endpoint);
-    return this.http.get(url, this.httpOptions);
+    return this.http.get(url,options);
   }
 
 
   /**
   * Post request
   **/
-  post(endpoint: string, body: any): Observable<any> {
+  post<T>(endpoint: string, body: any,  options?: IRequestOptions): Observable<any> {
     let url = this.getUrl(endpoint);
-    return this.http.post(url, body, this.httpOptions);
+    return this.http.post(url, body, options);
   }
 
   /**
   * Delete request
   **/
-  delete(endpoint: string): Observable<{}> {
+  delete<T>(endpoint: string, options?: IRequestOptions): Observable<{}> {
     let url = this.getUrl(endpoint);
-    return this.http.delete(url, this.httpOptions);
+    return this.http.delete(url,options);
   }
 
 }

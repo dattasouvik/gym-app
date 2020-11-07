@@ -4,7 +4,7 @@
     min-height: 100%;
     align-items: center;
   }
-  
+
   .login-card{
     .field-full-width{
       width: 100%;
@@ -13,9 +13,8 @@
     .show-password{
       cursor: pointer;
     }
-    .button {
+    .actions {
       display: flex;
-      justify-content: center;
+      justify-content: space-evenly;
     }
   }
-  

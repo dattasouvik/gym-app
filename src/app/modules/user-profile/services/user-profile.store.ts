@@ -1,4 +1,4 @@
-import { Injectable, OnDestroy } from '@angular/core';
+import { Injectable, OnInit} from '@angular/core';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError, shareReplay, tap } from 'rxjs/operators';
 import { LoadingService } from 'src/app/modules/shared/services/loading.service';
@@ -9,19 +9,17 @@ import { HttpService } from 'src/app/services/http.service';
 
 @Injectable()
 
-export class UserProfileStore{
+export class UserProfileStore {
 
   private subject = new BehaviorSubject<UserProfile[]>([]);
 
-  profile$ : Observable<UserProfile[]> = this.subject.asObservable();
+  public readonly profile$ : Observable<UserProfile[]> = this.subject.asObservable();
 
   constructor(
     private httpService: HttpService,
     private loading: LoadingService,
-    private messages: MessagesService) {
-
-    this.loadUserProfile();
-  }
+    private messages: MessagesService
+    ) {}
 
   loadUserProfile(){
     const loadProfile$ = this.httpService.get(`user-data?_format=json`)
@@ -34,16 +32,12 @@ export class UserProfileStore{
         }),
         tap(profileData => {
           this.subject.next(profileData);
-        })
+        }),
+        shareReplay()
     );
 
     this.loading.showLoaderUntilCompleted(loadProfile$)
         .subscribe();
-  }
-
-  viewUserProfile(): Observable<UserProfile[]> {
-    this.loadUserProfile();
-    return this.profile$;
   }
 
   saveUserProfile(changes: Partial<UserProfile>): Observable<any> {
@@ -72,4 +66,5 @@ export class UserProfileStore{
           shareReplay()
       );
     }
+
 }

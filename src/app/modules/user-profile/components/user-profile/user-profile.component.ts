@@ -1,6 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { UserProfile } from 'src/app/modules/user-profile/model/user-profile.model';
 import { UserProfileStore } from 'src/app/modules/user-profile/services/user-profile.store';
 
 
@@ -9,19 +8,14 @@ import { UserProfileStore } from 'src/app/modules/user-profile/services/user-pro
   templateUrl: './user-profile.component.html',
   styleUrls: ['./user-profile.component.scss']
 })
-export class UserProfileComponent {
+export class UserProfileComponent implements OnInit {
 
   constructor(
-    private userProfileStore: UserProfileStore
+    public userProfileStore: UserProfileStore
   ) { }
 
-  userProfile$: Observable<UserProfile[]>;
-
   ngOnInit(): void {
-    this.reloadUserProfile();
+    this.userProfileStore.loadUserProfile();
   }
 
-  reloadUserProfile(){
-    this.userProfile$ = this.userProfileStore.viewUserProfile();
-  }
 }

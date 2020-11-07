@@ -15,6 +15,7 @@ import { SharedModule } from 'src/app/modules/shared/shared.module';
 import { ThemeSwitcherModule } from 'src/app/modules/theme-switcher/theme-switcher.module';
 import { MessagesService } from 'src/app/modules/shared/services/messages.service';
 import { TokenInterceptor } from 'src/app/services/token.interceptor';
+import { HeaderInterceptor } from 'src/app/services/header.interceptor';
 
 
 @NgModule({
@@ -37,6 +38,11 @@ import { TokenInterceptor } from 'src/app/services/token.interceptor';
   providers: [
     LoadingService,
     MessagesService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HeaderInterceptor,
+      multi: true
+    },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,

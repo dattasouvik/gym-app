@@ -64,9 +64,15 @@ export class AuthService {
   // }
 
   Login(user: { username: string, password: string }): Observable<boolean> {
-    let body = `username=${user.username}&password=${user.password}&client_secret=abc123&grant_type=password&client_id=e0aa8076-6c49-466a-b2a9-ad3276917d70&scope=gymadmin`
+    let body= new FormData();
+    body.append("grant_type", 'password');
+    body.append("client_id", 'e0aa8076-6c49-466a-b2a9-ad3276917d70');
+    body.append("client_secret", 'abc123');
+    body.append("scope", 'gymadmin');
+    body.append("username", user.username);
+    body.append("password", user.password);
     let url = environment.serverApiUrl + 'oauth/token';
-    return this.http.post<any>(url, body, this.httpOptions_1)
+    return this.http.post<any>(url, body)
       .pipe(
         catchError(this.handleError),
         tap(
@@ -111,9 +117,14 @@ export class AuthService {
   }
 
   refreshToken() {
-    let body = `client_secret=abc123&grant_type=refresh_token&client_id=e0aa8076-6c49-466a-b2a9-ad3276917d70&scope=gymadmin&refresh_token=${this.getRefreshToken()}`
+    let body= new FormData();
+    body.append("grant_type", 'refresh_token');
+    body.append("client_id", 'e0aa8076-6c49-466a-b2a9-ad3276917d70');
+    body.append("client_secret", 'abc123');
+    body.append("scope", 'gymadmin');
+    body.append("refresh_token", this.getRefreshToken());
     let url = environment.serverApiUrl + 'oauth/token';
-    return this.http.post(url, body, this.httpOptions_1)
+    return this.http.post(url, body)
       .pipe(tap((tokens: Tokens) => {
         this.handleAuthentication(tokens);
       }));
