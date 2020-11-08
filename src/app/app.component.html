@@ -7,29 +7,62 @@
   #sidenav>
   <mat-toolbar color="primary">Menu</mat-toolbar>
   <mat-nav-list class="p-0">
-    <mat-list-item routerLink="/" (click)="sidenav.toggle()">
-      <mat-icon matListIcon>home</mat-icon>
-      <a matLine>Home</a>
-    </mat-list-item>
-    <mat-list-item routerLink="/profile" (click)="sidenav.toggle()">
-      <mat-icon matListIcon>account_circle</mat-icon>
-      <a matLine>Profile</a>
-    </mat-list-item>
-    <mat-list-item *ngIf="authService.isLoggedOut$ | async"
+    <!-- Menu loaded when user is logged in starts here -->
+    <ng-container *ngIf="authService.isLoggedIn$ | async">
+
+      <mat-list-item routerLink="/" (click)="sidenav.toggle()">
+        <mat-icon matListIcon>home</mat-icon>
+        <a matLine>Home</a>
+      </mat-list-item>
+
+
+      <mat-list-item routerLink="/profile" (click)="sidenav.toggle()">
+        <mat-icon matListIcon>account_circle</mat-icon>
+        <a matLine>Profile</a>
+      </mat-list-item>
+
+      
+      <ng-container *ngIf="authService.user$ | async  as user">
+        
+        <!-- Member Roles Start Here -->
+        <ng-container *ngIf="user.role.includes('member')">
+          <mat-list-item
+          (click)="sidenav.toggle()">
+            <mat-icon matListIcon>assignment_ind</mat-icon>
+            <a matLine>View my trainer</a>
+          </mat-list-item>
+        </ng-container>
+        <!-- Member Roles End Here -->   
+
+      </ng-container>
+   
+
+      <mat-list-item
+      (click)="sidenav.toggle() && logout()">
+        <mat-icon matListIcon>remove</mat-icon>
+        <a matLine>Logout</a>
+      </mat-list-item>
+
+    </ng-container>
+    <!-- Menu loaded when user is logged in ends here-->
+
+    <!-- Menu loaded when user is logged out starts here -->
+    <ng-container *ngIf="authService.isLoggedOut$ | async">
+      <mat-list-item 
       routerLink="/register" (click)="sidenav.toggle()">
       <mat-icon matListIcon>add</mat-icon>
       <a matLine>Register User</a>
     </mat-list-item>
-    <mat-list-item *ngIf="authService.isLoggedOut$ | async"
+
+    <mat-list-item
       routerLink="/login" (click)="sidenav.toggle()">
       <mat-icon matListIcon>login</mat-icon>
       <a matLine>Login</a>
     </mat-list-item>
-    <mat-list-item  *ngIf="authService.isLoggedIn$ | async"
-      (click)="sidenav.toggle() && logout()">
-      <mat-icon matListIcon>remove</mat-icon>
-      <a matLine>Logout</a>
-    </mat-list-item>
+
+    </ng-container>
+    <!-- Menu loaded when user is logged out ends here-->
+
   </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content class="main-content">
