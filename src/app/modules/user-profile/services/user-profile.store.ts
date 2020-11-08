@@ -1,3 +1,4 @@
+import { HttpParams } from '@angular/common/http';
 import { Injectable, OnInit} from '@angular/core';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError, shareReplay, tap } from 'rxjs/operators';
@@ -22,7 +23,9 @@ export class UserProfileStore {
     ) {}
 
   loadUserProfile(){
-    const loadProfile$ = this.httpService.get(`user-data?_format=json`)
+    let params = new HttpParams();
+    params = params.append('_format', `json`);
+    const loadProfile$ = this.httpService.get(`user-data`, {params})
     .pipe(
         catchError(err => {
             const message = "Unable to load data.";
@@ -55,7 +58,10 @@ export class UserProfileStore {
 
     this.subject.next(updatedUserProfile);
 
-    return this.httpService.post(`edit-profile?_format=json`, changes)
+    let params = new HttpParams();
+    params = params.append('_format', `json`);
+
+    return this.httpService.post(`edit-profile`, changes, {params})
       .pipe(
           catchError(err => {
               const message = "Unable to update data";

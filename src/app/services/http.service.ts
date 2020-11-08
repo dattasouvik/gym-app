@@ -1,3 +1,7 @@
+  /**
+  * Extends Angular HttpClient
+  * @Ref: https://medium.com/@admin_87321/extending-angular-httpclient-6b33a7a1a4d0
+  **/
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -31,28 +35,50 @@ export class HttpService {
 
 
   /**
-  * Fetch request
-  **/
+   * GET request
+   * @param {string} endPoint it doesn't need / in front of the end point
+   * @param {IRequestOptions} options options of the request like headers, body, etc.
+   * @returns {Observable<T>}
+   */
   get<T>(endpoint: string, options?: IRequestOptions): Observable<any> {
     let url = this.getUrl(endpoint);
-    return this.http.get(url,options);
+    return this.http.get<T>(url,options);
   }
 
 
   /**
-  * Post request
-  **/
+   * POST request
+   * @param {string} endPoint end point of the api
+   * @param {Object} body body of the request.
+   * @param {IRequestOptions} options options of the request like headers, body, etc.
+   * @returns {Observable<T>}
+   */
   post<T>(endpoint: string, body: any,  options?: IRequestOptions): Observable<any> {
     let url = this.getUrl(endpoint);
-    return this.http.post(url, body, options);
+    return this.http.post<T>(url, body, options);
   }
 
   /**
-  * Delete request
-  **/
-  delete<T>(endpoint: string, options?: IRequestOptions): Observable<{}> {
+   * PUT request
+   * @param {string} endPoint end point of the api
+   * @param {Object} body body of the request.
+   * @param {IRequestOptions} options options of the request like headers, body, etc.
+   * @returns {Observable<T>}
+   */
+  public put<T>(endpoint: string, body: Object, options?: IRequestOptions): Observable<T> {
     let url = this.getUrl(endpoint);
-    return this.http.delete(url,options);
+    return this.http.put<T>(url, body, options);
+  }
+
+  /**
+   * DELETE request
+   * @param {string} endPoint end point of the api
+   * @param {IRequestOptions} options options of the request like headers, body, etc.
+   * @returns {Observable<T>}
+   */
+  delete<T>(endpoint: string, options?: IRequestOptions): Observable<T> {
+    let url = this.getUrl(endpoint);
+    return this.http.delete<T>(url,options);
   }
 
 }

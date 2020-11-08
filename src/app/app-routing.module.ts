@@ -23,9 +23,15 @@ const routes: Routes = [
     canActivate: [LoginGuard],
     loadChildren: () => import('./modules/login/login.module').then(m => m.LoginModule)
   },
-  { path: 'register', canActivate: [LoginGuard], loadChildren: () => import('./modules/user-registration/user-registration.module').then(m => m.UserRegistrationModule) },
-
-  { path: '', redirectTo: 'login', pathMatch: 'full' }
+  { path: 'register',
+    canActivate: [LoginGuard],
+    loadChildren: () => import('./modules/user-registration/user-registration.module').then(m => m.UserRegistrationModule)
+  },
+  { path: 'trainers',
+    canActivate: [AuthGuard],
+    loadChildren: () => import('./modules/trainers/trainers.module').then(m => m.TrainersModule)
+  },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
 ];
 
 @NgModule({

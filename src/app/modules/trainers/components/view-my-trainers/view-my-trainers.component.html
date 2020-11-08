@@ -1,0 +1,47 @@
+<div class="mat-elevation-z8 m-2">
+  <mat-table [dataSource]="trainers"
+  *ngIf="trainers.length > 0">
+
+    <!-- First Name Column -->
+    <ng-container matColumnDef="first_name">
+      <mat-header-cell *matHeaderCellDef> First Name </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.first_name}}
+      </mat-cell>
+    </ng-container>
+
+    <!-- Last Name Column -->
+    <ng-container matColumnDef="last_name">
+      <mat-header-cell *matHeaderCellDef> Last Name </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.last_name}}
+      </mat-cell>
+    </ng-container>
+
+    <!-- Email Column -->
+    <ng-container matColumnDef="email">
+      <mat-header-cell *matHeaderCellDef> Email</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.email}} </mat-cell>
+    </ng-container>
+
+    <!-- Role  Column -->
+    <ng-container matColumnDef="phone">
+      <mat-header-cell *matHeaderCellDef> Phone </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.phone }}
+      </mat-cell>
+    </ng-container>
+
+
+    <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+  </mat-table>
+
+  <mat-paginator [length]="2" [pageSize]="usersPerPage"
+  (page)="onChangedPage($event)"
+  *ngIf="trainers.length > 0">
+  </mat-paginator>
+
+  <p class="info-text mat-body-1" *ngIf="trainers.length <= 0">
+    No Results
+  </p>
+
+</div>

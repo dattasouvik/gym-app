@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
 import { mapTo, tap, catchError, map, exhaustMap } from 'rxjs/operators';
+import { AuthConfig } from 'src/app/auth-config';
 import { Tokens } from 'src/app/models/tokens';
 import { HttpService } from 'src/app/services/http.service';
 import { environment } from 'src/environments/environment';
@@ -47,9 +48,9 @@ export class AuthService {
   Login(user: { username: string, password: string }): Observable<any> {
     let body= new FormData();
     body.append("grant_type", 'password');
-    body.append("client_id", 'e0aa8076-6c49-466a-b2a9-ad3276917d70');
-    body.append("client_secret", 'abc123');
-    body.append("scope", 'gymadmin');
+    body.append("client_id", AuthConfig.CLIENT_ID);
+    body.append("client_secret", AuthConfig.CLIENT_SECRET);
+    body.append("scope", AuthConfig.SCOPE);
     body.append("username", user.username);
     body.append("password", user.password);
     let url = environment.serverApiUrl + 'oauth/token';
@@ -113,9 +114,9 @@ export class AuthService {
   refreshToken() {
     let body= new FormData();
     body.append("grant_type", 'refresh_token');
-    body.append("client_id", 'e0aa8076-6c49-466a-b2a9-ad3276917d70');
-    body.append("client_secret", 'abc123');
-    body.append("scope", 'gymadmin');
+    body.append("client_id", AuthConfig.CLIENT_ID);
+    body.append("client_secret", AuthConfig.CLIENT_SECRET);
+    body.append("scope", AuthConfig.SCOPE);
     body.append("refresh_token", this.getRefreshToken());
     let url = environment.serverApiUrl + 'oauth/token';
     return this.http.post(url, body)
@@ -145,7 +146,7 @@ export class AuthService {
   }
 
 
-  private checkStorageData(accessToken, expirationDate, 
+  private checkStorageData(accessToken, expirationDate,
     refreshToken,userData):Boolean{
       const access_token = localStorage.getItem(accessToken);
       const expiration_date = localStorage.getItem(expirationDate);
@@ -160,12 +161,12 @@ export class AuthService {
   isTokenExpired():boolean{
 
     const storageStatus = this.checkStorageData(
-      this.ACCESS_TOKEN, 
+      this.ACCESS_TOKEN,
       this.EXPIRY_DATE,
       this.REFRESH_TOKEN,
       this.USER_DATA
       );
-    
+
     console.log("Storage Valdity", storageStatus);
     if(!storageStatus){
       this.authStatusListenerSubject.next(false);
