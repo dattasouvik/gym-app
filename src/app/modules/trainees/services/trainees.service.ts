@@ -37,4 +37,8 @@ export class TraineesService {
     this.loading.showLoaderUntilCompleted(loadProfile$)
       .subscribe();
   }
+
+  getTrainees1(){
+    return this.httpService.get("my-trainee?_format=json"); 
+  }
 }
