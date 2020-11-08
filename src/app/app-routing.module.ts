@@ -25,6 +25,8 @@ const routes: Routes = [
   },
   { path: 'register', canActivate: [LoginGuard], loadChildren: () => import('./modules/user-registration/user-registration.module').then(m => m.UserRegistrationModule) },
 
+  { path: 'trainees', loadChildren: () => import('./modules/trainees/trainees.module').then(m => m.TraineesModule) }
+  
   { path: '', redirectTo: 'login', pathMatch: 'full' }
 ];
 
