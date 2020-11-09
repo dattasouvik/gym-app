@@ -32,6 +32,13 @@
             <a matLine>View my trainer</a>
           </mat-list-item>
         </ng-container>
+
+        <ng-container *ngIf="user.role.includes('trainer')">
+          <mat-list-item routerLink="/trainees" (click)="sidenav.toggle()">
+            <mat-icon matListIcon>assignment_ind</mat-icon>
+            <a matLine>View my trainees</a>
+          </mat-list-item>
+        </ng-container>
         <!-- Member Roles End Here -->
 
       </ng-container>
