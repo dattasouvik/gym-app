@@ -1,20 +1,25 @@
 import { HttpParams } from '@angular/common/http';
 import { Injectable, OnInit} from '@angular/core';
-import { BehaviorSubject, Observable, throwError } from 'rxjs';
+import { BehaviorSubject, EMPTY, Observable, throwError } from 'rxjs';
 import { catchError, shareReplay, tap } from 'rxjs/operators';
 import { LoadingService } from 'src/app/modules/shared/services/loading.service';
 import { MessagesService } from 'src/app/modules/shared/services/messages.service';
 import { Trainer } from 'src/app/modules/trainers/model/trainer.model';
 import { HttpService } from 'src/app/services/http.service';
 
+export interface TrainerResponse{
+  rows:Trainer[];
+  pager: Object;
+}
+
 
 @Injectable()
 
 export class TrainersStore {
 
-  private subject = new BehaviorSubject<Trainer[]>([]);
+  private subject = new BehaviorSubject<TrainerResponse>(null);
 
-  public readonly trainers$ : Observable<Trainer[]> = this.subject.asObservable();
+  public readonly trainers$ : Observable<TrainerResponse> = this.subject.asObservable();
 
   constructor(
     private httpService: HttpService,
