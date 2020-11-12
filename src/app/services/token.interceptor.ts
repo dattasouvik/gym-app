@@ -2,13 +2,15 @@ import { Injectable } from '@angular/core';
 import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HttpErrorResponse } from '@angular/common/http';
 import { AuthService } from 'src/app/services/auth.service';
 import { Observable, throwError, BehaviorSubject } from 'rxjs';
-import { catchError, filter, take, switchMap } from 'rxjs/operators';
+import { catchError, filter, take, switchMap, tap } from 'rxjs/operators';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
 
   private isRefreshing = false;
   private refreshTokenSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+
+  private errorStatusMessage:[string] = ['invalid_credentials'];
 
   constructor(public authService: AuthService) { }
 
@@ -18,12 +20,17 @@ export class TokenInterceptor implements HttpInterceptor {
       request = this.addToken(request, this.authService.getJwtToken());
     }
 
-    return next.handle(request).pipe(catchError(error => {
-      if (error instanceof HttpErrorResponse && error.status === 401) {
+    return next.handle(request).pipe(
+      catchError(errorResponse => {
+      if (errorResponse instanceof HttpErrorResponse && errorResponse.status === 401 ) {
+        if (errorResponse.error &&
+            this.errorStatusMessage.includes(errorResponse.error.error)
+            ) {
+          return throwError(errorResponse);
+        }
         return this.handle401Error(request, next);
-      } else {
-        return throwError(error);
       }
+      return throwError(errorResponse);
     }));
   }
 

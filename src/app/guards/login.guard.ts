@@ -25,6 +25,7 @@ export class LoginGuard implements CanActivate {
         if(isAuth && !this.authService.isTokenExpired()){
           const message = `You are not allowed to visit this page`;
           this.messages.showErrors(message);
+          //TBM redirect to dashboard
           this.router.navigate(['/profile']);
           return false;
         }

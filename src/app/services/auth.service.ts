@@ -45,7 +45,7 @@ export class AuthService {
   }
 
 
-  Login(user: { username: string, password: string }): Observable<any> {
+  login(user: { username: string, password: string }): Observable<any> {
     let body= new FormData();
     body.append("grant_type", 'password');
     body.append("client_id", AuthConfig.CLIENT_ID);
@@ -53,9 +53,9 @@ export class AuthService {
     body.append("scope", AuthConfig.SCOPE);
     body.append("username", user.username);
     body.append("password", user.password);
-    let url = environment.serverApiUrl + 'oauth/token';
-    return this.http.post<any>(url, body)
+    return this.httpService.post<any>('oauth/token', body)
       .pipe(
+        catchError(this.handleError),
         exhaustMap( (tokenInfo:Tokens) => {
           let headers = new HttpHeaders().set('Authorization', `Bearer ${tokenInfo.access_token}`);
           return this.httpService.get<any>('user-extra-data?_format=json',{
@@ -71,24 +71,11 @@ export class AuthService {
             }),
           );
         }),
-        tap(([{userInfo,tokenInfo}]) => this.handleAuthentication(userInfo,tokenInfo)),
-        catchError(this.handleError)
+        catchError(this.handleError),
+        tap(([{userInfo,tokenInfo}]) => this.handleAuthentication(userInfo,tokenInfo))
       );
   }
 
-  // logout() {
-  //   return this.http.post<any>(`${config.apiUrl}/logout`, {
-  //     'refreshToken': this.getRefreshToken()
-  //   }).pipe(
-  //     tap(() => this.doLogoutUser()),
-  //     mapTo(true),
-  //     catchError(error => {
-  //       alert(error.error);
-  //       return of(false);
-  //     }));
-  // }
-
-  //To be Modified
   logout() {
     return this.httpService.get('user-logout?_format=json').pipe(
       tap((response)=>{
@@ -107,10 +94,6 @@ export class AuthService {
     )
   }
 
-  isLoggedIn() {
-    return !!this.getJwtToken();
-  }
-
   refreshToken() {
     let body= new FormData();
     body.append("grant_type", 'refresh_token');
@@ -118,9 +101,9 @@ export class AuthService {
     body.append("client_secret", AuthConfig.CLIENT_SECRET);
     body.append("scope", AuthConfig.SCOPE);
     body.append("refresh_token", this.getRefreshToken());
-    let url = environment.serverApiUrl + 'oauth/token';
-    return this.http.post(url, body)
+    return this.httpService.post('oauth/token', body)
     .pipe(
+      catchError(this.handleError),
       exhaustMap( (tokenInfo:Tokens) => {
         let headers = new HttpHeaders().set('Authorization', `Bearer ${tokenInfo.access_token}`);
         return this.httpService.get<any>('user-extra-data?_format=json',{
@@ -136,8 +119,8 @@ export class AuthService {
           }),
         );
       }),
-      tap(([{userInfo,tokenInfo}]) => this.handleAuthentication(userInfo,tokenInfo)),
-      catchError(this.handleError)
+      catchError(this.handleError),
+      tap(([{userInfo,tokenInfo}]) => this.handleAuthentication(userInfo,tokenInfo))
     );
   }
 
@@ -186,6 +169,28 @@ export class AuthService {
     }
   }
 
+  autoLogin(){
+    const tokenExpired = this.isTokenExpired();
+    console.log("Expiry", tokenExpired);
+    if(!tokenExpired){
+      const user: UserResponse = JSON.parse(localStorage.getItem(this.USER_DATA));
+      this.authStatusListenerSubject.next(true);
+      this.userSubject.next(user);
+      const expirationDate = localStorage.getItem(this.EXPIRY_DATE);
+      const expirationDuration =
+      new Date(expirationDate).getTime() - new Date().getTime();
+      this.autoLogout(expirationDuration);
+    }else{
+      this.removeTokens();
+    }
+  }
+
+  autoLogout(expirationDuration: number) {
+    this.tokenExpirationTimer = setTimeout(() => {
+      this.logout().subscribe();
+    }, expirationDuration);
+  }
+  
   private getRefreshToken() {
     return localStorage.getItem(this.REFRESH_TOKEN);
   }
@@ -231,39 +236,16 @@ export class AuthService {
   }
 
   private handleError(errorRes: HttpErrorResponse) {
-    console.log(errorRes);
     let errorMessage = 'An unknown error occurred!';
     if (!errorRes.error || !errorRes.error.error) {
-      return throwError(errorMessage);
+      return throwError(errorRes);
     }
-    console.log("Coming from error", errorRes.error.error.message)
-    switch (errorRes.error.error.message) {
-      case 'EMAIL_EXISTS':
-        errorMessage = 'This email exists already';
+    //Modify error messages
+    switch (errorRes.error.message) {
+      case 'The user credentials were incorrect.':
+        errorMessage = 'Invalid Credentials';
         break;
     }
     return throwError(errorMessage);
-  }
-
-  autoLogin(){
-    const tokenExpired = this.isTokenExpired();
-    console.log("Expiry", tokenExpired);
-    if(!tokenExpired){
-      const user: UserResponse = JSON.parse(localStorage.getItem(this.USER_DATA));
-      this.authStatusListenerSubject.next(true);
-      this.userSubject.next(user);
-      const expirationDate = localStorage.getItem(this.EXPIRY_DATE);
-      const expirationDuration =
-      new Date(expirationDate).getTime() - new Date().getTime();
-      this.autoLogout(expirationDuration);
-    }else{
-      this.removeTokens();
-    }
-  }
-
-  autoLogout(expirationDuration: number) {
-    this.tokenExpirationTimer = setTimeout(() => {
-      this.logout().subscribe();
-    }, expirationDuration);
   }
 }

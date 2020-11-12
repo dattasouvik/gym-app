@@ -23,8 +23,9 @@
         </ng-container>
       </mat-card-content>
       <mat-card-actions class="d-flex justify-content-center">
-        <button mat-button >Rate</button>
-        <button mat-button (click) = "hideContact[i] = !hideContact[i]">
+        <button mat-button mat-raised-button color="success">Rate</button>
+        <button mat-button color="accent" mat-raised-button
+        (click) = "hideContact[i] = !hideContact[i]">
           <ng-container  *ngIf="!hideContact[i]; else elseBlock">
             Show Contact
           </ng-container>
@@ -32,15 +33,20 @@
         </button>
       </mat-card-actions>
     </mat-card>
-    <mat-paginator [length]="trainers.pager['total_items']"
-      [pageSize]="trainers.pager['items_per_page']"
+    <!-- Pager block -->
+    <ng-container *ngIf="trainers.pager">
+      <mat-paginator [length]="trainers.pager.total_items"
+      [pageSize]="trainers.pager.items_per_page"
       (page)="onChangedPage($event)">
-    </mat-paginator>
+      </mat-paginator>
+    </ng-container>
   </ng-container>
-
+  <!-- No results block -->
   <ng-template #noResultBlock>
-    <p class="info-text mat-body-1">
-      No Results
-    </p>
+    <div class="mat-elevation-z8 my-2">
+      <p class="info-text mat-body-1 text-center">
+        No Results
+      </p>
+    </div>
   </ng-template>
 </div>

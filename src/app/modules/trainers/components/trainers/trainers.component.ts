@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PageEvent } from '@angular/material/paginator';
 import { TrainersStore } from 'src/app/modules/trainers/services/trainers.store';
 
 @Component({
@@ -14,6 +15,10 @@ export class TrainersComponent implements OnInit {
 
   ngOnInit(): void {
     this.trainersStore.loadMyTrainers();
+  }
+
+  onPageChange(pageData : PageEvent){
+    this.trainersStore.loadMyTrainers(pageData.pageIndex);
   }
 
 }

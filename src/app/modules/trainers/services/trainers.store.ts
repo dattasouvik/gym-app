@@ -1,16 +1,11 @@
 import { HttpParams } from '@angular/common/http';
-import { Injectable, OnInit} from '@angular/core';
-import { BehaviorSubject, EMPTY, Observable, throwError } from 'rxjs';
+import { Injectable} from '@angular/core';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError, shareReplay, tap } from 'rxjs/operators';
 import { LoadingService } from 'src/app/modules/shared/services/loading.service';
 import { MessagesService } from 'src/app/modules/shared/services/messages.service';
-import { Trainer } from 'src/app/modules/trainers/model/trainer.model';
+import { TrainerResponse } from 'src/app/modules/trainers/model/trainer-response.model';
 import { HttpService } from 'src/app/services/http.service';
-
-export interface TrainerResponse{
-  rows:Trainer[];
-  pager: Object;
-}
 
 
 @Injectable()
@@ -34,9 +29,8 @@ export class TrainersStore {
     const loadTrainers$ = this.httpService.get(`my-trainer`, {params})
     .pipe(
         catchError(err => {
-            const message = "Unable to load data.";
+            const message = "Unable to load Trainers.";
             this.messages.showErrors(message);
-            console.log(message, err);
             return throwError(err);
         }),
         tap(trainers => {

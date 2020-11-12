@@ -32,12 +32,13 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     loadChildren: () => import('./modules/trainers/trainers.module').then(m => m.TrainersModule)
   },
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
-  { path: 'register', canActivate: [LoginGuard], loadChildren: () => import('./modules/user-registration/user-registration.module').then(m => m.UserRegistrationModule) },
-
-  { path: 'trainees', loadChildren: () => import('./modules/trainees/trainees.module').then(m => m.TraineesModule) },
-  
-  { path: '', redirectTo: 'login', pathMatch: 'full' }
+  { path: 'trainees', 
+    loadChildren: () => import('./modules/trainees/trainees.module').then(m => m.TraineesModule) 
+  },
+  { path: '', 
+    redirectTo: 'login', 
+    pathMatch: 'full' 
+  }
 
 ];
 

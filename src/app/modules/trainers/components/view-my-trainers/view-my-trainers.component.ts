@@ -1,7 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
-import { Trainer } from 'src/app/modules/trainers/model/trainer.model';
-import { TrainerResponse, TrainersStore } from 'src/app/modules/trainers/services/trainers.store';
+import { TrainerResponse } from 'src/app/modules/trainers/model/trainer-response.model';
 
 @Component({
   selector: 'view-my-trainers',
@@ -11,22 +10,18 @@ import { TrainerResponse, TrainersStore } from 'src/app/modules/trainers/service
 export class ViewMyTrainersComponent implements OnInit {
 
   @Input() trainers: TrainerResponse;
+  @Output() pageChange: EventEmitter<PageEvent> = new EventEmitter();
+
   hideContact=[];
 
-  /* Mat-table setings */
-  displayedColumns: string[] = ['first_name','last_name','email','phone'];
-  /* Paginator setings */
-  // totalUsers = 0;
-  // usersPerPage = 1;
-  // currentPage = 1;
-  // pageSizeOptions = [1, 2, 5, 10];
-  constructor(private trainersStore:TrainersStore) { }
+  constructor() { }
 
   ngOnInit(): void {
   }
 
   onChangedPage(pageData: PageEvent) {
-    this.trainersStore.loadMyTrainers(pageData.pageIndex);
+    this.hideContact = [];
+    this.pageChange.emit(pageData);
   }
 
 }
