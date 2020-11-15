@@ -2,15 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 
 
-import { FullCalendarModule } from '@fullcalendar/angular'; // the main connector. must go first
-import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin
-import interactionPlugin from '@fullcalendar/interaction'; // a plugin
+// import { FullCalendarModule } from '@fullcalendar/angular'; // the main connector. must go first
+// import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin
+// import interactionPlugin from '@fullcalendar/interaction'; // a plugin
 
 
-FullCalendarModule.registerPlugins([ // register FullCalendar plugins
-  dayGridPlugin,
-  interactionPlugin
-]);
+// FullCalendarModule.registerPlugins([ // register FullCalendar plugins
+//   dayGridPlugin,
+//   interactionPlugin
+// ]);
 
 @Component({
   selector: 'app-root',

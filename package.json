@@ -30,6 +30,7 @@
     "bootstrap": "^4.5.0",
     "gtoken": "^5.0.1",
     "jquery": "^3.5.1",
+    "moment": "^2.29.1",
     "ng-multiselect-dropdown": "^0.2.10",
     "ng-scroll-calendar": "^1.1.0",
     "ng-starrating": "^1.0.20",

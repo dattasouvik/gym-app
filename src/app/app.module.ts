@@ -33,7 +33,7 @@ import { HeaderInterceptor } from 'src/app/services/header.interceptor';
     SharedModule,
     ThemeSwitcherModule,
     UserAttendenceModule,
-    FullCalendarModule
+    // FullCalendarModule
   ],
   providers: [
     LoadingService,

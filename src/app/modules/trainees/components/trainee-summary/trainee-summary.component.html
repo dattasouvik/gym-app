@@ -1,0 +1,60 @@
+<!-- <div class="container-fluid profile-page" id="profile">
+  <div class="row mat-elevation-z10">
+    <div class="col-sm-12">
+      <nav mat-tab-nav-bar color="primary" class="menu">
+          <a mat-tab-link *ngFor="let link of links"
+            [routerLink]="[link.url]"
+            routerLinkActive
+            #rla="routerLinkActive"
+            [active]="rla.isActive">
+            {{link.title}}
+          </a>
+      </nav>
+    </div>
+  </div>
+  <div class="row content">
+    <div class="col-sm-12 px-0">
+    <main class="content-max">
+      <router-outlet ></router-outlet>
+    </main>
+    </div>
+  </div>
+</div> -->
+<mat-tab-group>
+  <mat-tab label="Attendance">
+    <ng-template matTabContent>
+      <div class="container my-2">
+        <!-- <div class="row">
+          <div class="col-sm-12">
+              <div class="actions-container"
+                fxLayoutAlign="space-between"
+                fxLayout = "row" fxLayout.lt-md = "column" fxFlexFill>
+                <div class = "filter">
+                  <user-attendance-date-filter></user-attendance-date-filter>
+                </div>
+                <div class="events" fxFlexAlign = "center">
+                  <button mat-fab mat-raised-button color="primary"
+                  aria-label="Add Attendance">
+                    <mat-icon>add</mat-icon>
+                  </button>
+                </div>
+              </div>
+          </div>
+        </div> -->
+        <div class="row">
+          <div class="col-sm-12">
+              <view-user-attendance
+                [attendance] = "userAttendanceStore.userAttendanceInfo$ | async "
+                [userId] = "id">
+              </view-user-attendance>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </mat-tab>
+  <mat-tab label="Trainee Details">
+    <ng-template matTabContent>
+      Details WIP
+    </ng-template>
+  </mat-tab>
+</mat-tab-group>

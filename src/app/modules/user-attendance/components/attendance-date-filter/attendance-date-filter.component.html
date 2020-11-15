@@ -1,0 +1,8 @@
+<mat-form-field appearance="fill" class="date-filter">
+  <mat-label>Filter by Date</mat-label>
+  <input matInput [matDatepicker]="picker"
+        (dateInput)="filterByDate($event)"
+        (dateChange)="filterByDate($event)">
+  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-datepicker #picker></mat-datepicker>
+</mat-form-field>

@@ -11,8 +11,8 @@ const routes: Routes = [
   { path: 'registration', loadChildren: () => import('./registration-form/registration-form.module').then(m => m.RegistrationFormModule) },
   { path: 'users', loadChildren: () => import('./user-data/user-data.module').then(m => m.UserDataModule) },
   // { path: 'attendence',loadChildren:'./user-attendence/user-attendence.module#UserAttendenceModule'}
-  { path: 'attendence', component: AttendenceListComponent },
-  { path: 'schedule', component: ScheduleDaysComponent },
+  // { path: 'attendence', component: AttendenceListComponent },
+  // { path: 'schedule', component: ScheduleDaysComponent },
   {
     path: 'profile',
     canActivate: [AuthGuard],
@@ -32,12 +32,12 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     loadChildren: () => import('./modules/trainers/trainers.module').then(m => m.TrainersModule)
   },
-  { path: 'trainees', 
-    loadChildren: () => import('./modules/trainees/trainees.module').then(m => m.TraineesModule) 
+  { path: 'trainees',
+    loadChildren: () => import('./modules/trainees/trainees.module').then(m => m.TraineesModule)
   },
-  { path: '', 
-    redirectTo: 'login', 
-    pathMatch: 'full' 
+  { path: '',
+    redirectTo: 'login',
+    pathMatch: 'full'
   }
 
 ];
