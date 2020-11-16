@@ -1,4 +1,4 @@
 export interface UserAttendanceResponse{
   title:string;
-  date: Date;
+  date: string;
 }

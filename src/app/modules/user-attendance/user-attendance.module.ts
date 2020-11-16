@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialDesignModule } from 'src/app/modules/material-design/material-design.module';
 import { ViewUserAttendanceComponent } from './components/view-user-attendance/view-user-attendance.component';
 import { FullCalendarModule }
@@ -9,6 +9,7 @@ import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin
 import interactionPlugin from '@fullcalendar/interaction';
 import { AttendanceDateFilterComponent } from './components/attendance-date-filter/attendance-date-filter.component'; // a plugin
 import { UserAttendanceStore } from 'src/app/modules/user-attendance/services/user-attendance.store';
+import { AddUserAttendanceComponent } from './components/add-user-attendance/add-user-attendance.component';
 
 // register FullCalendar plugins
 FullCalendarModule.registerPlugins([
@@ -18,11 +19,16 @@ FullCalendarModule.registerPlugins([
 
 
 @NgModule({
-  declarations: [ViewUserAttendanceComponent, AttendanceDateFilterComponent],
+  declarations: [
+    ViewUserAttendanceComponent,
+    AttendanceDateFilterComponent,
+    AddUserAttendanceComponent
+  ],
   imports: [
     CommonModule,
-    FullCalendarModule,
     FormsModule,
+    ReactiveFormsModule,
+    FullCalendarModule,
     MaterialDesignModule
   ],
   exports:[
@@ -31,6 +37,9 @@ FullCalendarModule.registerPlugins([
   ],
   providers:[
     UserAttendanceStore
+  ],
+  entryComponents: [
+    AddUserAttendanceComponent
   ]
 })
 export class UserAttendanceModule { }

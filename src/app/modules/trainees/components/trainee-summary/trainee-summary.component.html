@@ -24,23 +24,25 @@
   <mat-tab label="Attendance">
     <ng-template matTabContent>
       <div class="container my-2">
-        <!-- <div class="row">
+        <div class="row">
           <div class="col-sm-12">
-              <div class="actions-container"
+              <div class="actions-container justify-content-center"
                 fxLayoutAlign="space-between"
                 fxLayout = "row" fxLayout.lt-md = "column" fxFlexFill>
-                <div class = "filter">
+                <!-- <div class = "filter">
                   <user-attendance-date-filter></user-attendance-date-filter>
-                </div>
+                </div> -->
                 <div class="events" fxFlexAlign = "center">
-                  <button mat-fab mat-raised-button color="primary"
+                  <button mat-fab
+                  mat-raised-button color="primary"
+                  (click) = "addAttendance()"
                   aria-label="Add Attendance">
                     <mat-icon>add</mat-icon>
                   </button>
                 </div>
               </div>
           </div>
-        </div> -->
+        </div>
         <div class="row">
           <div class="col-sm-12">
               <view-user-attendance

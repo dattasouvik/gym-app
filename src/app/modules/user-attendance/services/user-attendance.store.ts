@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable, Subject, throwError } from 'rxjs';
 import { catchError, shareReplay, tap } from 'rxjs/operators';
 import { LoadingService } from 'src/app/modules/shared/services/loading.service';
 import { MessagesService } from 'src/app/modules/shared/services/messages.service';
+import { AddAttendance } from 'src/app/modules/user-attendance/model/add-attendance.model';
 import { UserAttendanceResponse } from 'src/app/modules/user-attendance/model/user-attendance-response.model';
 import { HttpService } from 'src/app/services/http.service';
 
@@ -50,5 +51,32 @@ export class UserAttendanceStore {
 
       this.loading.showLoaderUntilCompleted(userAttendance$)
         .subscribe();
+    }
+
+    public addUserAttendance(changes:AddAttendance): Observable<any>{
+
+      const attendance = this.userAttendanceSubject.getValue();
+      const newAttendance  = attendance.slice();
+      newAttendance
+      .push({
+        title: 'Attended',
+        date: changes.attendance
+      });
+ 
+      this.userAttendanceSubject.next(newAttendance);
+
+      let params = new HttpParams();
+      params = params.append('_format', `json`);
+      return this.httpService.post(`user-attendance`, changes, {params})
+      .pipe(
+        catchError(err => {
+            //Restore old data if update failed
+            this.userAttendanceSubject.next(attendance);
+            const message = "Unable to update Attendance";
+            this.messages.showErrors(message);
+            return throwError(err);
+        }),
+        shareReplay()
+      );
     }
 }

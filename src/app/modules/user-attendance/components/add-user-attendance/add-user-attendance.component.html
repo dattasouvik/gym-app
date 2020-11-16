@@ -1,0 +1,37 @@
+<h2 mat-dialog-title>Add Attendance</h2>
+<mat-dialog-content [formGroup]="form">
+  <mat-form-field>
+    <input matInput placeholder="Title" formControlName="title" />
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Choose a date</mat-label>
+    <input matInput formControlName="date"
+      [min]="minDate"
+     [max]="maxDate" [matDatepicker]="picker">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+
+    <mat-error *ngIf="form.get('date').hasError('required')">
+      Attendance date required.
+    </mat-error>
+    <mat-error *ngIf="form.get('date').hasError('matDatepickerMin')">
+      Invalid minimum date.
+    </mat-error>
+    <mat-error *ngIf="form.get('date').hasError('matDatepickerMax')">
+      Invalid maximum date.
+    </mat-error>
+  </mat-form-field>
+
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button class="mat-raised-button" (click)="close()">Close</button>
+  <button
+    class="mat-raised-button mat-primary"
+    #saveButton
+    [disabled]="form.invalid"
+    (click)="save()">
+    Add
+  </button>
+</mat-dialog-actions>
