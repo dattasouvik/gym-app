@@ -45,15 +45,10 @@ export class AddUserAttendanceComponent implements OnInit {
 
     this.form$ = this.form.statusChanges;
     this.form$.subscribe( r => {
-      console.log(r);
-      if (r === 'VALID') {
-        //form valid
-      } else if( r === 'PENDING') {
+      if( r === 'PENDING') {
         setTimeout(() => {
           this.form.updateValueAndValidity(); // this function will trigger statusChange one more time.
         }, 1000);
-      } else {
-        // any other status
       }
     });
   }
