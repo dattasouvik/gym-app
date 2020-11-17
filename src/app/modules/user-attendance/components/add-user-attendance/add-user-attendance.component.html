@@ -21,6 +21,9 @@
     <mat-error *ngIf="form.get('date').hasError('matDatepickerMax')">
       Invalid maximum date.
     </mat-error>
+    <mat-error *ngIf="form.get('date').hasError('userAttended')">
+      Attendance is already marked.
+    </mat-error>
   </mat-form-field>
 
 </mat-dialog-content>
@@ -30,7 +33,8 @@
   <button
     class="mat-raised-button mat-primary"
     #saveButton
-    [disabled]="form.invalid"
+    [disabled]="form.invalid || form.pending"
+    [hidden]="form.invalid || form.pending"
     (click)="save()">
     Add
   </button>

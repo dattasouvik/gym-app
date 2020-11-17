@@ -10,6 +10,7 @@ import interactionPlugin from '@fullcalendar/interaction';
 import { AttendanceDateFilterComponent } from './components/attendance-date-filter/attendance-date-filter.component'; // a plugin
 import { UserAttendanceStore } from 'src/app/modules/user-attendance/services/user-attendance.store';
 import { AddUserAttendanceComponent } from './components/add-user-attendance/add-user-attendance.component';
+import { UserAttendanceValidator } from 'src/app/modules/user-attendance/validators/user-attendance.validator';
 
 // register FullCalendar plugins
 FullCalendarModule.registerPlugins([
@@ -36,7 +37,8 @@ FullCalendarModule.registerPlugins([
     AttendanceDateFilterComponent
   ],
   providers:[
-    UserAttendanceStore
+    UserAttendanceStore,
+    UserAttendanceValidator
   ],
   entryComponents: [
     AddUserAttendanceComponent

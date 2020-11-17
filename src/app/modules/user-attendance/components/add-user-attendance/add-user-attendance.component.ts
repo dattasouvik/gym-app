@@ -1,8 +1,11 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import * as moment from 'moment';
+import { Observable } from 'rxjs';
+import { debounceTime, exhaustMap } from 'rxjs/operators';
 import { UserAttendanceStore } from 'src/app/modules/user-attendance/services/user-attendance.store';
+import { UserAttendanceValidator } from 'src/app/modules/user-attendance/validators/user-attendance.validator';
 
 
 @Component({
@@ -15,11 +18,13 @@ export class AddUserAttendanceComponent implements OnInit {
   maxDate: Date;
   form: FormGroup;
   traineeId: number;
+  form$: Observable<any>;
 
   constructor(
     private fb: FormBuilder,
     private dialogRef: MatDialogRef<AddUserAttendanceComponent>,
     private userAttendanceStore:UserAttendanceStore,
+    private userAttendanceValidator:UserAttendanceValidator,
     @Inject(MAT_DIALOG_DATA) userId:number
   ) {
     this.traineeId = userId;
@@ -32,9 +37,25 @@ export class AddUserAttendanceComponent implements OnInit {
 
     this.form = this.fb.group({
       title: [{ value: 'Attended', disabled: true }, Validators.required],
-      date:  [ new Date(), Validators.required],
+      date:  [ '', Validators.compose([ Validators.required ]),
+          this.userAttendanceValidator.isAttendanceValid(),
+          {updateOn: 'blur'}
+      ],
     });
 
+    this.form$ = this.form.statusChanges;
+    this.form$.subscribe( r => {
+      console.log(r);
+      if (r === 'VALID') {
+        //form valid
+      } else if( r === 'PENDING') {
+        setTimeout(() => {
+          this.form.updateValueAndValidity(); // this function will trigger statusChange one more time.
+        }, 1000);
+      } else {
+        // any other status
+      }
+    });
   }
 
   save(){
