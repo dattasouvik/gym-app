@@ -1,38 +1,46 @@
 <div class="container">
-  <ng-container *ngIf="trainers?.rows && trainers.rows.length > 0 ;else noResultBlock">
-    <mat-card *ngFor="let trainer of trainers.rows;let i = index "
-    class="example-card mat-elevation-z8 my-2">
-      <mat-card-header>
-        <div mat-card-avatar class="example-header-image">
-          <img src="https://material.angular.io/assets/img/examples/shiba1.jpg"
-          class="rounded-circle mr-3" width="50x" alt="avatar">
-        </div>
-        <mat-card-title>{{trainer.first_name}} {{trainer.last_name}}</mat-card-title>
-        <mat-card-subtitle>Ratings: 5</mat-card-subtitle>
-      </mat-card-header>
-      <mat-card-content>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        <ng-container *ngIf="hideContact[i]">
-          <div class="card-header">
-            Contacts
-          </div>
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item">Email: {{trainer.email}}</li>
-            <li class="list-group-item">Phone: {{trainer.phone}}</li>
-          </ul>
-        </ng-container>
-      </mat-card-content>
-      <mat-card-actions class="d-flex justify-content-center">
-        <button mat-button mat-raised-button color="success">Rate</button>
-        <button mat-button color="accent" mat-raised-button
-        (click) = "hideContact[i] = !hideContact[i]">
-          <ng-container  *ngIf="!hideContact[i]; else elseBlock">
-            Show Contact
-          </ng-container>
-          <ng-template #elseBlock>Hide Contact</ng-template>
-        </button>
-      </mat-card-actions>
-    </mat-card>
+  <ng-container
+   *ngIf="trainers?.rows && trainers.rows.length > 0 ;else noResultBlock">
+   <!-- Content Block -->
+   <mat-card
+    *ngFor="let trainer of trainers.rows;let i = index"
+    class="mat-elevation-z8 mb-2">
+     <mat-card-header>
+       <div mat-card-avatar class="header-image">
+         <img src="https://material.angular.io/assets/img/examples/shiba1.jpg"
+         class="rounded-circle mr-3" width="50x" alt="avatar">
+       </div>
+       <mat-card-title>{{trainer.first_name}} {{trainer.last_name}}</mat-card-title>
+       <mat-card-subtitle >
+         Ratings: <b>{{ trainer.rating | number:'1.1-3' }}</b>
+       </mat-card-subtitle>
+     </mat-card-header>
+     <mat-card-content>
+       <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+       <ng-container *ngIf="hideContact[i]">
+         <div class="card-header">
+           Contacts
+         </div>
+         <ul class="list-group list-group-flush">
+           <li class="list-group-item">Email: {{trainer.email}}</li>
+           <li class="list-group-item">Phone: {{trainer.phone}}</li>
+         </ul>
+       </ng-container>
+     </mat-card-content>
+     <mat-card-actions class="d-flex justify-content-center">
+       <button (click) = "triggerRating(trainer.uid, trainers.pager.current_page)"
+         mat-button mat-raised-button color="primary">
+         Rate
+       </button>
+       <button mat-button color="accent" mat-raised-button
+       (click) = "hideContact[i] = !hideContact[i]">
+         <ng-container  *ngIf="!hideContact[i]; else elseBlock">
+           Show Contact
+         </ng-container>
+         <ng-template #elseBlock>Hide Contact</ng-template>
+       </button>
+     </mat-card-actions>
+   </mat-card> 
     <!-- Pager block -->
     <ng-container *ngIf="trainers.pager">
       <mat-paginator [length]="trainers.pager.total_items"

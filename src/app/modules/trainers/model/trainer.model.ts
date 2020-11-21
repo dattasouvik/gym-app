@@ -5,4 +5,5 @@ export interface Trainer{
   last_name: string;
   gender: any;
   phone: number;
+  rating: number;
 }

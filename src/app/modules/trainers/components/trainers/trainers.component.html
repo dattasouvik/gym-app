@@ -8,7 +8,8 @@
       <div class="row">
           <div class="col-md-12">
             <view-my-trainers [trainers]="trainersStore.trainers$ | async "
-            (pageChange) = "onPageChange($event)" >
+            (pageChange) = "onPageChange($event)" 
+            (displayRating) = "viewRatingModal($event)">
             </view-my-trainers>
           </div>
       </div>

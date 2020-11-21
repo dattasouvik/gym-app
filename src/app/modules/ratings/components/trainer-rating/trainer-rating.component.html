@@ -1,0 +1,40 @@
+<mat-dialog-content [formGroup]="ratingForm">
+
+  <div class="form-group row">
+    <label for="user-rating" class="col-sm-12 col-form-label">Please rate us</label>
+    <div class="col-sm-12">
+      <ngb-rating formControlName = "rate" [(rate)]="selected"
+      (hover)="hovered=$event"
+      id="user-rating" class="full-width">
+        <ng-template let-fill="fill" let-index="index">
+          <span class="star"
+          [matTooltip]="hovered" matTooltipPosition="above"
+           [class.filled]="fill === 100"
+           [class.green]="index >= 8"
+           [class.bad]="index < 3">&#9733;</span>
+        </ng-template>
+      </ngb-rating>
+    </div>
+  </div>
+  <div class="row my-2" *ngIf="selected">
+    <div class="col-sm-12">
+      <span>You rated: <b>{{selected}}/10</b></span>
+    </div>
+  </div>
+  <mat-form-field class="full-width">
+        <textarea matInput placeholder="Feedback"
+                  formControlName="feedback">
+        </textarea>
+  </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions class="d-flex justify-content-around">
+  <button class="mat-raised-button"
+          (click)="close()">
+    Close
+  </button>
+  <button class="mat-raised-button mat-primary" #saveButton
+    [hidden]="ratingForm.invalid" (click)="save()">
+    Update
+  </button>
+</mat-dialog-actions>
