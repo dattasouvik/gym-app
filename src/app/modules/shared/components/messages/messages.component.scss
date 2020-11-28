@@ -1,20 +1,24 @@
+@import 'abstracts/mixins';
+
 .messages-container {
   display: flex;
-  color: #a94442;
-  background-color: #f2dede;
-  border: 1px solid #ebccd1;
-  padding: 20px;
+  padding: 0.6rem;
   font-family: Roboto;
-  position: relative;
+  position: fixed;
+  width: 100%;
+  z-index: 100;
+  &.error{
+    @include error-message;
+  }
+  &.success{
+    @include success-message;
+  }
 }
 
+.message{
+  display: flex;
+  flex: 1 1 0;
+}
 .close {
-  position: absolute;
-  right: 10px;
-  top:10px;
   cursor: pointer;
-}
-
-.message {
-
 }

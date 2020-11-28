@@ -5,6 +5,7 @@ import { AttendenceListComponent } from './user-attendence/attendence-list/atten
 import { ScheduleDaysComponent } from './user-attendence/schedule-days/schedule-days.component';
 import { LoginGuard } from 'src/app/guards/login.guard';
 import { AuthGuard } from 'src/app/guards/auth.guard';
+import { CanLoadAuthGuard } from 'src/app/guards/can-load-auth.guard';
 
 
 const routes: Routes = [
@@ -29,11 +30,12 @@ const routes: Routes = [
     loadChildren: () => import('./modules/user-registration/user-registration.module').then(m => m.UserRegistrationModule)
   },
   { path: 'trainers',
-    canActivate: [AuthGuard],
-    loadChildren: () => import('./modules/trainers/trainers.module').then(m => m.TrainersModule)
+    loadChildren: () => import('./modules/trainers/trainers.module').then(m => m.TrainersModule),
+    canLoad: [CanLoadAuthGuard]
   },
   { path: 'trainees',
-    loadChildren: () => import('./modules/trainees/trainees.module').then(m => m.TraineesModule)
+    loadChildren: () => import('./modules/trainees/trainees.module').then(m => m.TraineesModule),
+    canLoad: [CanLoadAuthGuard]
   },
   { path: '',
     redirectTo: 'login',
@@ -43,7 +45,13 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes,
+    {
+      scrollPositionRestoration:'enabled',
+      paramsInheritanceStrategy: 'always',
+      relativeLinkResolution: 'corrected'
+    })
+  ],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

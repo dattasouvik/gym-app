@@ -1,8 +1,9 @@
-<ng-container *ngIf="(errors$ | async) as errors">
-  <div class="messages-container" *ngIf="showMessages">
-    <div class="message" *ngFor="let error of errors">
-      {{error}}
+<ng-container *ngIf="(messages$ | async) as messages">
+  <div class="messages-container" *ngIf="showMessages"
+  [ngClass]="setMessageColor(messages.type)">
+    <div class="message" *ngFor="let message of messages.body">
+      {{message}}
     </div>
-    <mat-icon class="close" (click)="onClose()">close</mat-icon>
+    <mat-icon class="close" (click)="onClose()">cancel</mat-icon>
   </div>
 </ng-container>

@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, Router} from '@angular/router';
+import { ActivatedRouteSnapshot, 
+  CanActivate, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { MessagesService } from 'src/app/modules/shared/services/messages.service';
 import { map, take } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 
 @Injectable({
@@ -12,25 +14,27 @@ export class LoginGuard implements CanActivate {
 
   constructor(
     private authService: AuthService,
-    private router: Router,
     private messages: MessagesService
   ) { }
 
-  canActivate() {
-    return this.authService.authStatus$.pipe(
-      take(1),
-      map( response => {
-        //if authenticated redirect user to profile page if navigated to login
-        const isAuth = !!response;
-        if(isAuth && !this.authService.isTokenExpired()){
-          const message = `You are not allowed to visit this page`;
-          this.messages.showErrors(message);
-          //TBM redirect to dashboard
-          this.router.navigate(['/profile']);
-          return false;
-        }
-        return true;
-      })
-    );
+  canActivate(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ): Observable<boolean | UrlTree> {
+
+    return this.checkIfAuthenticated();
+  }
+
+  private checkIfAuthenticated() {
+    return this.authService.isLoggedIn$
+      .pipe(
+        take(1),
+        map(loggedIn => {
+          if (loggedIn) {
+            this.messages.showErrors("Access forbidden");
+          }
+          return !loggedIn ? true : false;
+        })
+      );
   }
 }

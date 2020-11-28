@@ -15,8 +15,12 @@ import { HttpService } from 'src/app/services/http.service';
 export class RegisterComponent implements OnInit {
 
   regForm: FormGroup;
-  constructor(private regfrm: FormBuilder, private registerService: HttpService, private messages: MessagesService,private Router:Router) {
-  };
+  constructor(
+    private regfrm: FormBuilder, 
+    private registerService: HttpService, 
+    private messages: MessagesService,
+    private Router:Router
+    ) {};
 
   ngOnInit(): void {
     this.regForm = this.regfrm.group({
@@ -36,23 +40,16 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.regForm.value);
     this.registerService.post(`gym-user-registration?_format=json`, this.regForm.value).subscribe(arg => {
       console.log(arg)
       if (arg.errorMessage !='na') {
         this.messages.showErrors("Something went wrong");
       }
       else {
-        this.messages.showErrors("Successfully Registered.Please login");
+        this.messages.showOnSuccess("Successfully Registered.Please login");
         this.Router.navigate(["/login"])
       }
-
     })
-
-    // this.service.function
-    //   .subscribe(arg => this.property = arg);
-
-
   }
 
 }

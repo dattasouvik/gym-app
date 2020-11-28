@@ -48,11 +48,21 @@ export class RatingsService {
         exhaustMap( async (_) => this.trainersStore.loadMyTrainers(data.currentPage)
         ),
         catchError(err => {
-        const message = "Unable to submit rating.";
-        this.messages.showErrors(message);
-        return throwError(err);
+          this.notify("Unable to submit rating.", true);
+          return throwError(err);
       })
     );
-    this.loading.showLoaderUntilCompleted(update$).subscribe();
+    this.loading.showLoaderUntilCompleted(update$).subscribe(success =>
+      this.notify("Thanks for your feedback.")
+    );
   }
+
+  private notify(message:string, error = false):void {
+    if(error){
+      this.messages.showErrors(message);
+    }else{
+      this.messages.showOnSuccess(message);
+    }
+  }
+  
 }

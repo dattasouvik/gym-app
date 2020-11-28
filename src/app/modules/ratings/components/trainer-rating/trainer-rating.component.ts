@@ -13,6 +13,7 @@ export class TrainerRatingComponent implements OnInit {
 
   ratingForm: FormGroup;
   ratingInfo: TrainerRating;
+  maxRating = 10;
   hovered = 0;
   selected = 0;
   constructor(

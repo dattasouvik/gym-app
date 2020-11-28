@@ -1,0 +1,15 @@
+@use './variables' as variables;
+
+/* Messages Section  starts here */
+
+@mixin error-message {
+  background-color: variables.$error-bgcolor;
+  color: variables.$message-text;
+}
+
+@mixin success-message {
+  background-color: variables.$success-bgcolor;
+  color: variables.$message-text; 
+}
+
+/* Messages Section  ends here */

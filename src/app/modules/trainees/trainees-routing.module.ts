@@ -4,25 +4,36 @@ import { BaseComponent } from 'src/app/modules/trainees/components/base/base.com
 import { TraineeSummaryComponent } from 'src/app/modules/trainees/components/trainee-summary/trainee-summary.component';
 import { ViewMyTraineesComponent } from './components/view-my-trainees/view-my-trainees.component';
 
+// const routes: Routes = [
+//   { path: '',
+//     component: BaseComponent,
+//     children: [
+//       {
+//         path: 'details',
+//         component: ViewMyTraineesComponent,
+//       },
+//       {
+//         path: 'details/:id',
+//         component: TraineeSummaryComponent
+//       },
+//       {
+//         path: '',
+//         redirectTo: 'details',
+//         pathMatch: 'full'
+//       }
+//     ]
+//   }
+// ];
+
 const routes: Routes = [
-  { path: '',
-    component: BaseComponent,
-    children: [
-      {
-        path: 'details',
-        component: ViewMyTraineesComponent,
-      },
-      {
-        path: 'details/:id',
-        component: TraineeSummaryComponent
-      },
-      {
-        path: '',
-        redirectTo: 'details',
-        pathMatch: 'full'
-      }
-    ]
-  }
+    {
+      path: "",
+      component: ViewMyTraineesComponent
+    },
+    {
+      path:":id",
+      component: TraineeSummaryComponent,
+    }
 ];
 
 @NgModule({
