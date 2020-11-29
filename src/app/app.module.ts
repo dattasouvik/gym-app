@@ -16,6 +16,7 @@ import { ThemeSwitcherModule } from 'src/app/modules/theme-switcher/theme-switch
 import { MessagesService } from 'src/app/modules/shared/services/messages.service';
 import { TokenInterceptor } from 'src/app/services/token.interceptor';
 import { HeaderInterceptor } from 'src/app/services/header.interceptor';
+import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import { HeaderInterceptor } from 'src/app/services/header.interceptor';
     SharedModule,
     ThemeSwitcherModule,
     UserAttendenceModule,
+    MatPasswordStrengthModule,
     // FullCalendarModule
   ],
   providers: [

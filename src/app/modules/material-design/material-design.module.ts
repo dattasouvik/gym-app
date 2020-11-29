@@ -11,6 +11,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatRadioModule } from '@angular/material/radio';
+import {MatSelectModule} from '@angular/material/select';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialogModule } from '@angular/material/dialog';
 import {MatTabsModule} from '@angular/material/tabs';
@@ -37,6 +38,7 @@ const MaterialDesignComponents = [
   MatToolbarModule,
   MatSidenavModule,
   MatListModule,
+  MatSelectModule,
   MatRadioModule,
   MatTooltipModule,
   MatDialogModule,

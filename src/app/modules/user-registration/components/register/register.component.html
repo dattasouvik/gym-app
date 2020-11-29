@@ -3,55 +3,131 @@
     <mat-card-content>
         <form [formGroup]="regForm" (ngSubmit)="onSubmit()">
             <p>
-                <mat-form-field class="field-full-width">
-                    <mat-label>First Name</mat-label>
-                    <input matInput placeholder="Enter firstname" formControlName="first_name">
-                </mat-form-field>
+              <mat-form-field class="field-full-width">
+                  <mat-label>First Name</mat-label>
+                  <input
+                  required
+                  matInput 
+                  placeholder="Enter firstname" 
+                  formControlName="first_name">
+              </mat-form-field>
+            </p>
+            <p>
+              <mat-form-field class="field-full-width">
+                  <mat-label>Last Name</mat-label>
+                  <input 
+                  matInput 
+                  required
+                  placeholder="Enter firstname" 
+                  formControlName="last_name">
+              </mat-form-field>
+            </p>
+            <p>
+              <mat-form-field class="field-full-width">
+                  <mat-label>Email</mat-label>
+                  <input 
+                  matInput 
+                  required
+                  placeholder="Enter firstname" 
+                  formControlName="email">
+              </mat-form-field>
+            </p>
+            <p>
+              <mat-form-field class="field-full-width">
+                  <mat-label>Telephone</mat-label>
+                  <span matPrefix>+91 &nbsp;</span>
+                  <input 
+                  type="tel"
+                  matInput 
+                  required
+                  placeholder="Telephone" 
+                  formControlName="phone">
+                  <mat-icon matSuffix>call</mat-icon>
+              </mat-form-field>
+            </p>
+            <p>
+              <mat-form-field class="field-full-width">
+                  <mat-label>About me</mat-label>
+                  <textarea 
+                  matInput 
+                  #about_me
+                  placeholder="Tell us something about yourself" formControlName="about_me"></textarea>
+                  <button mat-button *ngIf="about_me.value" matSuffix mat-icon-button aria-label="Clear" (click)="about_me.value=''">
+                    <mat-icon>close</mat-icon>
+                  </button>
+              </mat-form-field>
+            </p>            
+            <p>
+              <label class="d-flex">Select gennder</label>
+              <mat-radio-group aria-label="Select an option" formControlName="gender">
+                  <mat-radio-button value="Male">Male</mat-radio-button>
+                  <mat-radio-button value="Female">Female</mat-radio-button>
+                  <mat-radio-button value="Others">Others</mat-radio-button>
+              </mat-radio-group>
+            </p>
+            <p>
+              <mat-form-field class="field-full-width">
+                <mat-label>Select role</mat-label>
+                <mat-select formControlName="role">
+                  <mat-option *ngFor="let role of roles" [value]="role.value">
+                    {{role.viewValue}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </p>
+            <p>
+              <mat-form-field class="field-full-width">
+                  <mat-label>Address</mat-label>
+                  <input 
+                  matInput
+                  required
+                  #address maxlength="45" 
+                  placeholder="Enter your current address." 
+                  formControlName="address">
+                  <mat-hint align="end">{{address.value.length}} / 45</mat-hint>
+              </mat-form-field>
+            </p>
+            <p>
+              <!--password input filed-->
+              <mat-form-field appearance="outline" class="field-full-width"
+              [color]="passwordComponent.color">
+                <mat-label>Password</mat-label>
+                <mat-pass-toggle-visibility #toggle matSuffix></mat-pass-toggle-visibility>
+                <input matInput #password
+                      [formControlName]="'password'"
+                      [type]="toggle.type"
+                      required
+                      placeholder="Password">
+                <mat-hint aria-live="polite" align="end">
+                  {{password.value.length}} / {{passwordComponent.max}}
+                </mat-hint>
+              </mat-form-field>
+              <!--@angular-material-extensions/password-strength's main component-->
+              <mat-password-strength #passwordComponent
+                                    [password]="password.value">
+              </mat-password-strength>
+              <!--Password's strength info-->
+
+              <mat-password-strength-info
+
+                [passwordComponent]="passwordComponent">
+              </mat-password-strength-info>
             </p>
 
             <p>
-                <mat-form-field class="field-full-width">
-                    <mat-label>Last Name</mat-label>
-                    <input matInput placeholder="Enter firstname" formControlName="last_name">
-                </mat-form-field>
-            </p>
-
-            <p>
-                <mat-form-field class="field-full-width">
-                    <mat-label>Email</mat-label>
-                    <input matInput placeholder="Enter firstname" formControlName="email">
-                </mat-form-field>
-            </p>
-
-            <p>
-                <mat-form-field class="field-full-width">
-                    <mat-label>Phone</mat-label>
-                    <input matInput placeholder="Enter phone" formControlName="phone">
-                </mat-form-field>
-            </p>
-
-            <p>
-                <mat-radio-group aria-label="Select an option" formControlName="gender">
-                    <mat-radio-button value="Male">Male</mat-radio-button>
-                    <mat-radio-button value="Female">Female</mat-radio-button>
-                    <mat-radio-button value="Others">Others</mat-radio-button>
-                </mat-radio-group>
-            </p>
-
-
-
-            <p>
-                <mat-form-field class="field-full-width">
-                    <mat-label>Enter Password</mat-label>
-                    <input matInput type="password" placeholder="Enter password" formControlName="password">
-                </mat-form-field>
-            </p>
-
-            <p>
-                <mat-form-field class="field-full-width">
-                    <mat-label>Address</mat-label>
-                    <textarea matInput placeholder="Ex. It makes me feel..." formControlName="address"></textarea>
-                </mat-form-field>
+              <mat-form-field class="field-full-width">
+                  <!-- <mat-label>Confirm Password</mat-label> -->
+                  <mat-pass-toggle-visibility #confirmPassword_toggle matSuffix></mat-pass-toggle-visibility>
+                  <input 
+                    matInput
+                    [formControlName]="'confirmPassword'"
+                    [type]="confirmPassword_toggle.type"
+                    required
+                    placeholder="Confirm Password">
+                  <mat-error *ngIf="regForm.controls['confirmPassword'].hasError('NoPassswordMatch')">
+                    Password do not match
+                  </mat-error>
+              </mat-form-field>
             </p>
 
             <div class="actions">
@@ -64,3 +140,7 @@
         </form>
     </mat-card-content>
 </mat-card>
+
+<div fxFlex>
+
+</div>

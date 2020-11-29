@@ -6,7 +6,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { MaterialDesignModule } from '../material-design/material-design.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
-
+import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
 
 @NgModule({
   declarations: [RegisterComponent],
@@ -15,6 +15,7 @@ import { FormsModule } from '@angular/forms';
     UserRegistrationRoutingModule,
     ReactiveFormsModule,
     FormsModule,
+    MatPasswordStrengthModule,
     MaterialDesignModule
   ]
 })
