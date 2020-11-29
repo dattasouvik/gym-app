@@ -1,4 +1,4 @@
-<mat-card class="login-card">
+<mat-card class="register-card">
     <mat-card-title class="d-flex justify-content-center">Register</mat-card-title>
     <mat-card-content>
         <form [formGroup]="regForm" (ngSubmit)="onSubmit()">
@@ -30,6 +30,7 @@
                   required
                   placeholder="Enter firstname" 
                   formControlName="email">
+                  <mat-icon matSuffix>email</mat-icon>
               </mat-form-field>
             </p>
             <p>
@@ -52,13 +53,16 @@
                   matInput 
                   #about_me
                   placeholder="Tell us something about yourself" formControlName="about_me"></textarea>
-                  <button mat-button *ngIf="about_me.value" matSuffix mat-icon-button aria-label="Clear" (click)="about_me.value=''">
-                    <mat-icon>close</mat-icon>
-                  </button>
+                  <mat-icon 
+                  matSuffix 
+                  class="clear"
+                  *ngIf="about_me.value" 
+                  (click)="about_me.value=''">close</mat-icon>
+                  <mat-icon matSuffix>edit</mat-icon>
               </mat-form-field>
             </p>            
             <p>
-              <label class="d-flex">Select gennder</label>
+              <label class="d-flex">Gender</label>
               <mat-radio-group aria-label="Select an option" formControlName="gender">
                   <mat-radio-button value="Male">Male</mat-radio-button>
                   <mat-radio-button value="Female">Female</mat-radio-button>
@@ -67,7 +71,7 @@
             </p>
             <p>
               <mat-form-field class="field-full-width">
-                <mat-label>Select role</mat-label>
+                <mat-label>Role</mat-label>
                 <mat-select formControlName="role">
                   <mat-option *ngFor="let role of roles" [value]="role.value">
                     {{role.viewValue}}
@@ -84,12 +88,13 @@
                   #address maxlength="45" 
                   placeholder="Enter your current address." 
                   formControlName="address">
+                  <mat-icon matSuffix>home</mat-icon>
                   <mat-hint align="end">{{address.value.length}} / 45</mat-hint>
               </mat-form-field>
             </p>
             <p>
               <!--password input filed-->
-              <mat-form-field appearance="outline" class="field-full-width"
+              <mat-form-field  class="field-full-width"
               [color]="passwordComponent.color">
                 <mat-label>Password</mat-label>
                 <mat-pass-toggle-visibility #toggle matSuffix></mat-pass-toggle-visibility>

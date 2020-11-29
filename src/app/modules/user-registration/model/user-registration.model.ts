@@ -1,4 +1,6 @@
-export interface UserRegistration{
+import { Roles, GenderType } from 'src/app/models/user.model';
+
+export interface UserRegistration {
   first_name: string;
   last_name: string;
   email: string;
@@ -8,15 +10,4 @@ export interface UserRegistration{
   phone: number;
   password: string;
   about_me?: string;
-}
-
-export enum GenderType{
-  MALE = 'Male',
-  FEMALE = 'Female',
-  OTHERS = 'Others'
-}
-
-export enum Roles{
-  MEMBER = 'member',
-  TRAINER = 'trainer'
 }

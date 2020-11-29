@@ -5,12 +5,15 @@
     align-items: center;
   }
 
-  .login-card{
+  .register-card{
     .field-full-width{
       width: 100%;
       min-width: 15rem;
     }
-    .show-password{
+    .mat-radio-button ~ .mat-radio-button {
+      margin-left: 1rem;
+    }
+    .clear{
       cursor: pointer;
     }
     .actions {
@@ -18,7 +21,3 @@
       justify-content: space-evenly;
     }
   }
-
-.mat-radio-button ~ .mat-radio-button {
-  margin-left: 1rem;
-}

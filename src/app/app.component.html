@@ -10,13 +10,15 @@
     <!-- Menu loaded when user is logged in starts here -->
     <ng-container *ngIf="authService.isLoggedIn$ | async">
 
-      <mat-list-item routerLink="/" (click)="sidenav.toggle()">
+      <mat-list-item routerLink="/"
+      (click)="sidenav.toggle()">
         <mat-icon matListIcon>home</mat-icon>
         <a matLine>Home</a>
       </mat-list-item>
 
 
-      <mat-list-item routerLink="/profile" (click)="sidenav.toggle()">
+      <mat-list-item routerLink="/profile" routerLinkActive='active'
+      (click)="sidenav.toggle()">
         <mat-icon matListIcon>account_circle</mat-icon>
         <a matLine>Profile</a>
       </mat-list-item>
@@ -26,7 +28,7 @@
 
         <!-- Member Roles Start Here -->
         <ng-container *ngIf="user.role.includes('member')">
-          <mat-list-item routerLink="/trainers"
+          <mat-list-item routerLink="/trainers" routerLinkActive='active'
           (click)="sidenav.toggle()">
             <mat-icon matListIcon>assignment_ind</mat-icon>
             <a matLine>View my trainer</a>
@@ -34,7 +36,8 @@
         </ng-container>
 
         <ng-container *ngIf="user.role.includes('trainer')">
-          <mat-list-item routerLink="/trainees" (click)="sidenav.toggle()">
+          <mat-list-item routerLink="/trainees" routerLinkActive='active'
+          (click)="sidenav.toggle()">
             <mat-icon matListIcon>assignment_ind</mat-icon>
             <a matLine>View my trainees</a>
           </mat-list-item>
@@ -56,13 +59,15 @@
     <!-- Menu loaded when user is logged out starts here -->
     <ng-container *ngIf="authService.isLoggedOut$ | async">
       <mat-list-item
-      routerLink="/register" (click)="sidenav.toggle()">
+      routerLink="/register" routerLinkActive='active'
+      (click)="sidenav.toggle()">
       <mat-icon matListIcon>add</mat-icon>
       <a matLine>Register User</a>
     </mat-list-item>
 
     <mat-list-item
-      routerLink="/login" (click)="sidenav.toggle()">
+      routerLink="/login" routerLinkActive='active'
+      (click)="sidenav.toggle()">
       <mat-icon matListIcon>login</mat-icon>
       <a matLine>Login</a>
     </mat-list-item>
@@ -79,7 +84,7 @@
         <button mat-icon-button (click)="sidenav.toggle()">
           <mat-icon>menu</mat-icon>
         </button>
-        <h1 routerLink="/" class="app-brand">
+        <h1 class="app-brand">
           {{ title }}
         </h1>
         <div class="flex-spacer"></div>

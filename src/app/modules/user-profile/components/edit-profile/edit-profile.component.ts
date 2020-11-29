@@ -11,7 +11,7 @@ import { UserProfileStore } from 'src/app/modules/user-profile/services/user-pro
 })
 export class EditProfileComponent implements OnInit {
 
-  form: FormGroup;
+  profileForm: FormGroup;
   profile: UserProfile;
 
   constructor(
@@ -22,10 +22,12 @@ export class EditProfileComponent implements OnInit {
   ) {
     this.profile = profile;
 
-    this.form = fb.group({
+    this.profileForm = fb.group({
       first_name: [profile.first_name, Validators.required],
       last_name: [profile.last_name,Validators.required],
-      address: [profile.address,Validators.required]
+      address: [profile.address,Validators.required],
+      about_me: [ profile.about_me ],
+      gender: [profile.gender,Validators.required]
     });
   }
 
@@ -34,7 +36,7 @@ export class EditProfileComponent implements OnInit {
   }
 
   save() {
-    const changes = this.form.value;
+    const changes = this.profileForm.value;
     this.userProfileStore.saveUserProfile(changes).subscribe();
 
     this.dialogRef.close(changes);

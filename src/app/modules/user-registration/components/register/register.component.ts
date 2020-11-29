@@ -4,7 +4,7 @@ import { FormGroup } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MessagesService } from 'src/app/modules/shared/services/messages.service';
-import { GenderType, Roles, UserRegistration }
+import { UserRegistration }
 from 'src/app/modules/user-registration/model/user-registration.model';
 import { UserRegistrationValidators }
 from 'src/app/modules/user-registration/validators/user-registration-validators';
@@ -13,6 +13,7 @@ import { LoadingService } from 'src/app/modules/shared/services/loading.service'
 import { HttpParams } from '@angular/common/http';
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { Roles, GenderType } from 'src/app/models/user.model';
 
 interface Role {
   value: string;
@@ -60,16 +61,15 @@ export class RegisterComponent implements OnInit {
         Validators.required,
         // 2. check whether the entered password has a number
         UserRegistrationValidators.patternValidator(/\d/, { hasNumber: true }),
-         // 3. check whether the entered password has upper case letter
-         UserRegistrationValidators.patternValidator(/[A-Z]/, { hasCapitalCase: true }),
-         // 4. check whether the entered password has a lower-case letter
-         UserRegistrationValidators.patternValidator(/[a-z]/, { hasSmallCase: true }),
-         // 5. any other special character rather the mentioned  have to throw erro
-         UserRegistrationValidators.patternValidator(/[^\w\*]/,
-          {
-            hasSpecialCharacters: true
-          }
-        ),
+        // 3. check whether the entered password has upper case letter
+        UserRegistrationValidators.patternValidator(/[A-Z]/, { hasCapitalCase: true }),
+        // 4. check whether the entered password has a lower-case letter
+        UserRegistrationValidators.patternValidator(/[a-z]/, { hasSmallCase: true }),
+        // 5. any other special character rather the mentioned  have to throw erro
+        UserRegistrationValidators.patternValidator(/[^\w\*]/,
+        {
+          hasSpecialCharacters: true
+        }),
          // 6. Has a minimum length of 8 characters
          Validators.minLength(8)
         ])

@@ -1,8 +1,16 @@
-.mat-form-field {
-    display: block;
-}
+// .mat-form-field {
+//     display: block;
+// }
 
-textarea {
-    height: 100px;
-    resize: vertical;
+// textarea {
+//     height: 100px;
+//     resize: vertical;
+// }
+
+.field-full-width{
+  width: 100%;
+  min-width: 15rem;
+}
+.mat-radio-button ~ .mat-radio-button {
+  margin-left: 1rem;
 }
