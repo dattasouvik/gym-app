@@ -22,6 +22,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { MatSliderModule } from '@angular/material/slider';
@@ -49,6 +50,7 @@ const MaterialDesignComponents = [
   MatGridListModule,
   MatFormFieldModule,
   MatInputModule,
+  MatCheckboxModule,
   MatDatepickerModule,
   MatSnackBarModule,
   MatSliderModule,
