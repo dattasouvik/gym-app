@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { BaseComponent } from 'src/app/modules/trainees/components/base/base.component';
 import { TraineeSummaryComponent } from 'src/app/modules/trainees/components/trainee-summary/trainee-summary.component';
+import { AttendanceComponent } from './components/attendance/attendance.component';
+import { PrescribeComponent } from './components/prescribe/prescribe.component';
 import { ViewMyTraineesComponent } from './components/view-my-trainees/view-my-trainees.component';
 
 // const routes: Routes = [
@@ -26,14 +28,26 @@ import { ViewMyTraineesComponent } from './components/view-my-trainees/view-my-t
 // ];
 
 const routes: Routes = [
-    {
-      path: "",
-      component: ViewMyTraineesComponent
-    },
-    {
-      path:":id",
-      component: TraineeSummaryComponent,
-    }
+  {
+    path: "",
+    component: ViewMyTraineesComponent
+  },
+  {
+    path: ":id",
+    component: TraineeSummaryComponent,
+    children: [
+      {
+        path: 'attendance',
+        component: AttendanceComponent
+      },
+
+      {
+        path: 'prescribe',
+        component: PrescribeComponent
+      },
+
+    ]
+  }
 ];
 
 @NgModule({

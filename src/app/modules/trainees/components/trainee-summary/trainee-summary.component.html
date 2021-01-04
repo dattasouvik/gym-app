@@ -20,7 +20,7 @@
     </div>
   </div>
 </div> -->
-<mat-tab-group>
+<!-- <mat-tab-group>
   <mat-tab label="Attendance">
     <ng-template matTabContent>
       <div class="container my-2">
@@ -29,9 +29,9 @@
               <div class="actions-container justify-content-center"
                 fxLayoutAlign="space-between"
                 fxLayout = "row" fxLayout.lt-md = "column" fxFlexFill>
-                <!-- <div class = "filter">
+               <div class = "filter">
                   <user-attendance-date-filter></user-attendance-date-filter>
-                </div> -->
+                </div> 
                 <div class="events" fxFlexAlign = "center">
                   <button mat-fab
                   mat-raised-button color="primary"
@@ -55,8 +55,14 @@
     </ng-template>
   </mat-tab>
   <mat-tab label="Trainee Details">
+    
+    
     <ng-template matTabContent>
-      Details WIP
+      <dynamic-form [fields]="regConfig" (submit)="submit($event)">
+      </dynamic-form>
     </ng-template>
   </mat-tab>
-</mat-tab-group>
+  
+</mat-tab-group> -->
+
+<router-outlet></router-outlet>

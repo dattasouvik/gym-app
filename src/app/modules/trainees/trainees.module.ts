@@ -10,15 +10,19 @@ import { TraineeSummaryComponent } from './components/trainee-summary/trainee-su
 import { BaseComponent } from './components/base/base.component';
 import { UserAttendanceModule } from 'src/app/modules/user-attendance/user-attendance.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { DynamicformModule } from '../dynamicform/dynamicform.module';
+import { AttendanceComponent } from './components/attendance/attendance.component';
+import { PrescribeComponent } from './components/prescribe/prescribe.component';
 
 @NgModule({
-  declarations: [ViewMyTraineesComponent, TraineeSummaryComponent, BaseComponent],
+  declarations: [ViewMyTraineesComponent, TraineeSummaryComponent, BaseComponent, AttendanceComponent, PrescribeComponent],
   imports: [
     CommonModule,
     TraineesRoutingModule,
     FlexLayoutModule,
     MaterialDesignModule,
-    UserAttendanceModule
+    UserAttendanceModule,
+    DynamicformModule
   ],
   providers: [TraineesService]
 })
