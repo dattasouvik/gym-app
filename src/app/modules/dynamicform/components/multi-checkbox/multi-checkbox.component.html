@@ -1,7 +1,7 @@
 <div class="demo-full-width margin-top" [formGroup]="group">
   <ng-container [formGroupName]="field.name">
     <ng-container *ngFor="let item of field.options; let i=index">
-      <mat-checkbox [formControlName]="item.name">{{ item.name }}</mat-checkbox>
+      <mat-checkbox [formControlName]="item.name">{{ item.value }}</mat-checkbox>
     </ng-container>
     <ng-container *ngFor="let validation of field.validations;" ngProjectAs="mat-error">
       <mat-error *ngIf="group.get(field.name).hasError(validation.name)">{{validation.message}}</mat-error>

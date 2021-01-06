@@ -54,15 +54,27 @@
       </div>
     </ng-template>
   </mat-tab>
-  <mat-tab label="Trainee Details">
-    
-    
-    <ng-template matTabContent>
-      <dynamic-form [fields]="regConfig" (submit)="submit($event)">
-      </dynamic-form>
-    </ng-template>
-  </mat-tab>
-  
 </mat-tab-group> -->
 
-<router-outlet></router-outlet>
+<div class="container-fluid">
+  <div class="row mat-elevation-z10">
+    <div class="col-sm-12">
+      <nav mat-tab-nav-bar color="primary" class="menu">
+          <a mat-tab-link *ngFor="let link of links"
+            [routerLink]="[link.url]"
+            routerLinkActive
+            #rla="routerLinkActive"
+            [active]="rla.isActive">
+            {{link.title}}
+          </a>
+      </nav>
+    </div>
+  </div>
+  <div class="row content">
+    <div class="col-sm-12 px-0">
+    <main class="content-max">
+      <router-outlet></router-outlet>
+    </main>
+    </div>
+  </div>
+</div>

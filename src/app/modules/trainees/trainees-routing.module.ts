@@ -40,7 +40,6 @@ const routes: Routes = [
         path: 'attendance',
         component: AttendanceComponent
       },
-
       {
         path: 'prescribe',
         component: PrescribeComponent

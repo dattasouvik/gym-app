@@ -1,1 +1,29 @@
-<p>attendance works!</p>
+<div class="container mt-3">
+  <div class="row">
+    <div class="col-sm-12">
+        <div class="actions-container justify-content-center"
+          fxLayoutAlign="space-between"
+          fxLayout = "row" fxLayout.lt-md = "column" fxFlexFill>
+         <!-- <div class = "filter">
+            <user-attendance-date-filter></user-attendance-date-filter>
+          </div>  -->
+          <div class="events" fxFlexAlign = "center">
+            <button mat-fab
+            mat-raised-button color="primary"
+            (click) = "addAttendance()"
+            aria-label="Add Attendance">
+              <mat-icon>add</mat-icon>
+            </button>
+          </div>
+        </div>
+    </div>
+  </div> 
+  <div class="row">
+    <div class="col-sm-12">
+      <view-user-attendance
+        [attendance] = "userAttendanceStore.userAttendanceInfo$ | async "
+        [userId] = "id">
+      </view-user-attendance>
+    </div>
+  </div>
+</div>

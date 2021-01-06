@@ -24,7 +24,7 @@ interface Collections {
 
 interface ConfigOptions {
   name: string;
-  id?: number;
+  value ?: string;
   selected?: boolean;
 }
 
