@@ -18,3 +18,13 @@ export function filterCheckedValues(subType: object):Array<string>{
   }
   return data;
 }
+
+export function  mapPrescribeForm(formValue: object){
+  const output = [];
+  for(const [key, value ] of Object.entries(formValue)){
+    if(typeof(value) === "object") {
+      output.push(value);
+    }
+  }
+  return output;
+}

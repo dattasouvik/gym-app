@@ -39,6 +39,10 @@ export class TraineesService {
   }
 
   getTrainees1(){
-    return this.httpService.get("my-trainee?_format=json"); 
+    return this.httpService.get("my-trainee?_format=json");
+  }
+
+  getPrescibeForm(id:number){
+    return this.httpService.get(`food-chart-form/${id}?_format=json`);
   }
 }

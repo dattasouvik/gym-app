@@ -10,9 +10,10 @@
 
                 <div class="d-flex justify-content-between align-items-center w-100">
                     <strong class="text-gray-dark">{{item.phone}}</strong>
-                    <a [routerLink]="[ item.uid ]"
-                    class="mr-2">Details</a>
-                    <a href="#">Prescribe</a>
+                    <a [routerLink]="[ item.uid, 'attendance' ]"
+                    class="mr-2">Attendance</a>
+                    <a [routerLink]="[ item.uid, 'prescribe' ]">
+                      Prescribe</a>
                 </div>
 
 

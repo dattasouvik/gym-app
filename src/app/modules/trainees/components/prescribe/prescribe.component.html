@@ -1,8 +1,15 @@
 <div class="container mt-3">
+  <ng-container *ngIf="formFields.length > 0">
   <div class="row">
     <div class="col-sm-12">
-      <dynamic-form [fields]="regConfig" (submit)="submit($event)">
-      </dynamic-form>
+      <h3 class="text-center">Prescribe</h3>
     </div>
   </div>
+  <div class="row">
+    <div class="col-sm-12">
+        <dynamic-form [fields]="formFields" (submit)="submit($event)">
+        </dynamic-form>
+    </div>
+  </div>
+  </ng-container>
 </div>

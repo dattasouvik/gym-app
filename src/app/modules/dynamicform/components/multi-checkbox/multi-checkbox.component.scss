@@ -1,0 +1,19 @@
+.checkbox-aligb{
+  flex-direction: column;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  align-items: center;
+}
+
+/* To override default material checkbox styles */
+/* https://gitmemory.com/issue/angular/components/8416/503586325 */
+// adds breaks to the mat-checkboxes with long labels
+::ng-deep .mat-checkbox-layout {
+  white-space: normal !important;
+}
+
+// rather than center the checkbox, put the checkbox in the first line
+::ng-deep .mat-checkbox-inner-container {
+  margin-top: 3px !important;
+}
