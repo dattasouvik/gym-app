@@ -46,7 +46,7 @@ export class DynamicFormComponent implements OnInit {
           }
           group.addControl(
             field.name,
-            this.buildOptionsFormGroup(field.options , minCheckBoxReqd),
+            this.buildOptionsFormGroup(field.options , minCheckBoxReqd, field.validations || []),
           )
           break;
         default:
@@ -78,9 +78,11 @@ export class DynamicFormComponent implements OnInit {
     });
   }
 
-  buildOptionsFormGroup(options: any, minCheckBox = 1): FormGroup {
+  buildOptionsFormGroup(options: any, minCheckBox = 1, validations: any): FormGroup {
     let group = this.fb.group({});
-    group.setValidators(minimumCheckboxCheckedValidator(minCheckBox))
+    if(validations.length > 0) {
+      group.setValidators(minimumCheckboxCheckedValidator(minCheckBox))
+    }
     options.forEach(option => {
       let isSelected = option.selected || false;
       group.addControl(option.name, this.fb.control(isSelected));

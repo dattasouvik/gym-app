@@ -16,6 +16,8 @@ import { mapDynamicForm, mapPrescribeForm } from 'src/app/modules/trainees/utils
 export class PrescribeComponent implements OnInit {
 
   formFields: FieldConfig[] = [];
+  traineeId:number;
+
   @ViewChild(DynamicFormComponent) form: DynamicFormComponent;
   constructor(
     private traineesService: TraineesService,
@@ -26,7 +28,8 @@ export class PrescribeComponent implements OnInit {
   ngOnInit(): void {
     const form$ = this.route.params.pipe(
       concatMap(params => {
-        return this.traineesService.getPrescibeForm(+ params.id);
+        this.traineeId = + params.id;
+        return this.traineesService.getPrescibeForm(this.traineeId);
       }),
     );
     this.loading.showLoaderUntilCompleted(form$)
@@ -37,9 +40,10 @@ export class PrescribeComponent implements OnInit {
     });
   }
 
-  submit(value: any) {
-    let output = mapDynamicForm(value);
+  submit(formData: any) {
+    let output = mapDynamicForm(formData);
     console.log(output)
+    this.traineesService.postPrescibeForm(this.traineeId, output);
   }
 
 }
