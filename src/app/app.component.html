@@ -28,11 +28,19 @@
 
         <!-- Member Roles Start Here -->
         <ng-container *ngIf="user.role.includes('member')">
+
           <mat-list-item routerLink="/trainers" routerLinkActive='active'
           (click)="sidenav.toggle()">
             <mat-icon matListIcon>assignment_ind</mat-icon>
             <a matLine>View my trainer</a>
           </mat-list-item>
+
+          <mat-list-item routerLink="/food-chart" routerLinkActive='active'
+          (click)="sidenav.toggle()">
+            <mat-icon matListIcon>menu_book</mat-icon>
+            <a matLine>My Food Chart</a>
+          </mat-list-item>
+
         </ng-container>
 
         <ng-container *ngIf="user.role.includes('trainer')">

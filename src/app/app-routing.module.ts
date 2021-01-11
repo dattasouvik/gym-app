@@ -9,39 +9,50 @@ import { CanLoadAuthGuard } from 'src/app/guards/can-load-auth.guard';
 
 
 const routes: Routes = [
-  { path: 'registration', loadChildren: () => import('./registration-form/registration-form.module').then(m => m.RegistrationFormModule) },
-  { path: 'users', loadChildren: () => import('./user-data/user-data.module').then(m => m.UserDataModule) },
+  { path: 'registration',
+    loadChildren: () => import('./registration-form/registration-form.module')
+    .then(m => m.RegistrationFormModule) },
+  { path: 'users',
+    loadChildren: () => import('./user-data/user-data.module')
+    .then(m => m.UserDataModule) },
   // { path: 'attendence',loadChildren:'./user-attendence/user-attendence.module#UserAttendenceModule'}
   // { path: 'attendence', component: AttendenceListComponent },
   // { path: 'schedule', component: ScheduleDaysComponent },
   {
     path: 'profile',
     canActivate: [AuthGuard],
-    loadChildren: () => import('./modules/user-profile/user-profile.module').then(m => m.UserProfileModule)
+    loadChildren: () => import('./modules/user-profile/user-profile.module')
+    .then(m => m.UserProfileModule)
   },
   {
     path: 'login',
     canActivate: [LoginGuard],
-    loadChildren: () => import('./modules/login/login.module').then(m => m.LoginModule)
+    loadChildren: () => import('./modules/login/login.module')
+    .then(m => m.LoginModule)
   },
 
   { path: 'register',
     canActivate: [LoginGuard],
-    loadChildren: () => import('./modules/user-registration/user-registration.module').then(m => m.UserRegistrationModule)
+    loadChildren: () => import('./modules/user-registration/user-registration.module')
+    .then(m => m.UserRegistrationModule)
   },
   { path: 'trainers',
-    loadChildren: () => import('./modules/trainers/trainers.module').then(m => m.TrainersModule),
+    loadChildren: () => import('./modules/trainers/trainers.module')
+    .then(m => m.TrainersModule),
     canLoad: [CanLoadAuthGuard]
   },
   { path: 'trainees',
-    loadChildren: () => import('./modules/trainees/trainees.module').then(m => m.TraineesModule),
+    loadChildren: () => import('./modules/trainees/trainees.module')
+    .then(m => m.TraineesModule),
     canLoad: [CanLoadAuthGuard]
   },
+  { path: 'food-chart',
+    loadChildren: () => import('./modules/user-food-chart/user-food-chart.module')
+    .then(m => m.UserFoodChartModule) },
   { path: '',
     redirectTo: 'login',
     pathMatch: 'full'
-  }
-
+  },
 ];
 
 @NgModule({

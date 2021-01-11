@@ -1,0 +1,26 @@
+<div class="container food-chart">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="suggestions card text-center" *ngIf="foodChart">
+          <ng-container *ngIf="!!foodChart.is_prescribed; else notPrescribed">
+            <div class="card-body">
+              <ng-container *ngFor="let field of foodChart.fields">
+                <h5>{{ field?.label |  titlecase }}</h5>
+                <ul *ngIf="field.values.length > 0" class="list-group list-group-flush mat-elevation-z10 mb-2">
+                  <li *ngFor="let value of field.values" class="list-group-item">
+                    {{ value }}
+                  </li>
+                </ul>
+              </ng-container>
+            </div>
+          </ng-container>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #notPrescribed>
+  <div class="card-body not-prescribed mat-elevation-z10">
+    <p class="text-danger">Please contact your trainer for food Chart preparation</p>
+  </div>
+</ng-template>

@@ -1,0 +1,19 @@
+:host {
+  .food-chart,
+  .suggestions{
+    height: 100%;
+    display: flex;
+  }
+
+  .card,
+  .list-group-item{
+      background-color:transparent;
+  }
+}
+
+.not-prescribed{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+

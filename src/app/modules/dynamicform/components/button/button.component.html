@@ -1,3 +1,8 @@
-<div class="demo-full-width margin-top" [formGroup]="group">
-  <button type="submit" mat-raised-button color="primary">{{field.label}}</button>
+<div class="demo-full-width margin-top action" [formGroup]="group">
+  <button type="submit" 
+    mat-raised-button 
+    color="primary"
+    [disabled]="group.invalid">
+    {{field.label}}
+  </button>
 </div>

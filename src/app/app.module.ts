@@ -18,9 +18,10 @@ import { TokenInterceptor } from 'src/app/services/token.interceptor';
 import { HeaderInterceptor } from 'src/app/services/header.interceptor';
 
 
+
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
     // SaveAttendenceComponent
   ],
   // entryComponents: [SaveAttendenceComponent],
