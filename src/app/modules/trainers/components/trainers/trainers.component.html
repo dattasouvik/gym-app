@@ -1,17 +1,16 @@
-<div class="main-content">
-  <div class="container-fluid">
-      <div class="row">
-          <div class="col-md-12">
-            <p class="text-center text-muted font-italic shadow-lg">My Trainers</p>
-          </div>
-      </div>
-      <div class="row">
-          <div class="col-md-12">
-            <view-my-trainers [trainers]="trainersStore.trainers$ | async "
-            (pageChange) = "onPageChange($event)" 
-            (displayRating) = "viewRatingModal($event)">
-            </view-my-trainers>
-          </div>
-      </div>
-  </div>
+<div class="container-fluid trainers">
+    <div class="row title-row">
+        <div class="col-md-12">
+          <p class="text-center text-muted font-italic shadow-lg">My Trainers</p>
+        </div>
+    </div>
+    <div class="row content-row">
+        <div class="col-md-12">
+          <view-my-trainers [trainers]="trainersStore.trainers$ | async "
+          (pageChange) = "onPageChange($event)" 
+          (displayRating) = "viewRatingModal($event)">
+          </view-my-trainers>
+        </div>
+    </div>
 </div>
+
