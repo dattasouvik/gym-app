@@ -3,7 +3,9 @@
   .suggestions{
     height: 100%;
     display: flex;
-    flex-direction: column;
+  }
+  .food-chart{
+    justify-content: center;
   }
 
   .card,
