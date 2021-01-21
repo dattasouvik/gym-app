@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { concatMap, take } from 'rxjs/operators';
+import { concatMap, take, map } from 'rxjs/operators';
 import { FieldConfig } from 'src/app/modules/dynamicform/field.interface';
 import { LoadingService } from 'src/app/modules/shared/services/loading.service';
 import { TraineesService } from 'src/app/modules/trainees/services/trainees.service';
@@ -30,11 +30,17 @@ export class PrescribeComponent implements OnInit {
         this.traineeId = + params.id;
         return this.traineesService.getPrescibeForm(this.traineeId);
       }),
+      map(response => {
+        const mapping =  Object.values(response).map(el => {
+          return el
+        });
+        return mapping;
+      })
     );
     this.loading.showLoaderUntilCompleted(form$)
     .pipe(take(1))
-    .subscribe( data  => {
-      this.formFields = mapPrescribeForm(data.form);
+    .subscribe( fields  => {
+      this.formFields = fields as FieldConfig[] ;
     });
   }
 

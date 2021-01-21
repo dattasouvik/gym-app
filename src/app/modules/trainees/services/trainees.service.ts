@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
-import { catchError, exhaustMap, shareReplay, tap } from 'rxjs/operators';
+import { catchError, exhaustMap, map, shareReplay, tap } from 'rxjs/operators';
 import { HttpService } from 'src/app/services/http.service';
 import { LoadingService } from '../../shared/services/loading.service';
 import { MessagesService } from '../../shared/services/messages.service';
@@ -52,6 +52,7 @@ export class TraineesService {
         this.messages.showErrors(message);
         return throwError(err);
       }),
+      map(el => el.form)
     );
   }
 

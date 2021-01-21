@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { DynamicFormInputs, FieldConfig } from 'src/app/modules/dynamicform/field.interface';
+import { DynamicFormInputs, FieldConfig, ValidatorOptions, ValidatorOptionsTypes }
+ from 'src/app/modules/dynamicform/field.interface';
 import { minimumCheckboxCheckedValidator }
  from 'src/app/modules/dynamicform/validators/dynamicform.validators';
 @Component({
@@ -12,7 +13,7 @@ export class DynamicFormComponent implements OnInit {
   @Input() fields: FieldConfig[] = [];
   @Output() submit: EventEmitter<any> = new EventEmitter<any>();
   form: FormGroup;
-  
+
   get value() {
     return this.form.value;
   }
@@ -64,7 +65,10 @@ export class DynamicFormComponent implements OnInit {
     if (validations.length > 0) {
       const validList = [];
       validations.forEach(valid => {
-        validList.push(valid.validator);
+        const validatorMappingFn = this.mapValidator(valid.validator);
+        if(validatorMappingFn) {
+          validList.push(validatorMappingFn);
+        }
       });
       return Validators.compose(validList);
     }
@@ -88,5 +92,34 @@ export class DynamicFormComponent implements OnInit {
       group.addControl(option.name, this.fb.control(isSelected));
     })
     return group;
+  }
+
+  mapValidator( validator: ValidatorOptions){
+    if(!validator.value) {
+      return null;
+    }
+    switch(validator.type){
+      case ValidatorOptionsTypes.REQUIRED:
+          return Validators.required;
+          break;
+      case ValidatorOptionsTypes.PATTERN:
+          return Validators.pattern(validator.value);
+          break;
+      case ValidatorOptionsTypes.EMAIL:
+          return Validators.email;
+          break;
+      case ValidatorOptionsTypes.MIN_LENGTH:
+          return Validators.minLength(+validator.value);
+          break;
+      case ValidatorOptionsTypes.MIN:
+          return Validators.min(+validator.value);
+          break;
+      case ValidatorOptionsTypes.MAX_LENGTH:
+          return Validators.maxLength(+validator.value);
+          break;
+      case ValidatorOptionsTypes.MAX:
+          return Validators.max(+validator.value);
+          break;
+    }
   }
 }

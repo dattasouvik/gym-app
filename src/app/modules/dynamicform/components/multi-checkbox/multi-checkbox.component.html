@@ -1,7 +1,7 @@
-<div class="demo-full-width margin-top" [formGroup]="group">
+<div class="dynamic-full-width margin-top" [formGroup]="group">
   <ng-container [formGroupName]="field.name">
     <ng-container *ngIf="field.label">
-      <mat-label class="d-flex justify-content-center">{{ field.label }}</mat-label>
+      <mat-label class="d-flex">{{ field.label }}</mat-label>
     </ng-container>
     <ng-container *ngFor="let item of field.options; let i=index">
       <mat-checkbox class="checkbox-aligb" color="primary"

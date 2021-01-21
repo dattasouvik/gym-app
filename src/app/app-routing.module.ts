@@ -49,10 +49,12 @@ const routes: Routes = [
   { path: 'food-chart',
     loadChildren: () => import('./modules/user-food-chart/user-food-chart.module')
     .then(m => m.UserFoodChartModule) },
+  { path: 'health-status',
+    loadChildren: () => import('./modules/health-card/health-card.module').then(m => m.HealthCardModule) },
   { path: '',
     redirectTo: 'login',
     pathMatch: 'full'
-  },
+  }
 ];
 
 @NgModule({

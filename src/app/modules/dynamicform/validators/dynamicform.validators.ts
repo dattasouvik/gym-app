@@ -4,10 +4,6 @@ export function minimumCheckboxCheckedValidator(
   minRequired = 1
 ): ValidatorFn {
   return function validate(formGroup: FormGroup) {
-    // if(formGroup.untouched){
-    //   return null;
-    // }
-    // console.log(formGroup.invalid)
     let checked = 0
 
     Object.keys(formGroup.controls).forEach(key => {

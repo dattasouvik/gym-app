@@ -1,0 +1,7 @@
+<div fxLayout="column" fxLayoutAlign="space-around center" class="container mt-1" *ngIf = "fields.length > 0">
+    <h3>Add Measurements</h3>
+    <dynamic-form  class="add-measurements"
+    [fields]="fields"
+    (submit)="submit($event)">
+    </dynamic-form>
+</div>

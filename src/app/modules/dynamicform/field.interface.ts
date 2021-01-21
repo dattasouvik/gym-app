@@ -10,10 +10,29 @@ export interface FieldConfig {
   validations?: Validator[];
 }
 
+/* TBM */
 interface Validator {
-  name: string;
+  name: ValidatorErrorNames;
   message: string;
-  validator?: any;
+  validator?: ValidatorOptions | string;
+}
+
+type ValidatorErrorNames = 'required' | 'pattern' | 'email' | 'minlength' | 'maxlength' | 'requireCheckboxToBeChecked' | 'min' | 'max';
+
+export interface ValidatorOptions {
+  type: string;
+  value: any;
+}
+
+//Supprted ValidatorOptionsTypes
+export enum ValidatorOptionsTypes {
+  REQUIRED = "required",
+  PATTERN = "pattern",
+  EMAIL = "email",
+  MIN_LENGTH = "minlength",
+  MIN = "min",
+  MAX_LENGTH = "maxlength",
+  MAX = "max",
 }
 
 interface Collections {
