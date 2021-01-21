@@ -46,7 +46,7 @@ export class HealthCardService {
     );
     this.loading.showLoaderUntilCompleted(update$)
     .subscribe(success =>
-      this.notify("Data has been updated.")
+      this.notify("Data has been submitted.")
     );
   }
 

@@ -4,6 +4,7 @@ import { concatMap, map } from 'rxjs/operators';
 import { FieldConfig } from 'src/app/modules/dynamicform/field.interface';
 import { HealthCardService }
 from 'src/app/modules/health-card/services/health-card.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-add-health-card',
@@ -43,7 +44,21 @@ export class AddHealthCardComponent implements OnInit {
   }
 
   submit(formValue: {[key:string]: any}) {
-    this.measurement.postHealthMeasurements(this.traineeId, formValue);
+    const formatted_data = this.formatDateInputs(formValue);
+    this.measurement.postHealthMeasurements(this.traineeId, formatted_data);
   }
 
+  formatDateInputs(value: {[key:string]: any}){
+    let output = {};
+    Object.entries(value).forEach(
+      ([key, value]) => {
+        if( value instanceof Date ){
+          value = moment(value).format('YYYY-MM-DD');
+        }
+        output[key] = value
+      }
+    );
+    return output;
+  }
+  
 }
