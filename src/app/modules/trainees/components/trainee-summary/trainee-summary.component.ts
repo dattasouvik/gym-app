@@ -20,6 +20,10 @@ export class TraineeSummaryComponent implements OnInit {
       title: 'Prescibe',
       url: 'prescribe'
     },
+    {
+      title: 'Measurements',
+      url: 'measuremets'
+    },
   ];
 
   constructor() { }

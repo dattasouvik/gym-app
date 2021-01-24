@@ -13,16 +13,26 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { DynamicformModule } from '../dynamicform/dynamicform.module';
 import { AttendanceComponent } from './components/attendance/attendance.component';
 import { PrescribeComponent } from './components/prescribe/prescribe.component';
+import { HealthChartComponent } from './components/health-chart/health-chart.component';
+import { HealthCardModule } from 'src/app/modules/health-card/health-card.module';
 
 @NgModule({
-  declarations: [ViewMyTraineesComponent, TraineeSummaryComponent, BaseComponent, AttendanceComponent, PrescribeComponent],
+  declarations: [
+    ViewMyTraineesComponent, 
+    TraineeSummaryComponent, 
+    BaseComponent, 
+    AttendanceComponent, 
+    PrescribeComponent, 
+    HealthChartComponent
+  ],
   imports: [
     CommonModule,
     TraineesRoutingModule,
     FlexLayoutModule,
     MaterialDesignModule,
     UserAttendanceModule,
-    DynamicformModule
+    DynamicformModule,
+    HealthCardModule
   ],
   providers: [TraineesService]
 })

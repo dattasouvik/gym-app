@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { BaseComponent } from 'src/app/modules/trainees/components/base/base.component';
+import { HealthChartComponent }
+from 'src/app/modules/trainees/components/health-chart/health-chart.component';
 import { TraineeSummaryComponent } from 'src/app/modules/trainees/components/trainee-summary/trainee-summary.component';
 import { AttendanceComponent } from './components/attendance/attendance.component';
 import { PrescribeComponent } from './components/prescribe/prescribe.component';
@@ -44,7 +46,10 @@ const routes: Routes = [
         path: 'prescribe',
         component: PrescribeComponent
       },
-
+      {
+        path: 'measuremets',
+        component: HealthChartComponent
+      },
     ]
   }
 ];

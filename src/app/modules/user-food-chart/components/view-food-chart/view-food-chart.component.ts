@@ -6,7 +6,7 @@ import { FoodChartService } from 'src/app/modules/user-food-chart/services/food-
 
 
 @Component({
-  selector: 'app-view-food-chart',
+  selector: 'ufc-view-food-chart',
   templateUrl: './view-food-chart.component.html',
   styleUrls: ['./view-food-chart.component.scss']
 })

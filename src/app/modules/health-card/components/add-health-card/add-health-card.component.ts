@@ -23,10 +23,10 @@ export class AddHealthCardComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    const form$ = this.route.params
+    const form$ = this.route.queryParams
     .pipe(
       concatMap(params => {
-        this.traineeId = + params.id;
+        this.traineeId = +params.id;
         return this.measurement.getHealthMeasurements(this.traineeId);
       })
     )
@@ -55,7 +55,7 @@ export class AddHealthCardComponent implements OnInit {
         if( value instanceof Date ){
           value = moment(value).format('YYYY-MM-DD');
         }
-        output[key] = value
+        output[key] = value;
       }
     );
     return output;

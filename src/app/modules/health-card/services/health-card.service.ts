@@ -50,6 +50,19 @@ export class HealthCardService {
     );
   }
 
+  viewHealthChartDetails(id: number, page:number = 0) {
+    let params = new HttpParams();
+    params = params.set('page', `${page}`);
+    params = params.set('_format', `json`);
+    const details$ = this.httpService.get(`health-chart-details/${id}`, {params})
+    return this.loading.showLoaderUntilCompleted(details$)
+    .pipe(
+      catchError(err => {
+        this.notify('"Unable to load data.',true)
+        return throwError(err);
+      })
+    );
+  }
 
   private notify(message:string, error = false):void {
     if(error){

@@ -1,0 +1,20 @@
+<div class="container-fluid trainee-report">
+  <div class="row mat-elevation-z10">
+    <div class="col-sm-12">
+      <nav mat-tab-nav-bar color="primary" class="menu">
+          <a mat-tab-link *ngFor="let link of links"
+            [routerLink]="[link.url]"
+            routerLinkActive
+            #rla="routerLinkActive"
+            [active]="rla.isActive">
+            {{link.title}}
+          </a>
+      </nav>
+    </div>
+  </div>
+  <div class="row content">
+    <div class="col-sm-12">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

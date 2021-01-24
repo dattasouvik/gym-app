@@ -14,10 +14,12 @@
                     class="mr-2">Attendance</a>
                     <a [routerLink]="[ item.uid, 'prescribe' ]">
                       Prescribe</a>
-                    <a [routerLink]="['/health-status','add', item.uid ]">
+                    <a [routerLink]="[ item.uid, 'measuremets' ]">
+                      Reports</a>
+                    <a [routerLink]="['/health-status','add']"
+                       [queryParams]="{id: item.uid }">
                       Health card</a>
                 </div>
-
 
                 <span class="d-block">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
                     Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took

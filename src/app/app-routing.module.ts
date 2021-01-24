@@ -50,7 +50,13 @@ const routes: Routes = [
     loadChildren: () => import('./modules/user-food-chart/user-food-chart.module')
     .then(m => m.UserFoodChartModule) },
   { path: 'health-status',
-    loadChildren: () => import('./modules/health-card/health-card.module').then(m => m.HealthCardModule) },
+    loadChildren: () => import('./modules/health-card/health-card.module')
+    .then(m => m.HealthCardModule) },
+  { path: 'view',
+    loadChildren: () => import('./modules/trainee-reports/trainee-reports.module')
+    .then(m => m.TraineeReportsModule),
+    canLoad: [CanLoadAuthGuard]
+  },
   { path: '',
     redirectTo: 'login',
     pathMatch: 'full'
