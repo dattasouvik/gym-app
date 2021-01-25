@@ -22,7 +22,7 @@ export class HealthCardService {
     return this.loading.showLoaderUntilCompleted(form$)
     .pipe(
       catchError(err => {
-        this.notify('"Unable to load data.',true)
+        this.notify('Unable to load data.',true)
         return throwError(err);
       }),
       map(el => el.form)

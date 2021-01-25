@@ -4,44 +4,33 @@ import { catchError, exhaustMap, map, shareReplay, tap } from 'rxjs/operators';
 import { HttpService } from 'src/app/services/http.service';
 import { LoadingService } from '../../shared/services/loading.service';
 import { MessagesService } from '../../shared/services/messages.service';
-import { Trainees } from '../model/trainees.model';
 import { HttpParams } from '@angular/common/http';
+import { TraineeResponse } from 'src/app/modules/trainees/model/trainee-response.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TraineesService {
 
-  private subject = new BehaviorSubject<Trainees[]>([]);
-
-  public readonly profile$: Observable<Trainees[]> = this.subject.asObservable();
-
-  constructor(private httpService: HttpService,
+  constructor(
+    private httpService: HttpService,
     private loading: LoadingService,
     private messages: MessagesService) { }
 
-  getTrainees(page: number = 0) {
-    const loadProfile$ = this.httpService.get(`my-trainee?_format=json&page=${page}`)
+    getTrainees(page: number = 0){
+      let params = new HttpParams();
+      params = params.set('page', `${page}`);
+      params = params.set('_format', `json`);
+      const trainees$ = this.httpService.get<TraineeResponse>("my-trainee",  {params})
       .pipe(
         catchError(err => {
           const message = "Unable to load data.";
           this.messages.showErrors(message);
-          console.log(message, err);
           return throwError(err);
-        }),
-        tap(profileData => {
-          this.subject.next(profileData);
-        }),
-        shareReplay()
+        })
       );
-
-    this.loading.showLoaderUntilCompleted(loadProfile$)
-      .subscribe();
-  }
-
-  getTrainees1(){
-    return this.httpService.get("my-trainee?_format=json");
-  }
+      return this.loading.showLoaderUntilCompleted(trainees$);
+    }
 
   getPrescibeForm(id:number){
     return this.httpService
@@ -85,5 +74,5 @@ export class TraineesService {
       this.messages.showOnSuccess(message);
     }
   }
-  
+
 }

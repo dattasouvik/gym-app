@@ -9,55 +9,66 @@ import { CanLoadAuthGuard } from 'src/app/guards/can-load-auth.guard';
 
 
 const routes: Routes = [
-  { path: 'registration',
-    loadChildren: () => import('./registration-form/registration-form.module')
-    .then(m => m.RegistrationFormModule) },
-  { path: 'users',
-    loadChildren: () => import('./user-data/user-data.module')
-    .then(m => m.UserDataModule) },
+  // { path: 'registration',
+  //   loadChildren: () => import('./registration-form/registration-form.module')
+  //   .then(m => m.RegistrationFormModule)
+  // },
+  // { path: 'users',
+  //   loadChildren: () => import('./user-data/user-data.module')
+  //   .then(m => m.UserDataModule) },
   // { path: 'attendence',loadChildren:'./user-attendence/user-attendence.module#UserAttendenceModule'}
   // { path: 'attendence', component: AttendenceListComponent },
   // { path: 'schedule', component: ScheduleDaysComponent },
   {
     path: 'profile',
-    canActivate: [AuthGuard],
     loadChildren: () => import('./modules/user-profile/user-profile.module')
-    .then(m => m.UserProfileModule)
+    .then(m => m.UserProfileModule),
+    canActivate: [AuthGuard],
+    canLoad: [CanLoadAuthGuard]
   },
   {
     path: 'login',
-    canActivate: [LoginGuard],
     loadChildren: () => import('./modules/login/login.module')
-    .then(m => m.LoginModule)
+    .then(m => m.LoginModule),
+    canActivate: [LoginGuard]
   },
-
-  { path: 'register',
+  { 
+    path: 'register',
     canActivate: [LoginGuard],
     loadChildren: () => import('./modules/user-registration/user-registration.module')
     .then(m => m.UserRegistrationModule)
   },
-  { path: 'trainers',
+  { 
+    path: 'trainers',
     loadChildren: () => import('./modules/trainers/trainers.module')
     .then(m => m.TrainersModule),
     canLoad: [CanLoadAuthGuard]
   },
-  { path: 'trainees',
+  { 
+    path: 'trainees',
     loadChildren: () => import('./modules/trainees/trainees.module')
     .then(m => m.TraineesModule),
     canLoad: [CanLoadAuthGuard]
   },
-  { path: 'food-chart',
-    loadChildren: () => import('./modules/user-food-chart/user-food-chart.module')
-    .then(m => m.UserFoodChartModule) },
-  { path: 'health-status',
+  { 
+    path: 'health-status', //To be moved to trainees module later
     loadChildren: () => import('./modules/health-card/health-card.module')
-    .then(m => m.HealthCardModule) },
-  { path: 'view',
+    .then(m => m.HealthCardModule),
+    canLoad: [CanLoadAuthGuard]
+  },
+  { 
+    path: 'view',
     loadChildren: () => import('./modules/trainee-reports/trainee-reports.module')
     .then(m => m.TraineeReportsModule),
     canLoad: [CanLoadAuthGuard]
   },
-  { path: '',
+  {
+    path: 'forgot-password',
+    loadChildren: () => import('./modules/forgot-password/forgot-password.module')
+    .then(m => m.ForgotPasswordModule)
+  },
+  { 
+    path: '',
     redirectTo: 'login',
     pathMatch: 'full'
   }

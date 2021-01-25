@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -7,16 +8,23 @@ import { AuthService } from 'src/app/services/auth.service';
   templateUrl: './tr-heatlh-chart.component.html',
   styleUrls: ['./tr-heatlh-chart.component.scss']
 })
-export class TrHeatlhChartComponent implements OnInit {
+export class TrHeatlhChartComponent implements OnInit,OnDestroy {
 
   traineeId:number;
+  private subscription: Subscription;
 
   constructor(private auth: AuthService) { }
 
   ngOnInit(): void {
-    this.auth.user$.pipe(
+    this.subscription = this.auth.user$
+    .pipe(
       map(response => response.id)
-    ).subscribe(id => this.traineeId = +id)
+    )
+    .subscribe(id => this.traineeId = +id);
   }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }  
 
 }

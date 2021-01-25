@@ -1,35 +1,63 @@
 <div class="container">
     <div class="my-3 p-3 rounded shadow-sm">
         <h6 class="border-bottom border-gray pb-2 mb-0 text-muted">View my trainees</h6>
-        <div class="media text-muted pt-3" *ngFor="let item of traineeData">
+        <div class="media pt-3 mat-elevation-z5" *ngFor="let item of traineeData">
             <!-- <svg class="bd-placeholder-img mr-2 rounded" width="52" height="52" xmlns="http://www.w3.org/2000/svg"
                 preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x32"> -->
-                <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-8.jpg" class="rounded-circle mr-3" width="50px" alt="avatar">
+                <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-8.jpg" class="rounded-circle p-1" width="50px" alt="avatar">
 
             <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-
                 <div class="d-flex justify-content-between align-items-center w-100">
-                    <strong class="text-gray-dark">{{item.phone}}</strong>
-                    <a [routerLink]="[ item.uid, 'attendance' ]"
-                    class="mr-2">Attendance</a>
-                    <a [routerLink]="[ item.uid, 'prescribe' ]">
-                      Prescribe</a>
-                    <a [routerLink]="[ item.uid, 'measuremets' ]">
-                      Reports</a>
-                    <a [routerLink]="['/health-status','add']"
-                       [queryParams]="{id: item.uid }">
-                      Health card</a>
+                    <strong class="text-gray-dark flex-grow-1">{{item.first_name}}</strong>
+                    <button
+                      mat-icon-button
+                      aria-label="Click here for more options"
+                      [matMenuTriggerFor]="menu"
+                      color="primary">
+                      <mat-icon>more_vert</mat-icon>
+                    </button>
+                    <!-- Actions sections -->
+                    <mat-menu #menu="matMenu">
+                      <button
+                      mat-menu-item
+                      [routerLink]="[ item.uid, 'attendance' ]">
+                      <mat-icon>create</mat-icon>
+                      Attendance
+                      </button>
+                      <button
+                      mat-menu-item
+                      [routerLink]="[ item.uid, 'prescribe' ]">
+                      <mat-icon>create</mat-icon>
+                      Prescribe
+                      </button>
+                      <button
+                      mat-menu-item
+                      [routerLink]="[ item.uid, 'measuremets' ]">
+                      <mat-icon>straighten</mat-icon>
+                      Reports
+                      </button>
+                      <button
+                      mat-menu-item
+                      [routerLink]="['/health-status','add']"
+                      [queryParams]="{id: item.uid }">
+                      <mat-icon>add</mat-icon>
+                      Health Chart
+                      </button>
+                    </mat-menu>
                 </div>
 
-                <span class="d-block">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                    Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took
-                    a galley of type and scrambled it to make a type specimen book. </span>
+                <span class="d-block" *ngIf="item.about_me">
+                  {{item.about_me}}
+                </span>
             </div>
         </div>
-
-
         <!-- <small class="d-block text-right mt-3">
             <a href="#">All suggestions</a>
         </small> -->
     </div>
+    <mat-paginator *ngIf="pager && traineeData.length > 0"
+      [length]="pager.total_items"
+      [pageSize]="pager.items_per_page"
+      (page)="onChangedPage($event)">
+    </mat-paginator>
 </div>
