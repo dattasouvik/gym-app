@@ -1,19 +1,10 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { Validators } from '@angular/forms';
-import { FormGroup } from '@angular/forms';
-import { FormBuilder } from '@angular/forms';
-import { Router } from '@angular/router';
-import { MessagesService } from 'src/app/modules/shared/services/messages.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserRegistration }
 from 'src/app/modules/user-registration/model/user-registration.model';
-import { UserRegistrationValidators }
-from 'src/app/modules/user-registration/validators/user-registration-validators';
-import { HttpService } from 'src/app/services/http.service';
-import { LoadingService } from 'src/app/modules/shared/services/loading.service';
-import { HttpParams } from '@angular/common/http';
-import { throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
 import { Roles, GenderType } from 'src/app/models/user.model';
+import { UserRegisterService } from 'src/app/modules/user-registration/services/user-register.service';
+import { SharedPasswordValidators } from 'src/app/modules/shared/validators/shared-password-validators';
 
 interface Role {
   value: string;
@@ -36,15 +27,12 @@ export class RegisterComponent implements OnInit {
 
   showDetails: boolean;
   constructor(
-    private regfrm: FormBuilder,
-    private registerService: HttpService,
-    private messages: MessagesService,
-    private loading: LoadingService,
-    private router:Router
+    private fb: FormBuilder,
+    private userRegistration: UserRegisterService
     ) {};
 
   ngOnInit(): void {
-    this.regForm = this.regfrm.group({
+    this.regForm = this.fb.group({
       first_name: [ null, Validators.required],
       last_name: [null , Validators.required],
       role: [this.roles[0].value, Validators.required],
@@ -60,71 +48,31 @@ export class RegisterComponent implements OnInit {
         // 1. Password Field is Required
         Validators.required,
         // 2. check whether the entered password has a number
-        UserRegistrationValidators.patternValidator(/\d/, { hasNumber: true }),
+        SharedPasswordValidators.patternValidator(/\d/, { hasNumber: true }),
         // 3. check whether the entered password has upper case letter
-        UserRegistrationValidators.patternValidator(/[A-Z]/, { hasCapitalCase: true }),
+        SharedPasswordValidators.patternValidator(/[A-Z]/, { hasCapitalCase: true }),
         // 4. check whether the entered password has a lower-case letter
-        UserRegistrationValidators.patternValidator(/[a-z]/, { hasSmallCase: true }),
+        SharedPasswordValidators.patternValidator(/[a-z]/, { hasSmallCase: true }),
         // 5. any other special character rather the mentioned  have to throw erro
-        UserRegistrationValidators.patternValidator(/[^\w\*]/,
+        SharedPasswordValidators.patternValidator(/[^\w\*]/,
         {
           hasSpecialCharacters: true
         }),
          // 6. Has a minimum length of 8 characters
-         Validators.minLength(8)
+         Validators.minLength(8),
+         // 7. Has a minimum length of 8 characters
+         Validators.maxLength(30)
         ])
       ],
       confirmPassword: [null, Validators.compose([Validators.required])]
     },
     {
       // check whether our password and confirm password match
-      validator: UserRegistrationValidators.passwordMatchValidator
+      validator: SharedPasswordValidators.ComparePassword("password", "confirmPassword")
     });
   }
 
   onSubmit() {
-    const userRegistrationData:UserRegistration = {
-      first_name: this.regForm.value.first_name,
-      last_name: this.regForm.value.last_name,
-      role: this.regForm.value.role,
-      email: this.regForm.value.email,
-      gender: this.regForm.value.gender,
-      address: this.regForm.value.address,
-      phone: this.regForm.value.phone,
-      password: this.regForm.value.password,
-      about_me:this.regForm.value.about_me
-    };
-
-    let params = new HttpParams();
-    params = params.append('_format', `json`);
-    const submit$ = this.registerService.post(
-      `gym-user-registration`, userRegistrationData, {params}
-    )
-    .pipe(
-      catchError(err => {
-        this.notify("Registration failed.Please try again later.", true);
-        return throwError(err);
-      })
-    );
-    this.loading.showLoaderUntilCompleted(submit$)
-      .subscribe(arg => {
-      console.log(arg)
-      if (arg.errorMessage !='na') {
-        this.notify("Registration failed.Please try again later.", true);
-      }
-      else {
-        this.notify("Successfully registered.Please login");
-        this.router.navigate(["/login"]);
-      }
-    });
+    this.userRegistration.register(this.regForm.value as UserRegistration);
   }
-
-  private notify(message:string, error = false):void {
-    if(error){
-      this.messages.showErrors(message);
-    }else{
-      this.messages.showOnSuccess(message);
-    }
-  }
-
 }

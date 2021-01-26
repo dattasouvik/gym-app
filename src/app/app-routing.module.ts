@@ -34,10 +34,16 @@ const routes: Routes = [
   },
   { 
     path: 'register',
-    canActivate: [LoginGuard],
     loadChildren: () => import('./modules/user-registration/user-registration.module')
-    .then(m => m.UserRegistrationModule)
+    .then(m => m.UserRegistrationModule),
+    canActivate: [LoginGuard]
   },
+  {
+    path: 'forgot-password',
+    loadChildren: () => import('./modules/forgot-password/forgot-password.module')
+    .then(m => m.ForgotPasswordModule),
+    canActivate: [LoginGuard]
+  },  
   { 
     path: 'trainers',
     loadChildren: () => import('./modules/trainers/trainers.module')
@@ -61,11 +67,6 @@ const routes: Routes = [
     loadChildren: () => import('./modules/trainee-reports/trainee-reports.module')
     .then(m => m.TraineeReportsModule),
     canLoad: [CanLoadAuthGuard]
-  },
-  {
-    path: 'forgot-password',
-    loadChildren: () => import('./modules/forgot-password/forgot-password.module')
-    .then(m => m.ForgotPasswordModule)
   },
   { 
     path: '',

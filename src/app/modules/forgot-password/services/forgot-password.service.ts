@@ -17,12 +17,12 @@ export class ForgotPasswordService {
     private messages: MessagesService
     ) { }
 
-    forgotPasswordRequest(value: string| number){
+    forgotPasswordRequest(mode:string, value: string| number){
       let params = new HttpParams();
       params = params.set('_format', `json`);
       const data = {
         "value": value,
-        "forgotType": "phone/email"
+        "forgotType": mode
       }
       const request$ = this.httpService.post(`user-forgot-password`,data ,{params})
       .pipe(
@@ -34,7 +34,7 @@ export class ForgotPasswordService {
       );
       this.loading.showLoaderUntilCompleted(request$)
       .subscribe(success =>
-        console.log("Success",success)
+        this.messages.showOnSuccess(success.statusMessage)
       );
     }
 }

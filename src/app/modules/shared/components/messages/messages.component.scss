@@ -18,6 +18,9 @@
 .message{
   display: flex;
   flex: 1 1 0;
+  .message-list{
+    list-style: none;
+  }
 }
 .close {
   cursor: pointer;

@@ -97,7 +97,8 @@
               <mat-form-field  class="field-full-width"
               [color]="passwordComponent.color">
                 <mat-label>Password</mat-label>
-                <mat-pass-toggle-visibility #toggle matSuffix></mat-pass-toggle-visibility>
+                <mat-pass-toggle-visibility #toggle matSuffix>
+                </mat-pass-toggle-visibility>
                 <input matInput #password
                       [formControlName]="'password'"
                       [type]="toggle.type"
@@ -129,7 +130,7 @@
                     [type]="confirmPassword_toggle.type"
                     required
                     placeholder="Confirm Password">
-                  <mat-error *ngIf="regForm.controls['confirmPassword'].hasError('NoPassswordMatch')">
+                  <mat-error *ngIf="regForm.controls['confirmPassword'].hasError('mustMatch')">
                     Password do not match
                   </mat-error>
               </mat-form-field>
@@ -145,7 +146,3 @@
         </form>
     </mat-card-content>
 </mat-card>
-
-<div fxFlex>
-
-</div>

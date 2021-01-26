@@ -10,8 +10,18 @@ import { ForgotPasswordService } from 'src/app/modules/forgot-password/services/
 export class ForgotPasswordComponent implements OnInit {
 
   form: FormGroup;
-  defaultMode = 'mobile';
+  defaultMode = 'phone';
   numberPattern = '^[0-9]+$';
+  availableModes:{[key:string]:string}[] = [
+    {
+      value: 'email',
+      display: 'Email'
+    },
+    {
+      value: 'phone',
+      display: 'Phone'
+    }
+  ]
 
   constructor(
     private fb: FormBuilder,
@@ -28,7 +38,7 @@ export class ForgotPasswordComponent implements OnInit {
     this.form =  this.fb.group({
       mode: [this.defaultMode],
       email: ['', Validators.email],
-      mobile: ['', Validators.compose(
+      phone: ['', Validators.compose(
         [
           Validators.required,
           Validators.maxLength(10),
@@ -42,8 +52,8 @@ export class ForgotPasswordComponent implements OnInit {
     return this.form.get('email');
   }
 
-  private get _mobile() {
-    return this.form.get('mobile');
+  private get _phone() {
+    return this.form.get('phone');
   }
 
   private get _value(){
@@ -53,8 +63,8 @@ export class ForgotPasswordComponent implements OnInit {
   private modeValidators(){
     this.form.get('mode').valueChanges
     .subscribe(selected => {
-      if(selected === 'mobile'){
-        this._mobile.setValidators(
+      if(selected === 'phone'){
+        this._phone.setValidators(
           [
             Validators.required,
             Validators.maxLength(10),
@@ -65,11 +75,11 @@ export class ForgotPasswordComponent implements OnInit {
         this._email.reset();
       } else{
         this._email.setValidators([Validators.required,Validators.email]);
-        this._mobile.clearValidators();
-        this._mobile.reset();
+        this._phone.clearValidators();
+        this._phone.reset();
       }
       this._email.updateValueAndValidity();
-      this._mobile.updateValueAndValidity();
+      this._phone.updateValueAndValidity();
     })
   }
 
@@ -80,8 +90,8 @@ export class ForgotPasswordComponent implements OnInit {
   }
 
   onSubmit(){
-    const { mode, email, mobile } = this._value;
-    const output = mode === 'mobile' ? mobile : email;
-    this.forgotPassword.forgotPasswordRequest(output);
+    const { mode, email, phone } = this._value;
+    const output = mode === 'phone' ? phone : email;
+    this.forgotPassword.forgotPasswordRequest(mode,output);
   }
 }

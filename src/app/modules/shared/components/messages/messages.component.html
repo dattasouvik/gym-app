@@ -1,8 +1,10 @@
 <ng-container *ngIf="(messages$ | async) as messages">
   <div class="messages-container" *ngIf="showMessages"
   [ngClass]="setMessageColor(messages.type)">
-    <div class="message" *ngFor="let message of messages.body">
-      {{message}}
+    <div class="message">
+      <ul class="message-list list-group m-0">
+        <li *ngFor="let message of messages.body">{{message}}</li>
+      </ul>
     </div>
     <mat-icon class="close" (click)="onClose()">cancel</mat-icon>
   </div>
