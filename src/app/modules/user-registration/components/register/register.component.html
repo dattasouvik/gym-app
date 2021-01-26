@@ -7,28 +7,28 @@
                   <mat-label>First Name</mat-label>
                   <input
                   required
-                  matInput 
-                  placeholder="Enter firstname" 
+                  matInput
+                  placeholder="Enter firstname"
                   formControlName="first_name">
               </mat-form-field>
             </p>
             <p>
               <mat-form-field class="field-full-width">
                   <mat-label>Last Name</mat-label>
-                  <input 
-                  matInput 
+                  <input
+                  matInput
                   required
-                  placeholder="Enter firstname" 
+                  placeholder="Enter firstname"
                   formControlName="last_name">
               </mat-form-field>
             </p>
             <p>
               <mat-form-field class="field-full-width">
                   <mat-label>Email</mat-label>
-                  <input 
-                  matInput 
+                  <input
+                  matInput
                   required
-                  placeholder="Enter firstname" 
+                  placeholder="Enter firstname"
                   formControlName="email">
                   <mat-icon matSuffix>email</mat-icon>
               </mat-form-field>
@@ -37,11 +37,11 @@
               <mat-form-field class="field-full-width">
                   <mat-label>Telephone</mat-label>
                   <span matPrefix>+91 &nbsp;</span>
-                  <input 
+                  <input
                   type="tel"
-                  matInput 
+                  matInput
                   required
-                  placeholder="Telephone" 
+                  placeholder="Telephone"
                   formControlName="phone">
                   <mat-icon matSuffix>call</mat-icon>
               </mat-form-field>
@@ -49,18 +49,18 @@
             <p>
               <mat-form-field class="field-full-width">
                   <mat-label>About me</mat-label>
-                  <textarea 
-                  matInput 
+                  <textarea
+                  matInput
                   #about_me
                   placeholder="Tell us something about yourself" formControlName="about_me"></textarea>
-                  <mat-icon 
-                  matSuffix 
+                  <mat-icon
+                  matSuffix
                   class="clear"
-                  *ngIf="about_me.value" 
+                  *ngIf="about_me.value"
                   (click)="about_me.value=''">close</mat-icon>
                   <mat-icon matSuffix>edit</mat-icon>
               </mat-form-field>
-            </p>            
+            </p>
             <p>
               <label class="d-flex">Gender</label>
               <mat-radio-group aria-label="Select an option" formControlName="gender">
@@ -82,11 +82,11 @@
             <p>
               <mat-form-field class="field-full-width">
                   <mat-label>Address</mat-label>
-                  <input 
+                  <input
                   matInput
                   required
-                  #address maxlength="45" 
-                  placeholder="Enter your current address." 
+                  #address maxlength="45"
+                  placeholder="Enter your current address."
                   formControlName="address">
                   <mat-icon matSuffix>home</mat-icon>
                   <mat-hint align="end">{{address.value.length}} / 45</mat-hint>
@@ -124,7 +124,7 @@
               <mat-form-field class="field-full-width">
                   <!-- <mat-label>Confirm Password</mat-label> -->
                   <mat-pass-toggle-visibility #confirmPassword_toggle matSuffix></mat-pass-toggle-visibility>
-                  <input 
+                  <input
                     matInput
                     [formControlName]="'confirmPassword'"
                     [type]="confirmPassword_toggle.type"
@@ -137,11 +137,15 @@
             </p>
 
             <div class="actions">
-                <button mat-raised-button color="gray" type="button"
+                <button mat-raised-button color="warn" type="button"
                 routerLink="/login">
+                <mat-icon>login</mat-icon>
                   Login
                 </button>
-                <button mat-raised-button color="primary" [disabled]="regForm.invalid">Submit</button>
+                <button mat-raised-button color="primary"
+                [disabled]="regForm.invalid">
+                  <mat-icon>send</mat-icon>
+                  Submit</button>
             </div>
         </form>
     </mat-card-content>

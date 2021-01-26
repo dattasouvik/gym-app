@@ -32,7 +32,7 @@ const routes: Routes = [
     .then(m => m.LoginModule),
     canActivate: [LoginGuard]
   },
-  { 
+  {
     path: 'register',
     loadChildren: () => import('./modules/user-registration/user-registration.module')
     .then(m => m.UserRegistrationModule),
@@ -43,32 +43,37 @@ const routes: Routes = [
     loadChildren: () => import('./modules/forgot-password/forgot-password.module')
     .then(m => m.ForgotPasswordModule),
     canActivate: [LoginGuard]
-  },  
-  { 
+  },
+  { path: 'reset-password',
+    loadChildren: () => import('./modules/reset-password/reset-password.module')
+    .then(m => m.ResetPasswordModule),
+    canActivate: [LoginGuard]
+  },
+  {
     path: 'trainers',
     loadChildren: () => import('./modules/trainers/trainers.module')
     .then(m => m.TrainersModule),
     canLoad: [CanLoadAuthGuard]
   },
-  { 
+  {
     path: 'trainees',
     loadChildren: () => import('./modules/trainees/trainees.module')
     .then(m => m.TraineesModule),
     canLoad: [CanLoadAuthGuard]
   },
-  { 
+  {
     path: 'health-status', //To be moved to trainees module later
     loadChildren: () => import('./modules/health-card/health-card.module')
     .then(m => m.HealthCardModule),
     canLoad: [CanLoadAuthGuard]
   },
-  { 
+  {
     path: 'view',
     loadChildren: () => import('./modules/trainee-reports/trainee-reports.module')
     .then(m => m.TraineeReportsModule),
     canLoad: [CanLoadAuthGuard]
   },
-  { 
+  {
     path: '',
     redirectTo: 'login',
     pathMatch: 'full'

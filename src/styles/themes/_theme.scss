@@ -3,7 +3,7 @@
 
 $light-theme-primary: mat-palette($mat-deep-purple, A700);
 $light-theme-accent: mat-palette($mat-yellow, 500);
-$light-theme-warn: mat-palette($mat-deep-orange, A200);
+$light-theme-warn: mat-palette($mat-red, 600);
 
 $light-theme: mat-light-theme(
   $light-theme-primary,

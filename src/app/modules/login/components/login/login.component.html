@@ -20,12 +20,16 @@
     </mat-form-field>
   </p>
   <div class="actions">
-    <button mat-raised-button color="gray" type="button"
+    <button mat-raised-button color="warn" type="button"
     routerLink="/register">
+    <mat-icon>person_add</mat-icon>
       Register
     </button>
     <button mat-raised-button color="primary"
-    [disabled]="loginForm.invalid">Login</button>
+    [disabled]="loginForm.invalid">
+    <mat-icon>login</mat-icon>
+    Login
+  </button>
   </div>
 </form>
 </mat-card-content>
