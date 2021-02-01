@@ -4,6 +4,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { filter, tap } from 'rxjs/operators';
 import { EditProfileComponent } from 'src/app/modules/user-profile/components/edit-profile/edit-profile.component';
 import { UserProfile } from 'src/app/modules/user-profile/model/user-profile.model';
+import { EditProfilePictureComponent } from '../edit-profile-picture/edit-profile-picture.component';
 
 @Component({
   selector: 'view-user-profile',
@@ -32,6 +33,27 @@ export class ViewProfileComponent implements OnInit {
 
     dialogConfig.data = profile;
     const dialogRef = this.dialog.open(EditProfileComponent, dialogConfig);
+    dialogRef.afterClosed()
+      .pipe(
+        filter(val => !!val),
+        tap(() => this.profileChanged.emit()
+        )
+      )
+      .subscribe();
+
+  }
+
+  editProfilePic(profile: UserProfile) {
+
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = "450px";
+
+
+    dialogConfig.data = profile;
+    const dialogRef = this.dialog.open(EditProfilePictureComponent, dialogConfig);
     dialogRef.afterClosed()
       .pipe(
         filter(val => !!val),

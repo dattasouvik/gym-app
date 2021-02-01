@@ -4,3 +4,30 @@
 .example-full-width {
   width: 100%;
 }
+.profile-avatar {
+  position: relative;
+  .hoverable-icon {
+  width: 50%;
+  margin: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  display: none;
+  }
+  &:hover,
+  &:focus,
+  &:active {
+  cursor: pointer;
+  img {
+  transition: opacity 0.5s ease-in-out 0.5s;
+  opacity: 0.5;
+  }
+  .hoverable-icon {
+  display: block;
+  }
+  }
+  }
+  

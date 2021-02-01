@@ -73,4 +73,18 @@ export class UserProfileStore {
       );
     }
 
+    uploadImage(imagedata) {
+      let params = new HttpParams();
+      params = params.append('_format', `json`);
+      const imageSave$ =  this.httpService.post(`profile-image`, imagedata, {params})
+       .pipe(         
+        catchError(err => {
+            const message = "Unable to update data";
+            this.messages.showErrors(message);
+            return throwError(err);
+         }),
+         );
+        return this.loading.showLoaderUntilCompleted(imageSave$);
+    }
+
 }

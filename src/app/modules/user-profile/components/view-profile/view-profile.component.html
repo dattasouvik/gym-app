@@ -2,8 +2,14 @@
   <div class="card profile-card">
     <div class="card-header card-header-danger d-flex">
       <!-- Avatar -->
-      <div class="card-avatar">
-        <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-8.jpg" class="rounded-circle mr-3 mat-elevation-z8" width="100px" alt="avatar">
+      <div class="card-avatar profile-avatar" [matMenuTriggerFor]="imageaction">
+        <img src="{{profileData.profile_image}}" class="rounded-circle mr-3 mat-elevation-z8" width="100px" height="100px" alt="avatar">
+        <span class="material-icons hoverable-icon">
+          camera_alt
+        </span>
+        <mat-menu #imageaction="matMenu" xPosition="after" yPosition="below">
+          <button mat-menu-item (click)="editProfilePic(profileData)">Upload Photo</button>
+        </mat-menu>
       </div>
       <div class="card-title">
         <h4 class="card-title">Edit Profile</h4>
@@ -54,7 +60,7 @@
                 </mat-form-field>
               </div>
           </div>
-          <div class="row">
+          <div class="row" *ngIf="profileData.about_me">
             <div class="col-md-12">
               <mat-form-field class="example-full-width">
                 <mat-label>About me</mat-label>

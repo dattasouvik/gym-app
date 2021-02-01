@@ -8,9 +8,10 @@ import { UserProfileComponent } from 'src/app/modules/user-profile/components/us
 import { EditProfileComponent } from 'src/app/modules/user-profile/components/edit-profile/edit-profile.component';
 import { ViewProfileComponent } from './components/view-profile/view-profile.component';
 import { UserProfileStore } from 'src/app/modules/user-profile/services/user-profile.store';
+import { EditProfilePictureComponent } from './components/edit-profile-picture/edit-profile-picture.component';
 
 @NgModule({
-  declarations: [UserProfileComponent,EditProfileComponent, ViewProfileComponent],
+  declarations: [UserProfileComponent,EditProfileComponent, ViewProfileComponent, EditProfilePictureComponent],
   imports: [
     CommonModule,
     UserProfileRoutingModule,
