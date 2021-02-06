@@ -5,17 +5,15 @@
   attr.role = "navigation"
   color="primary"
   #sidenav>
-  <mat-toolbar color="primary">Menu</mat-toolbar>
+  <mat-toolbar color="primary">
+    <div class="logo__container">
+      <img [src]="logoIcon" class="logo__icon">
+      <span class="logo__text">{{ logoTitle }}</span>
+    </div>
+  </mat-toolbar>
   <mat-nav-list class="p-0">
     <!-- Menu loaded when user is logged in starts here -->
     <ng-container *ngIf="authService.isLoggedIn$ | async">
-
-      <mat-list-item routerLink="/"
-      (click)="sidenav.toggle()">
-        <mat-icon matListIcon>home</mat-icon>
-        <a matLine>Home</a>
-      </mat-list-item>
-
 
       <mat-list-item routerLink="/profile" routerLinkActive='active'
       (click)="sidenav.toggle()">
@@ -93,7 +91,7 @@
           <mat-icon>menu</mat-icon>
         </button>
         <h1 class="app-brand">
-          {{ title }}
+          {{ logoTitle }}
         </h1>
         <div class="flex-spacer"></div>
         <toggle-theme></toggle-theme>

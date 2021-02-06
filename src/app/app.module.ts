@@ -16,6 +16,7 @@ import { ThemeSwitcherModule } from 'src/app/modules/theme-switcher/theme-switch
 import { MessagesService } from 'src/app/modules/shared/services/messages.service';
 import { TokenInterceptor } from 'src/app/services/token.interceptor';
 import { HeaderInterceptor } from 'src/app/services/header.interceptor';
+import { CoreModule } from 'src/app/modules/core/core.module';
 
 
 
@@ -32,6 +33,7 @@ import { HeaderInterceptor } from 'src/app/services/header.interceptor';
     BrowserAnimationsModule,
     MaterialDesignModule,
     SharedModule,
+    CoreModule,
     ThemeSwitcherModule,
     UserAttendenceModule,
     // FullCalendarModule

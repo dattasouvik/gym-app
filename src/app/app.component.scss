@@ -43,3 +43,21 @@
 .active{
   background: rgba(223, 190, 190, 0.657);
 }
+
+
+/* Logo section in toolbar */
+.logo__container{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex: 1;
+  .logo__icon{
+    max-width:3rem;
+    max-height:3rem;
+    border-radius: 25%;
+    padding: 0.25rem 0;
+  }
+  .logo__text{
+    text-shadow: 5px 5px #558ABB;
+  }
+}

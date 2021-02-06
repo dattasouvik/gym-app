@@ -1,11 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { HttpParams } from '@angular/common/http';
-import { HttpService } from 'src/app/services/http.service';
-import { catchError, map, tap } from 'rxjs/operators';
-import { MessagesService } from 'src/app/modules/shared/services/messages.service';
-import { throwError } from 'rxjs';
-import { UserProfileStore } from 'src/app/modules/user-profile/services/user-profile.store';
+import { MessageKey, PictureErrorMessage } from 'src/app/modules/user-profile/components/edit-profile-picture/profile-picture.config';
+import { UserProfileStore } from
+'src/app/modules/user-profile/services/user-profile.store';
+import { checkFileSize, checkFileTypes, checkExtension, checkMimeType }
+from 'src/app/modules/user-profile/utils/file.validatons';
+
+
+interface Image{
+  image: {[key:string]: string | ArrayBuffer}
+}
+
+interface Status{
+  success: boolean;
+  errorkey: string;
+}
+
+
 @Component({
   selector: 'app-edit-profile-picture',
   templateUrl: './edit-profile-picture.component.html',
@@ -13,12 +24,12 @@ import { UserProfileStore } from 'src/app/modules/user-profile/services/user-pro
 })
 export class EditProfilePictureComponent implements OnInit {
 
-  constructor(private dialogRef: MatDialogRef<EditProfilePictureComponent>,
-    private messages: MessagesService, 
-    private httpService: HttpService, 
-    private userProfileStore: UserProfileStore) { 
-    
-  }
+  constructor(
+    private dialogRef: MatDialogRef<EditProfilePictureComponent>,
+    private userProfileStore: UserProfileStore
+    ) {}
+
+    @ViewChild('fileUpload') InputFile: ElementRef;
 
   ngOnInit(): void {
   }
@@ -27,75 +38,100 @@ export class EditProfilePictureComponent implements OnInit {
   fileUploadProgress: string = null;
   uploadedFilePath: string = null;
   image_base64:any ;
-  imageError: string;
-  enableSubmit = true;
+  imageErrorMsg: string = null;
+
+  error:boolean = false;
+  private imageData: Image | null;
   fileProgress(fileInput: any) {
-      if (fileInput.target.files && fileInput.target.files[0]) {
-        // Size Filter Bytes
-        const max_size = 3145728;
-        const allowed_types = ['image/png', 'image/jpeg', 'image/jpg', 'image/gif'];
-
-        if (fileInput.target.files[0].size > max_size) {
-            this.imageError =
-                'Maximum size allowed is ' + (max_size / 1024)/1024 + 'Mb';
-            return false;
-        }
-
-        //if (!_.includes(allowed_types, fileInput.target.files[0].type)) {
-        if (!allowed_types.includes(fileInput.target.files[0].type)) {
-          this.imageError = 'Only Images are allowed ( JPG | PNG | JPEG | GIF )';
-          return false;
-        }
-      } 
-      this.imageError = "";
-      this.fileData = <File>fileInput.target.files[0];
-      this.preview();
-  }
- 
-  preview() {
-      // Show preview 
-      var mimeType = this.fileData.type;
-      if (mimeType.match(/image\/*/) == null) {
-        return;
+    this.error = false;
+    const  file = <File>fileInput.files[0];
+    if(!file){
+      this.error = true;
+      return;
+    } else{
+      const status = this.validateFile(file);
+      if(status.success){
+        this.renderFile(file);
+      }else{
+        this.error = true;
+        this.imageErrorMsg = PictureErrorMessage[status.errorkey]
       }
-  
-      var reader = new FileReader();      
-      reader.readAsDataURL(this.fileData); 
-      reader.onload = (_event) => { 
-        this.previewUrl = reader.result;
-        this.enableSubmit = false;
-      }
-  }
- 
-  onSubmit() {
-    const formData = new FormData();
-    formData.append('file', this.fileData);
-    let reader = new FileReader();
-    reader.readAsDataURL(this.fileData);
-    reader.onload =  (e: Event) => {
-      this.dialogRef.close();
-      this.saveImage(e);
     }
-    reader.onerror = function (error) {
+    if(this.error){
+      this.reset();
+    }
+  }
+
+  onSubmit() {
+    if(!this.imageData || this.error){
+      this.imageErrorMsg = PictureErrorMessage[MessageKey.required];
+      return;
+    }
+    else{
+      this.close();
+      this.userProfileStore.uploadImage(this.imageData).subscribe(
+        (success) => {
+          this.userProfileStore.loadUserProfile();
+        }
+      );
+    }
+  }
+
+ close():void {
+    this.dialogRef.close();
+  }
+
+  private reset():void{
+    this.InputFile.nativeElement.value = "";
+    this.previewUrl = null;
+  }
+
+  private renderFile(fileData: File){
+    const reader = new FileReader();
+    reader.readAsDataURL(fileData);
+    reader.onload = _event => {
+      this.previewUrl = reader.result;
+      this.imageData = {
+        "image" : {
+          "filename" : fileData.name,
+          "value": _event.target.result
+        }
+      };
+      this.error = false;
+    };
+    reader.onerror = error => {
+      this.error = true;
       console.log('Error: ', error);
     };
   }
-  saveImage(e) {
-    var imagedata = {
-      "image" : {
-        "filename" : this.fileData.name,
-        "value": e.target.result
-      }
+
+  private validateFile(file): Status {
+    let status = {
+      success: false,
+      errorkey: ''
     };
-    
-    this.userProfileStore.uploadImage(imagedata).subscribe(
-      () => {
-        this.userProfileStore.loadUserProfile();
-      } 
-    );
-    
-  }
-  close() {
-    this.dialogRef.close();
+    const {size , type, name } = file;
+    const fileSizeError = checkFileSize(size);
+    const fileTypesError = checkFileTypes(type);
+    const fileExtensioError = checkExtension(name);
+    const fileMimeTypeError = checkMimeType(type);
+
+    if(
+      fileExtensioError?.invalidFile ||
+      fileMimeTypeError?.invalidFile ||
+      fileTypesError?.invalidFile
+      ) {
+        status.errorkey = MessageKey.invalidFile;
+        return status;
+    }
+    else if( fileSizeError?.invalidFileSize ) {
+        status.errorkey = MessageKey.invalidFileSize;
+        return status;
+    }
+    else{
+      status.success = true;
+      status.errorkey = '';
+    }
+    return status;
   }
 }

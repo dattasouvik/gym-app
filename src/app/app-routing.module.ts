@@ -6,6 +6,7 @@ import { ScheduleDaysComponent } from './user-attendence/schedule-days/schedule-
 import { LoginGuard } from 'src/app/guards/login.guard';
 import { AuthGuard } from 'src/app/guards/auth.guard';
 import { CanLoadAuthGuard } from 'src/app/guards/can-load-auth.guard';
+import { NotFoundComponent } from 'src/app/modules/core/components/not-found/not-found.component';
 
 
 const routes: Routes = [
@@ -19,6 +20,11 @@ const routes: Routes = [
   // { path: 'attendence',loadChildren:'./user-attendence/user-attendence.module#UserAttendenceModule'}
   // { path: 'attendence', component: AttendenceListComponent },
   // { path: 'schedule', component: ScheduleDaysComponent },
+  {
+    path: '',
+    redirectTo: 'profile',
+    pathMatch: 'full'
+  },
   {
     path: 'profile',
     loadChildren: () => import('./modules/user-profile/user-profile.module')
@@ -74,10 +80,9 @@ const routes: Routes = [
     canLoad: [CanLoadAuthGuard]
   },
   {
-    path: '',
-    redirectTo: 'login',
-    pathMatch: 'full'
-  }
+    path: '**',
+    component: NotFoundComponent,
+  },
 ];
 
 @NgModule({

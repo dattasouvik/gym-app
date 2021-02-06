@@ -1,0 +1,16 @@
+:host {
+  display: flex;
+  justify-content: center;
+  min-height: 100%;
+  align-items: center;
+}
+.error-template {
+  padding: 2.5rem 1rem;
+  text-align: center;
+}
+.error-actions {
+  margin: 1rem 0;
+  .btn {
+    margin-right:0.5rem;
+  }
+}
