@@ -11,6 +11,7 @@ import { MessagesService } from 'src/app/modules/shared/services/messages.servic
 })
 export class MessagesComponent implements OnInit {
 	showMessages = false;
+  clearMesaageTimer = 2500;
 
 	messages$: Observable<Message>;
 
@@ -18,13 +19,16 @@ export class MessagesComponent implements OnInit {
 
 	ngOnInit() {
 		this.messages$ = this.messagesService.notify$.pipe(
-      tap(() => (this.showMessages = true)));
+      tap((_) => {
+        this.showMessages = true;
+        setTimeout(() => this.onClose(), this.clearMesaageTimer);
+      }));
 	}
 
 	onClose() {
 		this.showMessages = false;
   }
-  
+
   setMessageColor(value: MessageType):string{
     let color = 'NONE';
     switch(value){

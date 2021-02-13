@@ -58,7 +58,7 @@ export class ResetPasswordComponent implements OnInit {
         SharedPasswordValidators.patternValidator(/\d/, { hasNumber: true }),
         SharedPasswordValidators.patternValidator(/[A-Z]/, { hasCapitalCase: true }),
         SharedPasswordValidators.patternValidator(/[a-z]/, { hasSmallCase: true }),
-        SharedPasswordValidators.patternValidator(/[^\w\*]/,
+        SharedPasswordValidators.patternValidator(/[^a-zA-Z0-9]/,
         {
           hasSpecialCharacters: true
         }),

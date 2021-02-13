@@ -54,7 +54,7 @@ export class RegisterComponent implements OnInit {
         // 4. check whether the entered password has a lower-case letter
         SharedPasswordValidators.patternValidator(/[a-z]/, { hasSmallCase: true }),
         // 5. any other special character rather the mentioned  have to throw erro
-        SharedPasswordValidators.patternValidator(/[^\w\*]/,
+        SharedPasswordValidators.patternValidator(/[^a-zA-Z0-9]/,
         {
           hasSpecialCharacters: true
         }),
