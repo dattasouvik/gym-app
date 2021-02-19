@@ -15,15 +15,18 @@ import { AttendanceComponent } from './components/attendance/attendance.componen
 import { PrescribeComponent } from './components/prescribe/prescribe.component';
 import { HealthChartComponent } from './components/health-chart/health-chart.component';
 import { HealthCardModule } from 'src/app/modules/health-card/health-card.module';
+import { WorkoutPlanModule } from 'src/app/modules/workout-plan/workout-plan.module';
+import { WorkoutRoutineComponent } from './components/workout-routine/workout-routine.component';
 
 @NgModule({
   declarations: [
-    ViewMyTraineesComponent, 
-    TraineeSummaryComponent, 
-    BaseComponent, 
-    AttendanceComponent, 
-    PrescribeComponent, 
-    HealthChartComponent
+    ViewMyTraineesComponent,
+    TraineeSummaryComponent,
+    BaseComponent,
+    AttendanceComponent,
+    PrescribeComponent,
+    HealthChartComponent,
+    WorkoutRoutineComponent
   ],
   imports: [
     CommonModule,
@@ -32,7 +35,8 @@ import { HealthCardModule } from 'src/app/modules/health-card/health-card.module
     MaterialDesignModule,
     UserAttendanceModule,
     DynamicformModule,
-    HealthCardModule
+    HealthCardModule,
+    WorkoutPlanModule
   ],
   providers: [TraineesService]
 })

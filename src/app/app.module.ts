@@ -17,7 +17,7 @@ import { MessagesService } from 'src/app/modules/shared/services/messages.servic
 import { TokenInterceptor } from 'src/app/services/token.interceptor';
 import { HeaderInterceptor } from 'src/app/services/header.interceptor';
 import { CoreModule } from 'src/app/modules/core/core.module';
-
+import { FormlyModule } from '@ngx-formly/core';
 
 
 @NgModule({
@@ -36,6 +36,7 @@ import { CoreModule } from 'src/app/modules/core/core.module';
     CoreModule,
     ThemeSwitcherModule,
     UserAttendenceModule,
+    FormlyModule.forRoot({ extras: { lazyRender: true } }),
     // FullCalendarModule
   ],
   providers: [

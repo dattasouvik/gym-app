@@ -27,6 +27,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { MatSliderModule } from '@angular/material/slider';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatStepperModule} from '@angular/material/stepper';
 
 const MaterialDesignComponents = [
   MatButtonModule,
@@ -54,7 +55,8 @@ const MaterialDesignComponents = [
   MatDatepickerModule,
   MatSnackBarModule,
   MatSliderModule,
-  MatSlideToggleModule
+  MatSlideToggleModule,
+  MatStepperModule
 ];
 
 @NgModule({

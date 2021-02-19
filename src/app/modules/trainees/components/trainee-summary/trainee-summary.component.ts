@@ -24,6 +24,10 @@ export class TraineeSummaryComponent implements OnInit {
       title: 'Measurements',
       url: 'measuremets'
     },
+    {
+      title: 'Workout Routine',
+      url: 'routine'
+    },
   ];
 
   constructor() { }

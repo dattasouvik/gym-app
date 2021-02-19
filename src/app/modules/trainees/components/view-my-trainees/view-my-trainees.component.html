@@ -38,6 +38,12 @@
                       </button>
                       <button
                       mat-menu-item
+                      [routerLink]="[ item.uid, 'routine' ]">
+                      <mat-icon>accessibility</mat-icon>
+                      Workout Routine
+                      </button>
+                      <button
+                      mat-menu-item
                       [routerLink]="['/health-status','add']"
                       [queryParams]="{id: item.uid }">
                       <mat-icon>add</mat-icon>

@@ -4,6 +4,7 @@ import { BaseComponent } from 'src/app/modules/trainees/components/base/base.com
 import { HealthChartComponent }
 from 'src/app/modules/trainees/components/health-chart/health-chart.component';
 import { TraineeSummaryComponent } from 'src/app/modules/trainees/components/trainee-summary/trainee-summary.component';
+import { WorkoutRoutineComponent } from 'src/app/modules/trainees/components/workout-routine/workout-routine.component';
 import { AttendanceComponent } from './components/attendance/attendance.component';
 import { PrescribeComponent } from './components/prescribe/prescribe.component';
 import { ViewMyTraineesComponent } from './components/view-my-trainees/view-my-trainees.component';
@@ -49,6 +50,10 @@ const routes: Routes = [
       {
         path: 'measuremets',
         component: HealthChartComponent
+      },
+      {
+        path: 'routine',
+        component: WorkoutRoutineComponent
       },
     ]
   }
