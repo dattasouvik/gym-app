@@ -1,6 +1,10 @@
-<mat-vertical-stepper #stepper>
+<mat-vertical-stepper>
   <mat-step
     *ngFor="let step of field.fieldGroup; let index = index; let last = last;">
+    <!-- Define the edit icon, by default is 'create' -->
+    <ng-template matStepperIcon="edit">
+      <mat-icon>done</mat-icon>
+    </ng-template>
     <ng-template matStepLabel>{{ step.templateOptions.label }}</ng-template>
     <formly-field [field]="step"></formly-field>
     <div class="actions">
@@ -12,17 +16,9 @@
       </button>
       <button mat-button matStepperNext mat-raised-button
         *ngIf="!last"
-        color="primary" type="button"
-        [disabled]="!isValid(step)">
+        color="primary"
+        type="button">
         Next
-      </button>
-      <button mat-button mat-raised-button
-        *ngIf="last"
-        [disabled]="!form.valid"
-        color="accent"
-        class="action__submit"
-        type="submit">
-        Submit
       </button>
     </div>
   </mat-step>

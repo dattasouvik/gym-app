@@ -37,8 +37,6 @@
     "moment": "^2.29.1",
     "ng-multiselect-dropdown": "^0.2.10",
     "ng-scroll-calendar": "^1.1.0",
-    "ng-starrating": "^1.0.20",
-    "ngx-bar-rating": "^1.1.0",
     "rxjs": "~6.6.3",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"

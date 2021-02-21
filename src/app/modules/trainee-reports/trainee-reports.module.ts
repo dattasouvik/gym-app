@@ -13,20 +13,24 @@ from './components/tr-food-chart/tr-food-chart.component';
 import { UserFoodChartModule }
 from 'src/app/modules/user-food-chart/user-food-chart.module';
 import { HealthCardModule } from 'src/app/modules/health-card/health-card.module';
+import { TrWorkoutPlanComponent } from './components/tr-workout-plan/tr-workout-plan.component';
+import { WorkoutPlanModule } from 'src/app/modules/workout-plan/workout-plan.module';
 
 
 @NgModule({
   declarations: [
-    TraineeReportsDashboardComponent, 
-    TrHeatlhChartComponent, 
-    TrFoodChartComponent
+    TraineeReportsDashboardComponent,
+    TrHeatlhChartComponent,
+    TrFoodChartComponent,
+    TrWorkoutPlanComponent
   ],
   imports: [
     CommonModule,
     TraineeReportsRoutingModule,
     MaterialDesignModule,
     UserFoodChartModule,
-    HealthCardModule
+    HealthCardModule,
+    WorkoutPlanModule
   ]
 })
 export class TraineeReportsModule { }

@@ -11,13 +11,17 @@ import { addonsExtension } from 'src/app/modules/workout-plan/components/layout/
 import { FormlyFieldStepperComponent } from './components/layout/formly-field-stepper/formly-field-stepper.component';
 import { FormlyRepeatSectionComponent } from './components/layout/formly-repeat-section/formly-repeat-section.component';
 import { FormlyWrapperAddonsComponent } from './components/layout/formly-wrapper-addons/formly-wrapper-addons.component';
+import { ViewWorkoutPlanComponent } from './components/view-workout-plan/view-workout-plan.component';
+import { WorkoutPlanViewStepperComponent } from './components/layout/workout-plan-view-stepper/workout-plan-view-stepper.component';
 
 @NgModule({
   declarations: [
     CreateWorkoutPlanComponent,
     FormlyFieldStepperComponent,
+    WorkoutPlanViewStepperComponent,
     FormlyRepeatSectionComponent,
     FormlyWrapperAddonsComponent,
+    ViewWorkoutPlanComponent,
   ],
   imports: [
     CommonModule,
@@ -31,6 +35,7 @@ import { FormlyWrapperAddonsComponent } from './components/layout/formly-wrapper
       ],
       types: [
         { name: 'stepper', component: FormlyFieldStepperComponent, wrappers: [] },
+        { name: 'workoutPlanView', component: WorkoutPlanViewStepperComponent, wrappers: [] },
         { name: 'repeat', component: FormlyRepeatSectionComponent },
       ],
       wrappers: [
@@ -42,7 +47,8 @@ import { FormlyWrapperAddonsComponent } from './components/layout/formly-wrapper
     })
   ],
   exports:[
-    CreateWorkoutPlanComponent
+    CreateWorkoutPlanComponent,
+    ViewWorkoutPlanComponent
   ]
 })
 export class WorkoutPlanModule { }

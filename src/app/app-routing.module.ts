@@ -10,13 +10,6 @@ import { NotFoundComponent } from 'src/app/modules/core/components/not-found/not
 
 
 const routes: Routes = [
-  // { path: 'registration',
-  //   loadChildren: () => import('./registration-form/registration-form.module')
-  //   .then(m => m.RegistrationFormModule)
-  // },
-  // { path: 'users',
-  //   loadChildren: () => import('./user-data/user-data.module')
-  //   .then(m => m.UserDataModule) },
   // { path: 'attendence',loadChildren:'./user-attendence/user-attendence.module#UserAttendenceModule'}
   // { path: 'attendence', component: AttendenceListComponent },
   // { path: 'schedule', component: ScheduleDaysComponent },
