@@ -9,7 +9,21 @@
 
 @mixin success-message {
   background-color: variables.$success-bgcolor;
-  color: variables.$message-text; 
+  color: variables.$message-text;
 }
 
 /* Messages Section  ends here */
+
+/* Profile image for trainer and trainee */
+@mixin profile__avatar( $width:50%, $border-radius: 50% , $zoom: 1) {
+  width: $width;
+
+  & > img{
+    width: 100%;
+    border-radius: $border-radius;
+    transition: transform 1s ease-in-out;
+    &:hover{
+      transform: scale($zoom);
+    }
+  }
+}

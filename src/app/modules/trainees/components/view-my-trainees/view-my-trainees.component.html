@@ -1,14 +1,14 @@
 <div class="container">
     <div class="my-3 p-3 rounded shadow-sm">
         <h6 class="border-bottom border-gray pb-2 mb-0 text-muted">View my trainees</h6>
-        <div class="media pt-3 mat-elevation-z5" *ngFor="let item of traineeData">
-            <!-- <svg class="bd-placeholder-img mr-2 rounded" width="52" height="52" xmlns="http://www.w3.org/2000/svg"
-                preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x32"> -->
-                <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-8.jpg" class="rounded-circle p-1" width="50px" alt="avatar">
-
+        <div class="media pt-3 mat-elevation-z5" *ngFor="let trainee of traineeData">
+            <div class="profile__icon">
+              <img [src]="trainee.profile_image"
+                [alt]="trainee.first_name">
+            </div>
             <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
                 <div class="d-flex justify-content-between align-items-center w-100">
-                    <strong class="text-gray-dark flex-grow-1">{{item.first_name}}</strong>
+                    <strong class="text-gray-dark flex-grow-1">{{trainee.first_name}}</strong>
                     <button
                       mat-icon-button
                       aria-label="Click here for more options"
@@ -20,40 +20,40 @@
                     <mat-menu #menu="matMenu">
                       <button
                       mat-menu-item
-                      [routerLink]="[ item.uid, 'attendance' ]">
+                      [routerLink]="[ trainee.uid, 'attendance' ]">
                       <mat-icon>create</mat-icon>
                       Attendance
                       </button>
                       <button
                       mat-menu-item
-                      [routerLink]="[ item.uid, 'prescribe' ]">
+                      [routerLink]="[ trainee.uid, 'prescribe' ]">
                       <mat-icon>create</mat-icon>
                       Prescribe
                       </button>
                       <button
                       mat-menu-item
-                      [routerLink]="[ item.uid, 'measuremets' ]">
+                      [routerLink]="[ trainee.uid, 'measuremets' ]">
                       <mat-icon>straighten</mat-icon>
                       Reports
                       </button>
                       <button
                       mat-menu-item
-                      [routerLink]="[ item.uid, 'routine' ]">
+                      [routerLink]="[ trainee.uid, 'routine' ]">
                       <mat-icon>accessibility</mat-icon>
                       Workout Routine
                       </button>
                       <button
                       mat-menu-item
                       [routerLink]="['/health-status','add']"
-                      [queryParams]="{id: item.uid }">
+                      [queryParams]="{id: trainee.uid }">
                       <mat-icon>add</mat-icon>
                       Health Chart
                       </button>
                     </mat-menu>
                 </div>
 
-                <span class="d-block" *ngIf="item.about_me">
-                  {{item.about_me}}
+                <span class="d-block" *ngIf="trainee.about_me">
+                  {{trainee.about_me}}
                 </span>
             </div>
         </div>

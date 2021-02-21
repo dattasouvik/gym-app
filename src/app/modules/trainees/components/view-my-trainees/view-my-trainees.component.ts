@@ -2,7 +2,6 @@ import { Subscription } from 'rxjs';
 import { ViewChild, AfterViewInit, OnDestroy } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table';
 import { Pager } from 'src/app/models/pager.model';
 import { TraineeResponse } from 'src/app/modules/trainees/model/trainee-response.model';
 import { Trainee } from '../../model/trainee.model';
