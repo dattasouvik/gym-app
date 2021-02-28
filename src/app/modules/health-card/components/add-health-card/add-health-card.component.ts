@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { concatMap, map } from 'rxjs/operators';
 import { FieldConfig } from 'src/app/modules/dynamicform/field.interface';
-import { HealthCardService }
-from 'src/app/modules/health-card/services/health-card.service';
+import { HealthCardService } from
+'src/app/modules/health-card/services/health-card.service';
 import * as moment from 'moment';
 
 @Component({
@@ -60,5 +60,5 @@ export class AddHealthCardComponent implements OnInit {
     );
     return output;
   }
-  
+
 }

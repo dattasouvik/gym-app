@@ -1,4 +1,5 @@
 :host {
+  /* Display nested componented with pager at the bootom */
   ::ng-deep view-my-trainers {
     display: flex;
     height: 100%;
@@ -8,6 +9,10 @@
       justify-content: space-between;
     }
   }
+}
+
+::ng-deep app-trainers{
+  height: 100%;
 }
 
 .trainers{

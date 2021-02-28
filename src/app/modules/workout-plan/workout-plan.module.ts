@@ -35,7 +35,7 @@ import { WorkoutPlanViewStepperComponent } from './components/layout/workout-pla
       ],
       types: [
         { name: 'stepper', component: FormlyFieldStepperComponent, wrappers: [] },
-        { name: 'workoutPlanView', component: WorkoutPlanViewStepperComponent, wrappers: [] },
+        { name: 'stepperView', component: WorkoutPlanViewStepperComponent, wrappers: [] },
         { name: 'repeat', component: FormlyRepeatSectionComponent },
       ],
       wrappers: [

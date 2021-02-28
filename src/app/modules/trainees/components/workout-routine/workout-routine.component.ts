@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-workout-routine',
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WorkoutRoutineComponent implements OnInit {
 
-  constructor() { }
+  traineeId: number;
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.route.params.subscribe(params => this.traineeId = +params.id)
   }
 
 }
