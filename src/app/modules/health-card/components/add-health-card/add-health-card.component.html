@@ -1,7 +1,22 @@
-<div fxLayout="column" fxLayoutAlign="space-around center" class="container mt-1" *ngIf = "fields.length > 0">
-    <h3>Add Measurements</h3>
-    <dynamic-form  class="add-measurements"
-    [fields]="fields"
-    (submit)="submit($event)">
-    </dynamic-form>
+<!-- Renders layout in a dialog -->
+<mat-dialog-content>
+<div fxLayout="column">
+  <div fxLayoutAlign="space-between">
+    <h5>Add Measurements</h5>
+    <button mat-icon-button color="accent"
+    mat-raised-button 
+    matTooltip="close"
+    (click)="close()">
+    <mat-icon>close</mat-icon>
+  </button>
+  </div>
+  <mat-card class="pd-2 mt-1">
+    <ng-container *ngIf = "fields.length > 0">
+      <dynamic-form  class="add-measurements"
+      [fields]="fields"
+      (submit)="submit($event)">
+      </dynamic-form>
+    </ng-container>
+  </mat-card>
 </div>
+</mat-dialog-content>

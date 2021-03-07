@@ -18,6 +18,29 @@ export class ViewMyTraineesComponent implements OnInit,OnDestroy {
   pageNumber = 0;
   private subscription: Subscription;
 
+  links = [
+    {
+      title: 'Attendance',
+      url: 'attendance',
+      icon: 'create'
+    },
+    {
+      title: 'Prescribe',
+      url: 'prescribe',
+      icon: 'food_bank'
+    },
+    {
+      title: 'Measurements',
+      url: 'measuremets',
+      icon: 'straighten'
+    },
+    {
+      title: 'Workout Routine',
+      url: 'routine',
+      icon: 'accessibility'
+    }
+  ];
+
   constructor(public _getTrainees: TraineesService) { }
 
   ngOnInit(): void {

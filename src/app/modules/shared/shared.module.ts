@@ -7,7 +7,10 @@ import { MessagesComponent } from './components/messages/messages.component';
 
 
 @NgModule({
-  declarations: [LoadingComponent, MessagesComponent],
+  declarations: [
+    LoadingComponent, 
+    MessagesComponent
+  ],
   imports: [
     CommonModule,
     MaterialDesignModule

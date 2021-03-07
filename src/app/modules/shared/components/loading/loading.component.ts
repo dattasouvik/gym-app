@@ -4,11 +4,13 @@ import { LoadingService } from 'src/app/modules/shared/services/loading.service'
 @Component({
   selector: 'loading',
   templateUrl: './loading.component.html',
-  styleUrls: ['./loading.component.scss']
+  styleUrls: ['./loading.component.scss'],
 })
 export class LoadingComponent implements OnInit {
 
-  constructor(public loadingService: LoadingService) { }
+  constructor(
+    public loadingService: LoadingService
+    ) { }
 
   ngOnInit(): void {
   }

@@ -17,6 +17,7 @@ import { HealthChartComponent } from './components/health-chart/health-chart.com
 import { HealthCardModule } from 'src/app/modules/health-card/health-card.module';
 import { WorkoutPlanModule } from 'src/app/modules/workout-plan/workout-plan.module';
 import { WorkoutRoutineComponent } from './components/workout-routine/workout-routine.component';
+import { UserFoodChartModule } from 'src/app/modules/user-food-chart/user-food-chart.module';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { WorkoutRoutineComponent } from './components/workout-routine/workout-ro
     UserAttendanceModule,
     DynamicformModule,
     HealthCardModule,
-    WorkoutPlanModule
+    WorkoutPlanModule,
+    UserFoodChartModule
   ],
   providers: [TraineesService]
 })

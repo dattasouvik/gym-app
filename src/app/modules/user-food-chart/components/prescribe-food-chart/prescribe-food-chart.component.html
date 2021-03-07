@@ -1,0 +1,6 @@
+<ng-container *ngIf="formFields.length > 0">
+  <dynamic-form  class="prescribe"
+  [fields]="formFields"
+  (submit)="submit($event)">
+  </dynamic-form>
+</ng-container>

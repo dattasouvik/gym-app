@@ -1,51 +1,48 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { concatMap, map } from 'rxjs/operators';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FieldConfig } from 'src/app/modules/dynamicform/field.interface';
 import { HealthCardService } from
 'src/app/modules/health-card/services/health-card.service';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import * as moment from 'moment';
+import { Router } from '@angular/router';
+import { ApiHandlerService } from 'src/app/services/api-handler.service';
+
+interface DialogData {
+  userId:number;
+  fields:FieldConfig[]
+}
 
 @Component({
   selector: 'app-add-health-card',
   templateUrl: './add-health-card.component.html',
-  styleUrls: ['./add-health-card.component.scss']
+  styleUrls: ['./add-health-card.component.scss'],
 })
 export class AddHealthCardComponent implements OnInit {
 
-
   traineeId:number;
-  fields: FieldConfig[] = [];
+  fields: FieldConfig[];
 
   constructor(
-    private route: ActivatedRoute,
-    private measurement : HealthCardService
-    ) { }
+    private router:Router,
+    private measurement : HealthCardService,
+    private dialogRef: MatDialogRef<AddHealthCardComponent>,
+    @Inject(MAT_DIALOG_DATA) data:DialogData,
+    private apiHandlerService: ApiHandlerService
+    ) {
+      this.traineeId = + data.userId;
+      this.fields = data.fields;
+    }
 
-  ngOnInit(): void {
-    const form$ = this.route.queryParams
-    .pipe(
-      concatMap(params => {
-        this.traineeId = +params.id;
-        return this.measurement.getHealthMeasurements(this.traineeId);
-      })
-    )
-    form$.pipe(
-      map((value) => {
-        const mapping =  Object.values(value).map(el => {
-          return el
-        });
-        return mapping;
-      })
-    )
-    .subscribe(response => {
-      this.fields = response as FieldConfig[];
-    })
-  }
+  ngOnInit(): void {}
 
   submit(formValue: {[key:string]: any}) {
     const formatted_data = this.formatDateInputs(formValue);
-    this.measurement.postHealthMeasurements(this.traineeId, formatted_data);
+    this.measurement.addMeasurements(this.traineeId, formatted_data)
+    .subscribe(success => {
+      this.apiHandlerService.onApiSuccessMessage(success)
+      this.close();
+      this.router.navigateByUrl('/trainees');
+    });
   }
 
   formatDateInputs(value: {[key:string]: any}){
@@ -61,4 +58,7 @@ export class AddHealthCardComponent implements OnInit {
     return output;
   }
 
+  close() {
+    this.dialogRef.close();
+  }
 }

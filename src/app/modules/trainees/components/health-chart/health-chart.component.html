@@ -1,4 +1,15 @@
 <div class="reports mt-3">
-  <h5 class="text-center blockquote">Reports</h5>
+  <mat-toolbar>
+    <mat-toolbar-row>
+      <span>Reports</span>
+      <span class="spacer"></span>
+      <button mat-mini-fab
+      aria-label="Add health card measurements"
+      matTooltip="Add measurements"
+      (click)="addHealthMeasurements(traineeId)">
+        <mat-icon>add</mat-icon>
+      </button>
+    </mat-toolbar-row>
+  </mat-toolbar>
   <hc-view-health-cards [userId]='traineeId'></hc-view-health-cards>
 </div>

@@ -7,4 +7,5 @@ export interface Trainer{
   gender: string;
   phone: number;
   rating: number;
+  about_me: string | boolean;
 }

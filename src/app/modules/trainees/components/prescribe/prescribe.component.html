@@ -1,5 +1,4 @@
 <div class="container mt-3">
-  <ng-container *ngIf="formFields.length > 0">
   <div class="row">
     <div class="col-sm-12">
       <h3 class="text-center">Prescribe</h3>
@@ -7,11 +6,7 @@
   </div>
   <div class="row">
     <div class="col-sm-12">
-        <dynamic-form  class="prescribe"
-          [fields]="formFields"
-          (submit)="submit($event)">
-        </dynamic-form>
+      <ufc-prescribe-food-chart [userId]='traineeId'></ufc-prescribe-food-chart>
     </div>
   </div>
-  </ng-container>
 </div>
