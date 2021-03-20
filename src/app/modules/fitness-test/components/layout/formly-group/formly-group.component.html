@@ -1,0 +1,26 @@
+<div class="title" *ngIf="to?.label">
+  <h5>{{ to.label }}</h5>
+</div>
+
+<div *ngFor="let field of field.fieldGroup; let i = index;" class="row">
+  <formly-field class="col" [field]="field"></formly-field>
+  <div class="actions">
+    <button mat-mini-fab aria-label="delete"
+    color="warn"
+    [disabled]="i < 1"
+    type="button"
+    (click)="remove(i)">
+      <mat-icon>delete</mat-icon>
+    </button>
+    <button *ngIf="!to.maxItems || to.maxItems > i+1"
+      class="ml-1"
+      [attr.alt]="to.addText"
+      mat-mini-fab aria-label="add"
+      color="primary"
+      type="button"
+      [matTooltip]="to.addText"
+      (click)="add()">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+</div>

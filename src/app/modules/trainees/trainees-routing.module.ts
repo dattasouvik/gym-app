@@ -8,7 +8,7 @@ import { WorkoutRoutineComponent } from 'src/app/modules/trainees/components/wor
 import { AttendanceComponent } from './components/attendance/attendance.component';
 import { PrescribeComponent } from './components/prescribe/prescribe.component';
 import { ViewMyTraineesComponent } from './components/view-my-trainees/view-my-trainees.component';
-
+import { FitnessReportsComponent } from './components/fitness-reports/fitness-reports.component';
 // const routes: Routes = [
 //   { path: '',
 //     component: BaseComponent,
@@ -54,6 +54,10 @@ const routes: Routes = [
       {
         path: 'routine',
         component: WorkoutRoutineComponent
+      },
+      {
+        path: 'fitness',
+        component: FitnessReportsComponent
       },
     ]
   }

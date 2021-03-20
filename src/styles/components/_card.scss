@@ -1,0 +1,41 @@
+/*
+* Align contents at the center
+*/
+.card__center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/*
+* Divide card contents Equally
+*/
+.card__content__split{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+  height: 100%;
+}
+
+
+/*
+* Stacks responsive contents of card
+* To be made dynamic later
+*/
+.card__stack{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  .stack__item{
+    display: flex;
+    flex-wrap: wrap;
+    .item__value{
+      border: 1px solid var(--primary, #dee2e6) ;
+      padding: 0.25rem;
+    }
+  }
+}

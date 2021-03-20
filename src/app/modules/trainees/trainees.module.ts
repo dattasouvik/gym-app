@@ -18,6 +18,8 @@ import { HealthCardModule } from 'src/app/modules/health-card/health-card.module
 import { WorkoutPlanModule } from 'src/app/modules/workout-plan/workout-plan.module';
 import { WorkoutRoutineComponent } from './components/workout-routine/workout-routine.component';
 import { UserFoodChartModule } from 'src/app/modules/user-food-chart/user-food-chart.module';
+import { FitnessReportsComponent } from './components/fitness-reports/fitness-reports.component';
+import { CoreModule } from 'src/app/modules/core/core.module';
 
 @NgModule({
   declarations: [
@@ -27,11 +29,13 @@ import { UserFoodChartModule } from 'src/app/modules/user-food-chart/user-food-c
     AttendanceComponent,
     PrescribeComponent,
     HealthChartComponent,
-    WorkoutRoutineComponent
+    WorkoutRoutineComponent,
+    FitnessReportsComponent
   ],
   imports: [
     CommonModule,
     TraineesRoutingModule,
+    CoreModule,
     FlexLayoutModule,
     MaterialDesignModule,
     UserAttendanceModule,

@@ -73,6 +73,12 @@ const routes: Routes = [
     canLoad: [CanLoadAuthGuard]
   },
   {
+    path: 'fitness-test',
+    loadChildren: () => import('./modules/fitness-test/fitness-test.module')
+    .then(m => m.FitnessTestModule),
+    canLoad: [CanLoadAuthGuard]
+  },
+  {
     path: '**',
     component: NotFoundComponent,
   },

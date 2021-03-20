@@ -7,13 +7,23 @@
     class="mat-elevation-z8 mb-2">
      <mat-card-header>
        <div mat-card-avatar class="profile__icon">
-         <img [src]="trainer.profile_image"
-         class="" width="" [alt]="trainer.first_name">
+         <img
+          [src]="trainer.profile_image"
+          [default]="config.defaultProfileImg"
+          class=""
+          width=""
+          [alt]="trainer.first_name">
        </div>
-       <mat-card-title>{{trainer.first_name}} {{trainer.last_name}}</mat-card-title>
+       <mat-card-title>
+         {{trainer.first_name}} {{trainer.last_name}}
+       </mat-card-title>
        <mat-card-subtitle >
-          Ratings: <span class="rating-container stars-{{ trainer.rating * 10 }}">★★★★★★★★★★</span>
-         <b>({{ trainer.rating | number:'1.1-3' }})</b>
+          Ratings:
+          <span
+            class="rating-container stars-{{ trainer.rating * 10 }}">
+            ★★★★★★★★★★
+          </span>
+          <b>({{ trainer.rating | number:'1.1-3' }})</b>
        </mat-card-subtitle>
      </mat-card-header>
      <mat-card-content>

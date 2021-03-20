@@ -2,13 +2,25 @@
   <div class="card profile-card">
     <div class="card-header card-header-danger d-flex">
       <!-- Avatar -->
-      <div class="card-avatar profile-avatar" [matMenuTriggerFor]="imageaction">
-        <img src="{{profileData.profile_image}}" class="rounded-circle mat-elevation-z8" width="100px" height="100px" alt="avatar">
+      <div
+        class="card-avatar profile-avatar"
+        [matMenuTriggerFor]="imageaction">
+        <img
+          [src]="profileData.profile_image"
+          [default]="config.defaultProfileImg"
+          class="rounded-circle mat-elevation-z8"
+          width="100px"
+          height="100px"
+          alt="avatar">
         <span class="material-icons hoverable-icon">
           camera_alt
         </span>
         <mat-menu #imageaction="matMenu" xPosition="after" yPosition="below">
-          <button mat-menu-item (click)="editProfilePic(profileData)">Upload Photo</button>
+          <button
+            mat-menu-item
+            (click)="editProfilePic(profileData)">
+              Upload Photo
+          </button>
         </mat-menu>
       </div>
       <div class="card-title">

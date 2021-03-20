@@ -9,12 +9,14 @@ import { EditProfileComponent } from 'src/app/modules/user-profile/components/ed
 import { ViewProfileComponent } from './components/view-profile/view-profile.component';
 import { UserProfileStore } from 'src/app/modules/user-profile/services/user-profile.store';
 import { EditProfilePictureComponent } from './components/edit-profile-picture/edit-profile-picture.component';
+import { CoreModule } from 'src/app/modules/core/core.module';
 
 @NgModule({
   declarations: [UserProfileComponent,EditProfileComponent, ViewProfileComponent, EditProfilePictureComponent],
   imports: [
     CommonModule,
     UserProfileRoutingModule,
+    CoreModule,
     ReactiveFormsModule,
     FormsModule,
     MaterialDesignModule

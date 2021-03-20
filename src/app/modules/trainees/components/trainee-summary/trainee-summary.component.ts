@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-
-
 @Component({
   selector: 'app-trainee-summary',
   templateUrl: './trainee-summary.component.html',
@@ -27,6 +25,10 @@ export class TraineeSummaryComponent implements OnInit {
     {
       title: 'Workout Routine',
       url: 'routine'
+    },
+    {
+      title: 'Fitness Test',
+      url: 'fitness'
     },
   ];
 

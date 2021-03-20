@@ -18,6 +18,3 @@ https://www.angularjswiki.com/angular/angular-material-icons-list-mat-icon-list/
 Renderer API:
 ---------------------------------------------------------------------------
 https://itnext.io/using-renderer2-in-angular-8f80da6756f8
-
-## SCSS Artifacts
-<b>https://miro.medium.com/max/958/1*0MP59mq0K_Hi2ECSb_Zwhg.png</b>

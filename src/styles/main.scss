@@ -5,6 +5,8 @@
 
 
 @import 'base/reset';
+
+/* Load custom Fonts */
 @import 'base/typography';
 
 
@@ -15,29 +17,27 @@
 @import 'themes/theme';
 
 
+/* Load components */
+@import 'components/card';
+
 @import 'overrides/full-calendar-override';
 @import 'overrides/override';
 
 
-//TBR
+// Override typography for all Angular Material, including mat-base-typography and all components.
+@include angular-material-typography($typography);
 
 /* You can add global styles to this file, and also import other style files */
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-/* You can add global styles to this file, and also import other style files */
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
-// td.fc-daygrid-day {
-//   cursor: pointer!important;
-// }
-// .selected-date{
-//   background-color: mediumseagreen;
-// }
-// .custom-dialog-container .mat-dialog-container {
-//   /* add your styles */
-//   padding: 0 0 24px 0 ;
-//   border-radius: 0px;
-// }
-
-
-
+/*
+* PLEASE DO NOT MODIFY BELOW LOC
+*/
+.spacer {
+  flex: 1 1 0%;
+}
