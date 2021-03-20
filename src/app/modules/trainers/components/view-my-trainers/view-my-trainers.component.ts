@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
+import { APP_CONFIG, AppConfig } from 'src/app/modules/app-config/app-config.module';
 import { UserRatingEvent } from 'src/app/modules/trainers/model/rating-event.model';
 import { TrainerResponse } from 'src/app/modules/trainers/model/trainer-response.model';
 
@@ -16,10 +17,9 @@ export class ViewMyTrainersComponent implements OnInit {
 
   hideContact=[];
 
-  constructor() { }
+  constructor(@Inject(APP_CONFIG) public config: AppConfig) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   onChangedPage(pageData: PageEvent) {
     this.hideContact = [];

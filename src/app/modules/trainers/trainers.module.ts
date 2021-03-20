@@ -6,6 +6,7 @@ import { TrainersStore } from 'src/app/modules/trainers/services/trainers.store'
 import { MaterialDesignModule } from 'src/app/modules/material-design/material-design.module';
 import { TrainersComponent } from './components/trainers/trainers.component';
 import { RatingsModule } from 'src/app/modules/ratings/ratings.module';
+import { CoreModule } from 'src/app/modules/core/core.module';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { RatingsModule } from 'src/app/modules/ratings/ratings.module';
   imports: [
     CommonModule,
     TrainersRoutingModule,
+    CoreModule,
     MaterialDesignModule,
     RatingsModule
   ],

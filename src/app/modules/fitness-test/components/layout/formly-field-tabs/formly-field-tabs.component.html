@@ -1,0 +1,15 @@
+<mat-tab-group>
+  <mat-tab *ngFor="let tab of field.fieldGroup; let i = index; let last = last;"
+    [label]="tab.templateOptions.label">
+    <div class="container-fluid">
+      <formly-field [field]="tab"></formly-field>
+      <div class="actions center">
+        <button *ngIf="last"
+        mat-raised-button color="accent"
+        [disabled]="!form.valid" type="submit">
+        Submit
+      </button>
+      </div>
+    </div>
+  </mat-tab>
+</mat-tab-group>

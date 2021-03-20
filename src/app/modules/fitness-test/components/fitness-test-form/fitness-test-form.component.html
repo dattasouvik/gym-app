@@ -1,0 +1,13 @@
+<form [formGroup]="fitnessTestForm" (ngSubmit)="submit(fitnessTestFormModel)">
+  <formly-form [model]="fitnessTestFormModel"
+  [fields]="fitnessTestFormFields"
+  [options]="options"
+  [form]="fitnessTestForm">
+  </formly-form>
+</form>
+<div class="float-bottom actions">
+  <button mat-mini-fab
+    (click)="navigateBack()">
+    <mat-icon>arrow_back_ios</mat-icon>
+  </button>
+</div>

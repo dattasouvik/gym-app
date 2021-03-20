@@ -1,11 +1,12 @@
 import { Subscription } from 'rxjs';
-import { ViewChild, AfterViewInit, OnDestroy } from '@angular/core';
+import { ViewChild, AfterViewInit, OnDestroy, Inject } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { Pager } from 'src/app/models/pager.model';
 import { TraineeResponse } from 'src/app/modules/trainees/model/trainee-response.model';
 import { Trainee } from '../../model/trainee.model';
 import { TraineesService } from '../../services/trainees.service';
+import { APP_CONFIG, AppConfig } from 'src/app/modules/app-config/app-config.module';
 
 @Component({
   selector: 'app-view-my-trainees',
@@ -38,10 +39,18 @@ export class ViewMyTraineesComponent implements OnInit,OnDestroy {
       title: 'Workout Routine',
       url: 'routine',
       icon: 'accessibility'
+    },
+    {
+      title: 'Fitness Reports',
+      url: 'fitness',
+      icon: 'accessibility'
     }
   ];
 
-  constructor(public _getTrainees: TraineesService) { }
+  constructor(
+    private _getTrainees: TraineesService,
+    @Inject(APP_CONFIG) public config: AppConfig
+  ) { }
 
   ngOnInit(): void {
     this.loadTrainees(this.pageNumber);

@@ -1,0 +1,20 @@
+
+RewriteOptions inherit
+# Generated with ngx-htaccess-generator v1.0.5
+# https://julianpoemp.github.io/ngx-htaccess-generator/
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+# Rewrite --- https://drupalone.org/assets/images/logo.jpg => https://drupalone.org/stay-fit/assets/images/logo.jpg
+# RewriteRule ^assets/images/logo\.jpg$ /stay-fit/assets/images/logo.jpg?&%{QUERY_STRING}
+  # Redirection of requests to index.html
+  RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} -s [OR]
+  RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} -f [OR]
+  RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} -d
+  RewriteRule ^.*$ - [NC,L]
+  RewriteRule ^(.*) index.html [NC,L]
+</IfModule>
+#RewriteCond %{HTTP_HOST} ^stay\-fit\.drupalone\.org$ [OR]
+#RewriteCond %{HTTP_HOST} ^www\.stay\-fit\.drupalone\.org$
+#RewriteRule ^/?$ "https\:\/\/drupalone\.org\/stay\-fit\/login" [R=301,L]

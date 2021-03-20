@@ -5,6 +5,9 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:prod": "ng build --prod --output-path dist/stay-fit --base-href /stay-fit/",
+    "copy:htaccess": "cp src/.htaccess dist/stay-fit/.htaccess",
+    "bundle:prod": "npm run build:prod && npm run copy:htaccess",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

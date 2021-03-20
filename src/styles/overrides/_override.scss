@@ -1,0 +1,9 @@
+/*
+* Override color for default Boolstrap classes
+*/
+.card,
+.card-body,
+.table {
+  background: unset;
+  color: unset;
+}
