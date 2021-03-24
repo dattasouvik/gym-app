@@ -1,15 +1,21 @@
-<div class="reports mt-3">
-  <mat-toolbar>
-    <mat-toolbar-row>
-      <span>Reports</span>
-      <span class="spacer"></span>
-      <button mat-mini-fab
-      aria-label="Add health card measurements"
-      matTooltip="Add measurements"
-      (click)="addHealthMeasurements(traineeId)">
-        <mat-icon>add</mat-icon>
-      </button>
-    </mat-toolbar-row>
-  </mat-toolbar>
-  <hc-view-health-cards [userId]='traineeId'></hc-view-health-cards>
+<div class="wrapper__container">
+  <section class="pt-3">
+    <mat-toolbar>
+      <mat-toolbar-row>
+        <span>Health Measurements</span>
+        <span class="spacer"></span>
+        <button
+          mat-mini-fab
+          (click)="addHealthMeasurements(traineeId)"
+          aria-label="Add health card measurements"
+          matTooltip="Add measurements"
+          color="accent">
+          <mat-icon>add</mat-icon>
+        </button>
+      </mat-toolbar-row>
+    </mat-toolbar>
+  </section>
+  <section class="content content__full-height">
+    <hc-view-health-cards [userId]='traineeId'></hc-view-health-cards>
+  </section>
 </div>

@@ -11,6 +11,7 @@ import { FormlyGroupComponent } from 'src/app/modules/fitness-test/components/la
 import { FormlyFieldTabsComponent } from './components/layout/formly-field-tabs/formly-field-tabs.component';
 import { FitnessTestReportsAdminComponent } from './components/fitness-test-reports-admin/fitness-test-reports-admin.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { FitnessTestDetailsComponent } from './components/fitness-test-details/fitness-test-details.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     FitnessTestFormComponent,
     FormlyGroupComponent,
     FormlyFieldTabsComponent,
-    FitnessTestReportsAdminComponent
+    FitnessTestReportsAdminComponent,
+    FitnessTestDetailsComponent
   ],
   imports: [
     CommonModule,

@@ -20,6 +20,10 @@ export class TraineeReportsDashboardComponent implements OnInit {
       title: 'Workout Routine',
       url: 'workout-routine'
     },
+    {
+      title: 'Fitness Test',
+      url: 'fitness-test'
+    },
   ];
   constructor() { }
 

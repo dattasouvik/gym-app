@@ -1,0 +1,32 @@
+/*
+* Styling for all content layouts
+*/
+.flex-column{
+  display: flex;
+  flex-direction: column;
+}
+
+.wrapper__container{
+  height: 100%;
+  @extend .flex-column;
+}
+
+
+.content {
+
+  &__full-height{
+    @extend .flex-column;
+    flex: 1;
+  }
+
+  &__center{
+    @extend .flex-column;
+    justify-content: center;
+    align-items: center;
+  }
+
+}
+
+.content__align_pager{
+  justify-content: space-between;
+}

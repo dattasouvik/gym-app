@@ -65,7 +65,6 @@ export class FitnessTestReportsAdminComponent implements OnInit {
         const {rows , pager } = response;
         this.reports = rows;
         this.pager = pager;
-        console.log(response);
       });
   }
 

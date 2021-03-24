@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
+import { take } from 'rxjs/operators';
 import { HealthChartResponse } from 'src/app/modules/health-card/models/health-chart-response.model';
 import { HealthCardService } from 'src/app/modules/health-card/services/health-card.service';
 
@@ -27,6 +28,7 @@ export class ViewHealthCardsComponent implements OnInit {
 
   private getHealthChart(page:number = 0 ):void {
     this.measurement.viewHealthChartDetails(this.userId, page)
+    .pipe(take(1))
     .subscribe(response => {
       this.details = response;
     })

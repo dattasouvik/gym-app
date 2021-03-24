@@ -43,7 +43,7 @@ export class ViewMyTraineesComponent implements OnInit,OnDestroy {
     {
       title: 'Fitness Reports',
       url: 'fitness',
-      icon: 'accessibility'
+      icon: 'fitness_center'
     }
   ];
 

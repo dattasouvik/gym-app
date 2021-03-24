@@ -10,8 +10,10 @@
 @import 'base/typography';
 
 
-
+/* Load Layout */
 @import 'layout/grid';
+@import 'layout/content';
+@import 'layout/table';
 
 
 @import 'themes/theme';
@@ -40,4 +42,9 @@ body {
 */
 .spacer {
   flex: 1 1 0%;
+}
+
+.logo-image {
+  background-image: url('/assets/images/logo.jpg');
+  background-size: cover;
 }

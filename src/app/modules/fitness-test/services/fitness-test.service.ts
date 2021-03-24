@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { FitnessTestFormMode } from 'src/app/modules/fitness-test/models/fitness-test-form.model';
-import { FitnessTestFormFieldGroup, FitnessTestFormResponse, MonitorFitnessTestReportResponse } from 'src/app/modules/fitness-test/models/fitness-test-response.model';
+import { FitnessTestFormFieldGroup, FitnessTestFormResponse, MonitorFitnessTestReportResponse,TraineeFitnessReportDetailsResponse,TraineeFitnessReportsResponse } from 'src/app/modules/fitness-test/models/fitness-test-response.model';
 import { LoadingService } from 'src/app/modules/shared/services/loading.service';
 import { ApiHandlerService } from 'src/app/services/api-handler.service';
 import { HttpService } from 'src/app/services/http.service';
@@ -124,4 +124,28 @@ export class FitnessTestService {
       );
     return this.loading.showLoaderUntilCompleted(report$);
   }
+
+  viewTraineeFitnessReports(page: number = 0){
+    let params = new HttpParams();
+    params = params.set('page', `${page}`);
+    params = params.set('_format', `json`);
+    const report$ = this.httpService.get<TraineeFitnessReportsResponse>
+      ("fitness-reports-for-trainee", { params })
+      .pipe(
+        catchError(error => this.apiHandlerService.onApiError(error))
+      );
+    return this.loading.showLoaderUntilCompleted(report$);
+  }
+
+  viewFitnessReportDetails(nid: number){
+    let params = new HttpParams();
+    params = params.set('_format', `json`);
+    const details$ = this.httpService.get<TraineeFitnessReportDetailsResponse>
+      (`view-fitness-test/${nid}`, { params })
+      .pipe(
+        catchError(error => this.apiHandlerService.onApiError(error))
+      );
+    return this.loading.showLoaderUntilCompleted(details$);
+  }
+
 }

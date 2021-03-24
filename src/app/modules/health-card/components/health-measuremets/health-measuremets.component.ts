@@ -6,10 +6,6 @@ import { HealthChartResponse } from 'src/app/modules/health-card/models/health-c
 import { Pager } from 'src/app/models/pager.model';
 
 
-/* https://dev.to/jwp/angular-material-table-in-20-minutes-15f4 */
-/* https://robferguson.org/blog/2019/12/13/angular-material-table/ */
-/* https://ultimatecourses.com/blog/the-missing-guide-to-angular-material */
-
 @Component({
   selector: 'health-measuremets',
   templateUrl: './health-measuremets.component.html',

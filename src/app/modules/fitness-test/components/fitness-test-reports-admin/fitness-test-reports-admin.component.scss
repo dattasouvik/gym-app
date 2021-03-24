@@ -1,22 +1,6 @@
 :host {
   height: 100%;
 }
-.wrapper{
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-.fill-content-height{
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-}
-.content-center{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
 .container__align{
   margin: 0.25rem 0;
 }

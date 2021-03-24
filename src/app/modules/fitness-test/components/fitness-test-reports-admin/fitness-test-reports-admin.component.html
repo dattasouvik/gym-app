@@ -1,4 +1,4 @@
-<div class="wrapper">
+<div class="wrapper__container">
   <section class="pt-3">
     <mat-toolbar>
       <mat-toolbar-row>
@@ -15,7 +15,7 @@
       </mat-toolbar-row>
     </mat-toolbar>
   </section>
-  <section class="content fill-content-height">
+  <section class="content content__full-height">
     <div
     *ngIf="reports?.length > 0 else noResult"
     fxLayout='column'
@@ -47,10 +47,11 @@
       <div class="card-body">
         <div class="card__content__split">
           <div class="content__top">
-            <section class="container__align" *ngIf="report.field_cardiovascular_endurance">
+            <section class="container__align"
+              *ngIf="report.field_cardiovascular_endurance">
               <div class="table-responsive">
                 <div class="stack__title title__focus">Cardiovacular Endurance</div>
-                <table class="table">
+                <table class="table table__hover">
                   <thead>
                     <tr>
                       <th scope="col">#</th>
@@ -60,7 +61,9 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr *ngFor="let cardio of report.field_cardiovascular_endurance; let i = index">
+                    <tr
+                      *ngFor="let cardio of report.field_cardiovascular_endurance;
+                      let i = index">
                       <th scope="row">{{ i+1 }}</th>
                       <td>{{ cardio?.field_rhr1 }}</td>
                       <td>{{ cardio?.field_rhr2 }}</td>
@@ -72,39 +75,53 @@
             </section>
           </div>
           <div class="content__bottom">
-            <section class="card__stack container__align" *ngIf="report.field_crunches">
+            <section class="card__stack container__align"
+              *ngIf="report.field_crunches">
               <div class="stack__title title__focus">Crunches</div>
               <span class="spacer"></span>
               <div class="stack__item">
-                <div class="item__value" *ngFor="let item of report.field_crunches">{{ item }}</div>
+                <div class="item__value"
+                  *ngFor="let item of report.field_crunches">{{ item }}</div>
               </div>
             </section>
-            <section class="card__stack container__align" *ngIf="report.field_push_ups">
+            <section class="card__stack container__align"
+              *ngIf="report.field_push_ups">
               <div class="stack__title title__focus">Push Up</div>
               <span class="spacer"></span>
               <div class="stack__item">
-                <div class="item__value" *ngFor="let item of report.field_push_ups">{{ item }}</div>
+                <div class="item__value"
+                  *ngFor="let item of report.field_push_ups">{{ item }}</div>
               </div>
             </section>
-            <section class="card__stack container__align" *ngIf="report.field_core_balancer">
+            <section class="card__stack container__align"
+              *ngIf="report.field_core_balancer">
               <div class="stack__title title__focus">Core Balance</div>
               <span class="spacer"></span>
               <div class="stack__item">
-                <div class="item__value" *ngFor="let item of report.field_core_balancer">{{ item }}</div>
+                <div class="item__value"
+                  *ngFor="let item of report.field_core_balancer">{{ item }}</div>
               </div>
             </section>
-            <section class="card__stack container__align" *ngIf="report.field_chest_press_fitness_test">
+            <section class="card__stack container__align"
+              *ngIf="report.field_chest_press_fitness_test">
               <div class="stack__title title__focus">Chest Press</div>
               <span class="spacer"></span>
               <div class="stack__item">
-                <div class="item__value" *ngFor="let item of report.field_chest_press_fitness_test">{{ item }}</div>
+                <div class="item__value"
+                  *ngFor="let item of report.field_chest_press_fitness_test">
+                    {{ item }}
+                </div>
               </div>
             </section>
-            <section class="card__stack container__align" *ngIf="report.field_sit_and_rest">
+            <section class="card__stack container__align"
+              *ngIf="report.field_sit_and_rest">
               <div class="stack__title title__focus">Sit & Crunch</div>
               <span class="spacer"></span>
               <div class="stack__item">
-                <div class="item__value" *ngFor="let item of report.field_sit_and_rest">{{ item }}</div>
+                <div class="item__value"
+                  *ngFor="let item of report.field_sit_and_rest">
+                    {{ item }}
+                  </div>
               </div>
             </section>
           </div>
@@ -114,8 +131,10 @@
   </div>
     <!-- No Result section -->
     <ng-template #noResult>
-      <div class="no-results fill-content-height">
-      <p class="content-center mat-elevation-z10 fill-content-height">No data available</p>
+      <div class="no-results content__full-height">
+      <p class="content__center mat-elevation-z10 content__full-height">
+        No data available
+      </p>
     </div>
     </ng-template>
   <!-- Pager section starts here  -->

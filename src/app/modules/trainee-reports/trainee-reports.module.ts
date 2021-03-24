@@ -15,6 +15,7 @@ from 'src/app/modules/user-food-chart/user-food-chart.module';
 import { HealthCardModule } from 'src/app/modules/health-card/health-card.module';
 import { TrWorkoutPlanComponent } from './components/tr-workout-plan/tr-workout-plan.component';
 import { WorkoutPlanModule } from 'src/app/modules/workout-plan/workout-plan.module';
+import { TrFitnessTestComponent } from './components/tr-fitness-test/tr-fitness-test.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { WorkoutPlanModule } from 'src/app/modules/workout-plan/workout-plan.mod
     TraineeReportsDashboardComponent,
     TrHeatlhChartComponent,
     TrFoodChartComponent,
-    TrWorkoutPlanComponent
+    TrWorkoutPlanComponent,
+    TrFitnessTestComponent
   ],
   imports: [
     CommonModule,

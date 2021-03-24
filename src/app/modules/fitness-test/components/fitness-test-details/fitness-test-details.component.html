@@ -1,0 +1,319 @@
+<mat-dialog-content>
+  <section class="content content__full-height">
+    <div class="card-header card__center">
+      <div class="date" *ngIf="report.field_assessment_date">
+        <span>Created on:</span>
+        <span class="title__focus">
+          {{ report.field_assessment_date | date:'dd LLL,yyyy' }}
+        </span>
+      </div>
+      <span class="spacer"></span>
+      <div class="actions">
+        <button mat-icon-button
+          matTooltip="Close"
+          (click)="close()">
+          <mat-icon>cancel</mat-icon>
+        </button>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card__content__split">
+        <div class="content__top">
+          <section class="container__align"
+            *ngIf="report.field_cardiovascular_endurance">
+            <div class="table-responsive">
+              <div class="stack__title title__focus text-center">
+                Cardiovacular Endurance
+              </div>
+              <table class="table table__hover">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">RHR</th>
+                    <th scope="col">10 min</th>
+                    <th scope="col">RHR</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr
+                    *ngFor="let cardio of report.field_cardiovascular_endurance;
+                    let i = index">
+                    <th scope="row">{{ i+1 }}</th>
+                    <td>{{ cardio?.field_rhr1 }}</td>
+                    <td>{{ cardio?.field_rhr2 }}</td>
+                    <td>{{ cardio?.field_rhr3 }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <hr>
+          </section>
+        </div>
+        <div class="content__bottom">
+          <section class="card__stack container__align"
+            *ngIf="report.field_height">
+            <div class="stack__title title__focus">Height</div>
+            <span class="spacer"></span>
+            <div class="stack__item">
+              <div class="item__value">
+                {{ report.field_height }}
+              </div>
+            </div>
+          </section>
+          <section class="card__stack container__align"
+            *ngIf="report.field_weight">
+            <div class="stack__title title__focus">Weight(Kg)</div>
+            <span class="spacer"></span>
+            <div class="stack__item">
+              <div class="item__value">
+                {{ report.field_weight }}
+              </div>
+            </div>
+          </section>
+          <section class="card__stack container__align"
+            *ngIf="report.field_bmi">
+            <div class="stack__title title__focus">BMI</div>
+            <span class="spacer"></span>
+            <div class="stack__item">
+              <div class="item__value">
+                {{ report.field_bmi }}
+              </div>
+            </div>
+          </section>
+          <section class="card__stack container__align"
+            *ngIf="report.field_body_water">
+            <div class="stack__title title__focus">Body Water</div>
+            <span class="spacer"></span>
+            <div class="stack__item">
+              <div class="item__value">
+                {{ report.field_body_water }}
+              </div>
+            </div>
+          </section>
+          <section class="card__stack container__align"
+            *ngIf="report.field_fat_percent">
+            <div class="stack__title title__focus">Fat(%)</div>
+            <span class="spacer"></span>
+            <div class="stack__item">
+              <div class="item__value">
+                {{ report.field_fat_percent }}
+              </div>
+            </div>
+          </section>
+          <section class="card__stack container__align"
+            *ngIf="report.field_visceral_fat">
+            <div class="stack__title title__focus">Visceral Fat</div>
+            <span class="spacer"></span>
+            <div class="stack__item">
+              <div class="item__value">
+                {{ report.field_visceral_fat }}
+              </div>
+            </div>
+          </section>
+          <section class="card__stack container__align"
+            *ngIf="report.field_body_age">
+            <div class="stack__title title__focus">Body Age</div>
+            <span class="spacer"></span>
+            <div class="stack__item">
+              <div class="item__value">
+                {{ report.field_body_age }}
+              </div>
+            </div>
+          </section>
+          <section class="card__stack container__align"
+            *ngIf="report.field_blood_p">
+            <div class="stack__title title__focus">Blood Pressure</div>
+            <span class="spacer"></span>
+            <div class="stack__item">
+              <div class="item__value">
+                {{ report.field_blood_p }}
+              </div>
+            </div>
+          </section>
+          <section class="card__stack container__align"
+            *ngIf="report.field_resting_metabolis">
+            <div class="stack__title title__focus">Resting Metabolism</div>
+            <span class="spacer"></span>
+            <div class="stack__item">
+              <div class="item__value">
+                {{ report.field_resting_metabolis }}
+              </div>
+            </div>
+          </section>
+          <section class="card__stack container__align"
+            *ngIf="report.field_protein">
+            <div class="stack__title title__focus">Protein</div>
+            <span class="spacer"></span>
+            <div class="stack__item">
+              <div class="item__value">
+                {{ report.field_protein }}
+              </div>
+            </div>
+          </section>
+          <section class="card__stack container__align"
+            *ngIf="report.field_minerals">
+            <div class="stack__title title__focus">Minerals</div>
+            <span class="spacer"></span>
+            <div class="stack__item">
+              <div class="item__value">
+                {{ report.field_minerals }}
+              </div>
+            </div>
+          </section>
+
+          <div class="content__bottom"
+          *ngIf="showGroupedFields(
+            report.field_skeletal_whole_body,
+            report.field_skeletal_trunk,
+            report.field_skeletal_arms,
+            report.field_skeletal_legs)">
+            <hr>
+            <div class="stack__title title__focus text-center">Skeletal</div>
+              <section class="card__stack container__align"
+              *ngIf="report.field_skeletal_whole_body">
+              <div class="stack__title title__focus">Whole Body</div>
+              <span class="spacer"></span>
+              <div class="stack__item">
+                <div class="item__value">
+                  {{ report.field_skeletal_whole_body }}
+                </div>
+              </div>
+            </section>
+            <section class="card__stack container__align"
+              *ngIf="report.field_skeletal_trunk">
+              <div class="stack__title title__focus">Trunk</div>
+              <span class="spacer"></span>
+              <div class="stack__item">
+                <div class="item__value">
+                  {{ report.field_skeletal_trunk }}
+                </div>
+              </div>
+            </section>
+            <section class="card__stack container__align"
+              *ngIf="report.field_skeletal_arms">
+              <div class="stack__title title__focus">Arms</div>
+              <span class="spacer"></span>
+              <div class="stack__item">
+                <div class="item__value">
+                  {{ report.field_skeletal_arms }}
+                </div>
+              </div>
+            </section>
+            <section class="card__stack container__align"
+              *ngIf="report.field_skeletal_legs">
+              <div class="stack__title title__focus">Legs</div>
+              <span class="spacer"></span>
+              <div class="stack__item">
+                <div class="item__value">
+                  {{ report.field_skeletal_legs }}
+                </div>
+              </div>
+            </section>
+            <hr>
+          </div>
+
+          <div class="content__bottom"
+          *ngIf="showGroupedFields(
+              report.field_whole_body,
+              report.field_trunk,
+              report.field_arms,
+              report.field_le)">
+            <hr>
+            <div class="stack__title title__focus text-center">Subcutaneous</div>
+              <section class="card__stack container__align"
+              *ngIf="report.field_whole_body">
+              <div class="stack__title title__focus">Whole Body</div>
+              <span class="spacer"></span>
+              <div class="stack__item">
+                <div class="item__value">
+                  {{ report.field_whole_body }}
+                </div>
+              </div>
+            </section>
+            <section class="card__stack container__align"
+              *ngIf="report.field_trunk">
+              <div class="stack__title title__focus">Trunk</div>
+              <span class="spacer"></span>
+              <div class="stack__item">
+                <div class="item__value">
+                  {{ report.field_trunk }}
+                </div>
+              </div>
+            </section>
+            <section class="card__stack container__align"
+              *ngIf="report.field_arms">
+              <div class="stack__title title__focus">Arms</div>
+              <span class="spacer"></span>
+              <div class="stack__item">
+                <div class="item__value">
+                  {{ report.field_arms }}
+                </div>
+              </div>
+            </section>
+            <section class="card__stack container__align"
+              *ngIf="report.field_le">
+              <div class="stack__title title__focus">Legs</div>
+              <span class="spacer"></span>
+              <div class="stack__item">
+                <div class="item__value">
+                  {{ report.field_le }}
+                </div>
+              </div>
+            </section>
+            <hr>
+          </div>
+
+          <section class="card__stack container__align"
+            *ngIf="report.field_crunches">
+            <div class="stack__title title__focus">Crunches (reps)</div>
+            <span class="spacer"></span>
+            <div class="stack__item">
+              <div class="item__value"
+                *ngFor="let item of report.field_crunches">{{ item }}</div>
+            </div>
+          </section>
+          <section class="card__stack container__align"
+            *ngIf="report.field_push_ups">
+            <div class="stack__title title__focus">Push Up (reps)</div>
+            <span class="spacer"></span>
+            <div class="stack__item">
+              <div class="item__value"
+                *ngFor="let item of report.field_push_ups">{{ item }}</div>
+            </div>
+          </section>
+          <section class="card__stack container__align"
+            *ngIf="report.field_core_balancer">
+            <div class="stack__title title__focus">Core Balance</div>
+            <span class="spacer"></span>
+            <div class="stack__item">
+              <div class="item__value"
+                *ngFor="let item of report.field_core_balancer">{{ item }}</div>
+            </div>
+          </section>
+          <section class="card__stack container__align"
+            *ngIf="report.field_chest_press_fitness_test">
+            <div class="stack__title title__focus">Chest Press</div>
+            <span class="spacer"></span>
+            <div class="stack__item">
+              <div class="item__value"
+                *ngFor="let item of report.field_chest_press_fitness_test">
+                  {{ item }}
+              </div>
+            </div>
+          </section>
+          <section class="card__stack container__align"
+            *ngIf="report.field_sit_and_rest">
+            <div class="stack__title title__focus">Sit & Crunch</div>
+            <span class="spacer"></span>
+            <div class="stack__item">
+              <div class="item__value"
+                *ngFor="let item of report.field_sit_and_rest">
+                  {{ item }}
+                </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </section>
+</mat-dialog-content>

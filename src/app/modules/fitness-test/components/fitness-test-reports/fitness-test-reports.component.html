@@ -1,4 +1,77 @@
 <!-- For trainee only -->
-<!-- <button (click)="navigate()"  >Edit form</button> -->
-
-<!-- <fitness-test-form></fitness-test-form> -->
+<div class="wrapper__container">
+  <section class="pt-3">
+    <mat-toolbar>
+      <mat-toolbar-row>
+        <span>Fitness Test Reports</span>
+      </mat-toolbar-row>
+    </mat-toolbar>
+  </section>
+  <section class="content content__full-height content__align_pager">
+    <div *ngIf="reports?.length > 0 else noResult"
+      class="table-responsive mat-elevation-z5">
+      <table class="table table__hover table-bordered table-sm">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Created On</th>
+            <th scope="col" class="text-center">Status</th>
+            <th scope="col">&nbsp;</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let report of reports;let i=index;">
+            <td scope="row">{{i+1}}</td>
+            <td>
+              <span class="title__focus">
+                {{ report.date  | date:'dd LLL,yyyy' }}
+              </span>
+            </td>
+            <td class="text-center">
+              <ng-container *ngIf="isReportReady(report.status);else inProgress">
+                <button mat-icon-button class="text-success"
+                  matTooltip="Report is available"
+                  aria-label="Available">
+                  <mat-icon>task_alt</mat-icon>
+                </button>
+              </ng-container>
+              <ng-template #inProgress>
+                <button mat-icon-button class="text-danger"
+                matTooltip="Report is unavailable.Please contact your trainer for help."
+                  aria-label="Unavailable">
+                  <mat-icon>not_interested</mat-icon>
+                </button>
+              </ng-template>
+            </td>
+            <td class="text-center">
+              <button
+                mat-raised-button
+                color="primary"
+                [disabled]="!isReportReady(report.status)"
+                (click)="loadDetails(report.nid)">
+                  View Details
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- No Result section -->
+    <ng-template #noResult>
+      <div class="no-results content__full-height">
+      <p class="content__center mat-elevation-z10 content__full-height">
+        No data available
+      </p>
+    </div>
+    </ng-template>
+    <!-- Pager section starts here  -->
+    <div class="pager" *ngIf="pager && reports.length > 0">
+      <mat-paginator
+        [length]="pager.total_items"
+        [pageSize]="pager.items_per_page"
+        (page)="onChangedPage($event)">
+      </mat-paginator>
+    </div>
+    <!-- Pager section ends here  -->
+  </section>
+</div>

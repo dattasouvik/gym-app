@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { TrFitnessTestComponent } from 'src/app/modules/trainee-reports/components/tr-fitness-test/tr-fitness-test.component';
 import { TrFoodChartComponent } from 'src/app/modules/trainee-reports/components/tr-food-chart/tr-food-chart.component';
 import { TrHeatlhChartComponent } from 'src/app/modules/trainee-reports/components/tr-heatlh-chart/tr-heatlh-chart.component';
 import { TrWorkoutPlanComponent } from 'src/app/modules/trainee-reports/components/tr-workout-plan/tr-workout-plan.component';
@@ -22,6 +23,10 @@ const routes: Routes = [
       {
         path: 'workout-routine',
         component: TrWorkoutPlanComponent
+      },
+      {
+        path: 'fitness-test',
+        component: TrFitnessTestComponent
       },
       {
         path: '',
