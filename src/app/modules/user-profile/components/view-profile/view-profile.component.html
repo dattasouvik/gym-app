@@ -1,5 +1,5 @@
 <ng-container *ngFor="let profileData of profile">
-  <div class="card profile-card">
+  <div class="card profile-card py-3 mat-elevation-z10">
     <div class="card-header card-header-danger d-flex">
       <!-- Avatar -->
       <div
@@ -23,21 +23,32 @@
           </button>
         </mat-menu>
       </div>
-      <div class="card-title">
-        <h4 class="card-title">Edit Profile</h4>
-        <p class="card-category">Complete your profile</p>
+      <div class="card-title flex-grow-1">
+        <div class="title-container d-flex flex-wrap">
+          <div class="title">
+            <h4 class="card-title title__focus m-0">Edit Profile</h4>
+            <p class="card-category">Complete your profile</p>
+          </div>
+          <span class="spacer"></span>
+          <button mat-mini-fab color="accent"
+            class="btn edit-button"
+            matTooltip="Update Profile"
+            (click)="editProfile(profileData)">
+           <mat-icon>edit</mat-icon>
+          </button>
+        </div>
       </div>
     </div>
     <div class="card-body">
       <form>
           <div class="row">
-              <div class="col-md-6">
+              <div class="col-md-6 col-sm-6">
                 <mat-form-field class="example-full-width">
                   <mat-label>First Name</mat-label>
                   <input matInput [value]="profileData.first_name" disabled>
                 </mat-form-field>
               </div>
-              <div class="col-md-6">
+              <div class="col-md-6 col-sm-6">
                 <mat-form-field class="example-full-width">
                   <mat-label>Last Name</mat-label>
                   <input matInput [value]="profileData.last_name" disabled>
@@ -45,13 +56,13 @@
               </div>
           </div>
           <div class="row">
-              <div class="col-md-6">
+              <div class="col-md-6 col-sm-6">
                 <mat-form-field class="example-full-width">
                   <mat-label>Username</mat-label>
                   <input matInput [value]="profileData.username" disabled>
                 </mat-form-field>
               </div>
-              <div class="col-md-6">
+              <div class="col-md-6 col-sm-6">
                 <mat-form-field class="example-full-width">
                   <mat-label>Email</mat-label>
                   <input matInput [value]="profileData.email" disabled>
@@ -59,13 +70,13 @@
               </div>
           </div>
           <div class="row">
-              <div class="col-md-6">
+              <div class="col-md-6 col-sm-6">
                 <mat-form-field class="example-full-width">
                   <mat-label>Gender</mat-label>
                   <input matInput [value]="profileData.gender" disabled>
                 </mat-form-field>
               </div>
-              <div class="col-md-6">
+              <div class="col-md-6 col-sm-6">
                 <mat-form-field class="example-full-width">
                   <mat-label>Role</mat-label>
                   <input matInput [value]="profileData.role" disabled>
@@ -89,13 +100,6 @@
               </div>
           </div>
       </form>
-  </div>
-  <div class="card-footer d-flex justify-content-center">
-    <button mat-raised-button color="accent"
-          class="btn text-center edit-button"
-           (click)="editProfile(profileData)">
-           Update Profile
-    </button>
   </div>
 </div>
 </ng-container>

@@ -17,7 +17,11 @@ export class ApiHandlerService {
   onApiError(error, message = this.DEFAULT_ERROR_MSG ):Observable<any> {
     if(error.error && error.error.errorMessage){
       this.messages.showErrors(error.error.errorMessage);
-    } else {
+    }
+    else if(error.error && error.error.message){
+      this.messages.showErrors(error.error.message);
+    }
+    else {
       this.messages.showErrors(message);
     }
     return throwError(error);

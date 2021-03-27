@@ -1,0 +1,16 @@
+.form{
+
+  .mat-card-header .mat-card-title{
+    margin-bottom: 0.5rem;
+  }
+
+  .field-full-width{
+    width: 100%;
+    min-width: 15rem;
+  }
+
+  .mat-radio-button ~ .mat-radio-button {
+    margin-left: 1rem;
+  }
+
+}

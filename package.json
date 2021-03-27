@@ -35,6 +35,7 @@
     "@ngx-formly/schematics": "^5.10.14",
     "@syncfusion/ej2-angular-grids": "^18.2.44",
     "bootstrap": "^4.5.0",
+    "gsap": "^2.1.0",
     "gtoken": "^5.0.1",
     "jquery": "^3.5.1",
     "moment": "^2.29.1",

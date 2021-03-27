@@ -6,7 +6,8 @@ import { mapTo, tap, catchError, map, exhaustMap } from 'rxjs/operators';
 import { AuthConfig } from 'src/app/auth-config';
 import { Tokens } from 'src/app/models/tokens';
 import { HttpService } from 'src/app/services/http.service';
-import { environment } from 'src/environments/environment';
+import { LoadingService } from 'src/app/modules/shared/services/loading.service';
+import { ApiHandlerService } from 'src/app/services/api-handler.service';
 
 interface UserResponse {
   email: string;
@@ -38,7 +39,9 @@ export class AuthService {
   constructor(
     private http: HttpClient,
     private router: Router,
-    private httpService: HttpService
+    private httpService: HttpService,
+    private loading: LoadingService,
+    private apiHandlerService: ApiHandlerService
   ) {
     this.isLoggedIn$ = this.authStatus$.pipe(map(response => !!response));
     this.isLoggedOut$ = this.isLoggedIn$.pipe(map(loggedIn => !loggedIn));
@@ -53,7 +56,8 @@ export class AuthService {
     body.append("scope", AuthConfig.SCOPE);
     body.append("username", user.username);
     body.append("password", user.password);
-    return this.httpService.post<any>('oauth/token', body)
+
+    const userLoggdInfo$ = this.httpService.post<any>('oauth/token', body)
       .pipe(
         catchError(this.handleError),
         exhaustMap( (tokenInfo:Tokens) => {
@@ -74,10 +78,12 @@ export class AuthService {
         catchError(this.handleError),
         tap(([{userInfo,tokenInfo}]) => this.handleAuthentication(userInfo,tokenInfo))
       );
+    return this.loading.showLoaderUntilCompleted(userLoggdInfo$);
   }
 
   logout() {
-    return this.httpService.get('user-logout?_format=json').pipe(
+    const logout$ = this.httpService.get('user-logout?_format=json').pipe(
+      catchError((error => this.apiHandlerService.onApiError(error))),
       tap((response)=>{
         //TBD
         this.removeTokens();
@@ -91,7 +97,8 @@ export class AuthService {
         }
         this.tokenExpirationTimer = null;
       })
-    )
+    );
+    return this.loading.showLoaderUntilCompleted(logout$);
   }
 
   refreshToken() {
@@ -190,7 +197,7 @@ export class AuthService {
       this.logout().subscribe();
     }, expirationDuration);
   }
-  
+
   private getRefreshToken() {
     return localStorage.getItem(this.REFRESH_TOKEN);
   }
@@ -244,8 +251,9 @@ export class AuthService {
     switch (errorRes.error.message) {
       case 'The user credentials were incorrect.':
         errorMessage = 'Invalid Credentials';
+        errorRes.error.message = errorMessage;
         break;
     }
-    return throwError(errorMessage);
+    return throwError(errorRes);
   }
 }

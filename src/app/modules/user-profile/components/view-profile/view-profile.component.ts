@@ -30,7 +30,7 @@ export class ViewProfileComponent implements OnInit {
 
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.width = "400px";
+    dialogConfig.width = "100%";
 
 
     dialogConfig.data = profile;

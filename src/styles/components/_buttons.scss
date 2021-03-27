@@ -1,0 +1,28 @@
+.actions__center{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  button + button {
+    margin-left: 0.5rem;
+  }
+}
+
+
+.btn-small{
+  padding: 0  0.5rem;
+}
+
+.btn-medium{
+  padding: 0  1rem;
+}
+
+.btn-large{
+  padding: 0  2rem;
+}
+
+
+
+.pointer{
+  cursor: pointer;
+}

@@ -23,20 +23,6 @@
         flex-grow: 1;
       }
     }
-    // uses flexbox to push the inner content area, where the router-outlet lives below the toolbar and grants
-    // it the rest of the available space with the ability to scroll
-    .main-content-inner {
-      flex: 1 1 auto;
-      position: relative; /* need this to position inner content */
-      overflow-y: auto;
-
-      .content-area {
-        // min-height: 100%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-      }
-    }
   }
 }
 

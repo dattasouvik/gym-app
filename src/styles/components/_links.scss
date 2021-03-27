@@ -1,0 +1,16 @@
+a{
+  color: var(--primary, #3208eb);
+  
+  &.support{
+    color: var(--accent, #3208eb);
+  }
+
+  &.notice{
+    color: var(--accent, #3208eb);
+    font-weight: 500;
+  }
+
+  &:hover{
+    text-decoration: none;
+  }
+}
