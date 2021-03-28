@@ -1,6 +1,7 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { takeWhile } from 'rxjs/operators';
 import { ApiHandlerService } from 'src/app/services/api-handler.service';
 import { AuthService } from 'src/app/services/auth.service';
 import 'src/assets/login-animation.js';
@@ -11,9 +12,10 @@ import 'src/assets/login-animation.js';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit,AfterViewInit {
+export class LoginComponent implements OnInit,AfterViewInit,OnDestroy {
 
   hide = true;
+  private isAlive : boolean = true;
 
   loginForm = this.fb.group({
     username: ['', Validators.required],
@@ -34,6 +36,10 @@ export class LoginComponent implements OnInit,AfterViewInit {
   ngOnInit(): void {
   }
 
+  ngOnDestroy() {
+    this.isAlive = false;
+  }
+
   onSubmit() {
     const login$ = this.authservice.login(
       {
@@ -41,6 +47,7 @@ export class LoginComponent implements OnInit,AfterViewInit {
         password: this.loginForm.value.password
       }
     )
+    .pipe(takeWhile(() => this.isAlive))
     .subscribe( success => {
           this.router.navigate(['/profile']);
     },error => this.apiHandlerService.onApiError(error));
