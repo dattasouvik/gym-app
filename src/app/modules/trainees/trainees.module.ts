@@ -20,6 +20,7 @@ import { WorkoutRoutineComponent } from './components/workout-routine/workout-ro
 import { UserFoodChartModule } from 'src/app/modules/user-food-chart/user-food-chart.module';
 import { FitnessReportsComponent } from './components/fitness-reports/fitness-reports.component';
 import { CoreModule } from 'src/app/modules/core/core.module';
+import { WeightMonitorComponent } from './components/weight-monitor/weight-monitor.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { CoreModule } from 'src/app/modules/core/core.module';
     PrescribeComponent,
     HealthChartComponent,
     WorkoutRoutineComponent,
-    FitnessReportsComponent
+    FitnessReportsComponent,
+    WeightMonitorComponent
   ],
   imports: [
     CommonModule,

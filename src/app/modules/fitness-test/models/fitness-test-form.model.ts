@@ -1,5 +1,5 @@
-import { FormlyFieldConfig } from "@ngx-formly/core";
-import { FitnessTestFormFieldGroup } from "src/app/modules/fitness-test/models/fitness-test-response.model";
+import { FormlyFieldConfig } from '@ngx-formly/core';
+import { FitnessTestFormFieldGroup } from 'src/app/modules/fitness-test/models/fitness-test-response.model';
 
 export enum FitnessTestFormMode {
   EDIT = 'edit',
@@ -14,7 +14,7 @@ export interface FitnessTestFormState {
 
 export class FitnessTestForm {
   mode: FitnessTestFormMode;
-  form :FitnessTestFormFieldGroup;
+  form: FitnessTestFormFieldGroup;
 
   constructor(mode: FitnessTestFormMode) {
     this.mode = mode;
@@ -27,7 +27,7 @@ export class FitnessTestForm {
     switch (this.mode) {
       case FitnessTestFormMode.ADD:
       case FitnessTestFormMode.EDIT:
-        return <FormlyFieldConfig[]>[
+        return [
           {
             type: 'tabs',
             fieldGroupClassName: 'row',
@@ -243,7 +243,7 @@ export class FitnessTestForm {
               },
             ],
           },
-        ];
+        ] as FormlyFieldConfig[];
     }
   }
 }

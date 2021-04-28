@@ -78,6 +78,11 @@ const routes: Routes = [
     .then(m => m.FitnessTestModule),
     canLoad: [CanLoadAuthGuard]
   },
+  { path: 'weight-tracker',
+    loadChildren: () => import('./modules/weight-tracker/weight-tracker.module')
+    .then(m => m.WeightTrackerModule),
+    canLoad: [CanLoadAuthGuard]
+  },
   {
     path: '**',
     component: NotFoundComponent,

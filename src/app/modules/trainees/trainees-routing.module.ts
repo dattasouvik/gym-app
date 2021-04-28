@@ -9,6 +9,7 @@ import { AttendanceComponent } from './components/attendance/attendance.componen
 import { PrescribeComponent } from './components/prescribe/prescribe.component';
 import { ViewMyTraineesComponent } from './components/view-my-trainees/view-my-trainees.component';
 import { FitnessReportsComponent } from './components/fitness-reports/fitness-reports.component';
+import { WeightMonitorComponent } from './components/weight-monitor/weight-monitor.component';
 // const routes: Routes = [
 //   { path: '',
 //     component: BaseComponent,
@@ -58,6 +59,10 @@ const routes: Routes = [
       {
         path: 'fitness',
         component: FitnessReportsComponent
+      },
+      {
+        path: 'weight-monitor',
+        component: WeightMonitorComponent
       },
     ]
   }

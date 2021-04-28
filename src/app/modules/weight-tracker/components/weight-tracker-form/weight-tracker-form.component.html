@@ -1,0 +1,17 @@
+<div class="wrapper__container card__center">
+  <form class="container mat-elevation-z5 py-1" [formGroup]="weightTrackerForm"
+    (ngSubmit)="submit(weightTrackerFormModel)">
+    <formly-form [model]="weightTrackerFormModel" [fields]="weightTrackerFormFields" [options]="options"
+      [form]="weightTrackerForm"></formly-form>
+    <div class="actions__center">
+      <button mat-raised-button color="accent" [disabled]="!weightTrackerForm.valid" class="btn-medium" type="submit">
+        Submit
+      </button>
+    </div>
+  </form>
+  <div class="float-bottom actions">
+    <button mat-mini-fab (click)="navigateBack()">
+      <mat-icon>arrow_back_ios</mat-icon>
+    </button>
+  </div>
+</div>

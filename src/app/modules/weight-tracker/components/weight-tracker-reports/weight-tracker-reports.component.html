@@ -1,0 +1,74 @@
+<div class="wrapper__container">
+  <section class="pt-3">
+    <mat-toolbar>
+      <mat-toolbar-row>
+        <span>Fitness Test</span>
+        <span class="spacer"></span>
+        <button matTooltip="Add new entry" (click)="onAdd(userId)" mat-mini-fab color="accent"
+          aria-label="Add new entry">
+          <mat-icon>add</mat-icon>
+        </button>
+      </mat-toolbar-row>
+    </mat-toolbar>
+  </section>
+  <section class="content content__full-height content__align_pager">
+    <div class="table__responsive_wrapper">
+      <table class="table__hover" mat-table [dataSource]="dataSource">
+        <!-- Date Column -->
+        <ng-container matColumnDef="field_weight_date">
+          <th mat-header-cell *matHeaderCellDef> Date </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.field_weight_date | date: 'dd LLL,yyyy' }} </td>
+        </ng-container>
+
+        <!-- Before Weight Column -->
+        <ng-container matColumnDef="field_before_weight">
+          <th mat-header-cell *matHeaderCellDef> Before Weight </th>
+          <td mat-cell *matCellDef="let element"> {{element.field_before_weight}} </td>
+        </ng-container>
+
+        <!-- After Weight Column -->
+        <ng-container matColumnDef="field_after_weight">
+          <th mat-header-cell *matHeaderCellDef> After Weight </th>
+          <td mat-cell *matCellDef="let element">
+            <ng-container *ngIf="element.field_after_weight else noData">
+              {{element.field_after_weight}}
+            </ng-container>
+            <ng-template #noData>
+               NA
+            </ng-template>
+          </td>
+        </ng-container>
+        <!-- Action Column -->
+        <ng-container matColumnDef="field_action">
+          <th mat-header-cell *matHeaderCellDef> Action </th>
+          <td mat-cell *matCellDef="let element">
+            <button mat-icon-button
+              matTooltip="Edit entry"
+              [disabled]="!element.field_action">
+              <mat-icon>edit</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr class="mat-row text-center muted" *matNoDataRow>
+          <td class="mat-cell" [attr.colspan]="columns.length">
+            No results found
+          </td>
+        </tr>
+
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+      </table>
+    </div>
+    <!-- Pager section starts here  -->
+    <div class="pager" *ngIf="pager && dataSource.length > 0">
+      <mat-paginator
+        [length]="pager.total_items"
+        [pageSize]="pager.items_per_page"
+        (page)="onChangedPage($event)">
+      </mat-paginator>
+    </div>
+  <!-- Pager section ends here  -->
+  </section>
+</div>

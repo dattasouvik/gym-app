@@ -30,6 +30,10 @@ export class TraineeSummaryComponent implements OnInit {
       title: 'Fitness Test',
       url: 'fitness'
     },
+    {
+      title: 'Weight Tracker',
+      url: 'weight-monitor'
+    },
   ];
 
   constructor() { }

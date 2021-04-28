@@ -44,6 +44,11 @@ export class ViewMyTraineesComponent implements OnInit,OnDestroy {
       title: 'Fitness Reports',
       url: 'fitness',
       icon: 'fitness_center'
+    },
+    {
+      title: 'Weight Tracker',
+      url: 'weight-monitor',
+      icon: 'monitor_weight'
     }
   ];
 
@@ -62,7 +67,7 @@ export class ViewMyTraineesComponent implements OnInit,OnDestroy {
 
   private  loadTrainees(page: number){
     this.subscription = this._getTrainees.getTrainees(page)
-      .subscribe((response:TraineeResponse) => {
+      .subscribe((response: TraineeResponse) => {
         const {rows , pager } = response;
         this.traineeData = rows;
         this.pager = pager;

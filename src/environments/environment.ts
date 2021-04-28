@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  serverApiUrl: `https://healthworldfitness.com/`
+  serverApiUrl: `https://healthworlddev.com/`
 };
 
 /*
