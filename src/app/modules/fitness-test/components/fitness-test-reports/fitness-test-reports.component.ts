@@ -15,7 +15,7 @@ import { FitnessTestDetailsComponent } from 'src/app/modules/fitness-test/compon
 export class FitnessTestReportsComponent implements OnInit {
 
   reports: TraineeFitnessReports[];
-  pager:Pager;
+  pager: Pager;
   pageNumber = 0;
   private subscription: Subscription;
 
@@ -29,7 +29,7 @@ export class FitnessTestReportsComponent implements OnInit {
   }
 
   isReportReady(status){
-    return +status > 0 ? true: false;
+    return +status > 0 ? true : false;
   }
 
   loadDetails(nid: number){
@@ -37,11 +37,11 @@ export class FitnessTestReportsComponent implements OnInit {
 
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.width = "100%";
+    dialogConfig.width = '100%';
 
     this.fitnessTestService.viewFitnessReportDetails(nid)
     .pipe(
-      map((el:TraineeFitnessReportDetailsResponse) => el.rows)
+      map((el: TraineeFitnessReportDetailsResponse) => el.rows)
     )
     .subscribe(response => {
       const details = Object.assign({}, response);
@@ -60,7 +60,7 @@ export class FitnessTestReportsComponent implements OnInit {
 
   private viewReports(page:number = 0){
     this.fitnessTestService.viewTraineeFitnessReports(page)
-    .subscribe((response:TraineeFitnessReportsResponse) => {
+    .subscribe((response: TraineeFitnessReportsResponse) => {
         const {rows , pager } = response;
         this.reports = rows;
         this.pager = pager;

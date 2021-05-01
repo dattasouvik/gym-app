@@ -7,6 +7,8 @@ import { TraineeResponse } from 'src/app/modules/trainees/model/trainee-response
 import { Trainee } from '../../model/trainee.model';
 import { TraineesService } from '../../services/trainees.service';
 import { APP_CONFIG, AppConfig } from 'src/app/modules/app-config/app-config.module';
+import { TRAINEES_ACTION_LINKS } from '../../configs/trainees-links-config';
+import { NavLinks } from 'src/app/models/nav-links.model';
 
 @Component({
   selector: 'app-view-my-trainees',
@@ -15,45 +17,14 @@ import { APP_CONFIG, AppConfig } from 'src/app/modules/app-config/app-config.mod
 })
 export class ViewMyTraineesComponent implements OnInit,OnDestroy {
   traineeData: Trainee[];
-  pager:Pager;
+  pager: Pager;
   pageNumber = 0;
   private subscription: Subscription;
 
-  links = [
-    {
-      title: 'Attendance',
-      url: 'attendance',
-      icon: 'create'
-    },
-    {
-      title: 'Prescribe',
-      url: 'prescribe',
-      icon: 'food_bank'
-    },
-    {
-      title: 'Measurements',
-      url: 'measuremets',
-      icon: 'straighten'
-    },
-    {
-      title: 'Workout Routine',
-      url: 'routine',
-      icon: 'accessibility'
-    },
-    {
-      title: 'Fitness Reports',
-      url: 'fitness',
-      icon: 'fitness_center'
-    },
-    {
-      title: 'Weight Tracker',
-      url: 'weight-monitor',
-      icon: 'monitor_weight'
-    }
-  ];
+  links: NavLinks[] = TRAINEES_ACTION_LINKS;
 
   constructor(
-    private _getTrainees: TraineesService,
+    private traineesService: TraineesService,
     @Inject(APP_CONFIG) public config: AppConfig
   ) { }
 
@@ -66,12 +37,11 @@ export class ViewMyTraineesComponent implements OnInit,OnDestroy {
   }
 
   private  loadTrainees(page: number){
-    this.subscription = this._getTrainees.getTrainees(page)
+    this.subscription = this.traineesService.getTrainees(page)
       .subscribe((response: TraineeResponse) => {
         const {rows , pager } = response;
         this.traineeData = rows;
         this.pager = pager;
-        console.log(rows)
       });
   }
 

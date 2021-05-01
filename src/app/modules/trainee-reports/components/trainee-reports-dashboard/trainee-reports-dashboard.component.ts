@@ -24,6 +24,10 @@ export class TraineeReportsDashboardComponent implements OnInit {
       title: 'Fitness Test',
       url: 'fitness-test'
     },
+    {
+      title: 'Weight Tracker',
+      url: 'weight-monitor'
+    },
   ];
   constructor() { }
 

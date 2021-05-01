@@ -4,10 +4,12 @@
       <mat-toolbar-row>
         <span>Fitness Test</span>
         <span class="spacer"></span>
-        <button matTooltip="Add new entry" (click)="onAdd(userId)" mat-mini-fab color="accent"
-          aria-label="Add new entry">
-          <mat-icon>add</mat-icon>
-        </button>
+        <ng-container *ngIf="isTrainer && userId">
+          <button matTooltip="Add new entry" (click)="onAdd(userId)" mat-mini-fab color="accent"
+            aria-label="Add new entry">
+            <mat-icon>add</mat-icon>
+          </button>
+        </ng-container>
       </mat-toolbar-row>
     </mat-toolbar>
   </section>
@@ -45,7 +47,8 @@
           <td mat-cell *matCellDef="let element">
             <button mat-icon-button
               matTooltip="Edit entry"
-              [disabled]="!element.field_action">
+              [disabled]="element.field_action == 0"
+              (click)="onEdit(userId, element.nid)">
               <mat-icon>edit</mat-icon>
             </button>
           </td>

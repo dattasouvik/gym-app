@@ -17,7 +17,7 @@ import { WeightTrackerService } from '../../services/weight-tracker.service';
 export class WeightTrackerReportsComponent implements OnInit {
 
   @Input()
-  userId: number;
+  userId: number | null = null;
 
   @Input()
   isTrainer = false;
@@ -35,7 +35,7 @@ export class WeightTrackerReportsComponent implements OnInit {
 
   ngOnInit(): void {
     this.columns = this.renderColumns(this.isTrainer);
-    this.loadweightTrackersList(this.userId, this.pageNumber);
+    this.loadweightTrackersList(this.isTrainer, this.pageNumber);
   }
 
   /*
@@ -55,29 +55,51 @@ export class WeightTrackerReportsComponent implements OnInit {
 
 
   onAdd(uid: number) {
-    const routeInfo: WeightTrackerFormState = {
+    const data: WeightTrackerFormState = {
       uid,
       mode: WeightTrackerFormMode.ADD
     };
     this.router.navigateByUrl('/weight-tracker/form',{
-      state: routeInfo,
+      state: data,
+      skipLocationChange: true
+    });
+  }
+
+  onEdit(uid: number, nid: number) {
+    const data: WeightTrackerFormState = {
+      uid,
+      mode: WeightTrackerFormMode.EDIT,
+      nid
+    };
+    console.log(data);
+    this.router.navigateByUrl('/weight-tracker/form',{
+      state: data,
       skipLocationChange: true
     });
   }
 
   onChangedPage(pageData: PageEvent) {
-    this.loadweightTrackersList(this.userId, pageData.pageIndex);
+    this.loadweightTrackersList(this.isTrainer, pageData.pageIndex);
   }
 
 
-  private loadweightTrackersList(userId: number, page: number) {
-    this.subscription = this.weightTrackerService
-    .viewWeightTrackersList(userId, page)
-    .subscribe( (response: ListWeightTrackersResponse) => {
-        const {rows , pager } = response;
-        this.dataSource = rows;
-        this.pager = pager;
-    });
-
+  private loadweightTrackersList( isTrainer: boolean, page: number) {
+    if (!!isTrainer){
+      this.subscription = this.weightTrackerService
+      .weightTrackersListTrainerView(this.userId, page)
+      .subscribe( (response: ListWeightTrackersResponse) => {
+          const {rows , pager } = response;
+          this.dataSource = rows;
+          this.pager = pager;
+      });
+    } else{
+      this.subscription = this.weightTrackerService
+      .weightTrackersListTraineeView(page)
+      .subscribe( (response: ListWeightTrackersResponse) => {
+          const {rows , pager } = response;
+          this.dataSource = rows;
+          this.pager = pager;
+      });
+    }
   }
 }

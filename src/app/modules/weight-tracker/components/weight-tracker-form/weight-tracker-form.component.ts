@@ -47,11 +47,11 @@ export class WeightTrackerFormComponent implements OnInit, OnDestroy {
     const form  = new WeightTrackerForm(mode);
     this.weightTrackerFormFields = form.formFields();
 
-    // if(mode === FitnessTestFormMode.ADD){
-    //   return this.fitnessformFieldsOnAdd();
-    // }
+    if (mode === WeightTrackerFormMode.ADD){
+      return this.weightTrackerFormFieldsOnAdd();
+    }
 
-    return this.weightTrackerFormFieldsOnAdd();
+    return this.weightTrackerFormFieldsOnEdit();
   }
 
   private getFormState(state: WeightTrackerFormState){
@@ -70,6 +70,17 @@ export class WeightTrackerFormComponent implements OnInit, OnDestroy {
     .pipe(takeWhile(() => this.isAlive))
     .subscribe( ({form}) => this.weightTrackerFormModel = form
     );
+  }
+
+  /*
+  * Renders only on EDIT mode
+  */
+  private  weightTrackerFormFieldsOnEdit() {
+    this.weightTrackerService.loadEditForm(this.nid)
+    .pipe(takeWhile(() => this.isAlive))
+    .subscribe( fields => {
+      console.log("Output", fields);
+    })
   }
 
   /*

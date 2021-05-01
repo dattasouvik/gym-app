@@ -21,8 +21,8 @@ export class FitnessTestFormComponent implements OnInit, OnDestroy {
   fitnessTestFormModel: any;
   fitnessTestFormFields: FormlyFieldConfig[];
   options: FormlyFormOptions = {};
-  userId:number;
-  nid:number;
+  userId: number;
+  nid: number;
   formMode: FitnessTestFormMode;
 
   constructor(
@@ -37,6 +37,7 @@ export class FitnessTestFormComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    this.options.resetModel(); /* Clear form values on exit */
     this.isAlive = false;
   }
 
@@ -46,7 +47,7 @@ export class FitnessTestFormComponent implements OnInit, OnDestroy {
     this.fitnessTestFormModel = new FitnessTestForm(mode);
     this.fitnessTestFormFields = this.fitnessTestFormModel.formFields();
 
-    if(mode === FitnessTestFormMode.ADD){
+    if (mode === FitnessTestFormMode.ADD){
       return this.fitnessformFieldsOnAdd();
     }
 
@@ -82,8 +83,8 @@ export class FitnessTestFormComponent implements OnInit, OnDestroy {
     })
   }
 
-  /*  
-  * Handles submit both for 
+  /*
+  * Handles submit both for
   * Add/edit form
   */
   submit(payload: FitnessTestForm) {

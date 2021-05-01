@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { NavLinks } from 'src/app/models/nav-links.model';
+import { TRAINEES_ACTION_LINKS } from '../../configs/trainees-links-config';
 @Component({
   selector: 'app-trainee-summary',
   templateUrl: './trainee-summary.component.html',
@@ -7,34 +8,7 @@ import { Subscription } from 'rxjs';
 })
 export class TraineeSummaryComponent implements OnInit {
   id: number;
-  subscription: Subscription
-
-  links = [
-    {
-      title: 'Attendance',
-      url: 'attendance'
-    },
-    {
-      title: 'Prescibe',
-      url: 'prescribe'
-    },
-    {
-      title: 'Measurements',
-      url: 'measuremets'
-    },
-    {
-      title: 'Workout Routine',
-      url: 'routine'
-    },
-    {
-      title: 'Fitness Test',
-      url: 'fitness'
-    },
-    {
-      title: 'Weight Tracker',
-      url: 'weight-monitor'
-    },
-  ];
+  links: NavLinks[] = TRAINEES_ACTION_LINKS;
 
   constructor() { }
 

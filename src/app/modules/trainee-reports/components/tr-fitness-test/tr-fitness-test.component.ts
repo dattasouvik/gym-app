@@ -26,7 +26,7 @@ export class TrFitnessTestComponent implements OnInit {
       this.vcref.clear();
       const { FitnessTestReportsComponent } = await
       import('../../../fitness-test/components/fitness-test-reports/fitness-test-reports.component');
-      let fitnessReportComp = this.fitnessReportviewContainerRef.createComponent(
+      const fitnessReportComp = this.fitnessReportviewContainerRef.createComponent(
         this.cfr.resolveComponentFactory(FitnessTestReportsComponent)
       );
     }
