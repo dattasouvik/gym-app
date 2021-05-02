@@ -12,7 +12,7 @@ import { FormlyFieldTabsComponent } from './components/layout/formly-field-tabs/
 import { FitnessTestReportsAdminComponent } from './components/fitness-test-reports-admin/fitness-test-reports-admin.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FitnessTestDetailsComponent } from './components/fitness-test-details/fitness-test-details.component';
-
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -31,6 +31,7 @@ import { FitnessTestDetailsComponent } from './components/fitness-test-details/f
     MaterialDesignModule,
     FormlyMaterialModule,
     FlexLayoutModule,
+    SharedModule,
     FormlyModule.forChild({
       validationMessages: [
         { name: 'required', message: 'This field is required' },

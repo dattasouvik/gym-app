@@ -97,6 +97,7 @@ export class WeightTrackerForm {
                 label: 'After Weight',
                 type: 'number',
                 min: 1,
+                required: true,
               },
             },
           ]

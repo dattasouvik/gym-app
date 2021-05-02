@@ -10,7 +10,7 @@ export class TokenInterceptor implements HttpInterceptor {
   private isRefreshing = false;
   private refreshTokenSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
 
-  private errorStatusMessage:[string] = ['invalid_credentials'];
+  private errorStatusMessage: [string] = ['invalid_credentials'];
 
   constructor(public authService: AuthService) { }
 
@@ -22,22 +22,22 @@ export class TokenInterceptor implements HttpInterceptor {
 
     return next.handle(request).pipe(
       catchError(errorResponse => {
-      if (errorResponse instanceof HttpErrorResponse && errorResponse.status === 401 ) {
-        if (errorResponse.error &&
+        if (errorResponse instanceof HttpErrorResponse && errorResponse.status === 401) {
+          if (errorResponse.error &&
             this.errorStatusMessage.includes(errorResponse.error.error)
-            ) {
-          return throwError(errorResponse);
+          ) {
+            return throwError(errorResponse);
+          }
+          return this.handle401Error(request, next);
         }
-        return this.handle401Error(request, next);
-      }
-      return throwError(errorResponse);
-    }));
+        return throwError(errorResponse);
+      }));
   }
 
   private addToken(request: HttpRequest<any>, token: string) {
     return request.clone({
       setHeaders: {
-        'Authorization': `Bearer ${token}`
+        Authorization: `Bearer ${token}`
       }
     });
   }

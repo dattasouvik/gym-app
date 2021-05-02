@@ -9,9 +9,6 @@
       </button>
     </div>
   </form>
-  <div class="float-bottom actions">
-    <button mat-mini-fab (click)="navigateBack()">
-      <mat-icon>arrow_back_ios</mat-icon>
-    </button>
-  </div>
+  <redirect [className]="['float-right', 'actions']" [url]="reditectTo">
+  </redirect>
 </div>

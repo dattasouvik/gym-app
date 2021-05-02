@@ -3,13 +3,13 @@ import { CommonModule } from '@angular/common';
 import { LoadingComponent } from './components/loading/loading.component';
 import { MaterialDesignModule } from 'src/app/modules/material-design/material-design.module';
 import { MessagesComponent } from './components/messages/messages.component';
+import { RedirectComponent } from './components/redirect/redirect.component';
 
 
 
 @NgModule({
   declarations: [
-    LoadingComponent, 
-    MessagesComponent
+    LoadingComponent, MessagesComponent, RedirectComponent
   ],
   imports: [
     CommonModule,
@@ -17,7 +17,8 @@ import { MessagesComponent } from './components/messages/messages.component';
   ],
   exports:[
     LoadingComponent,
-    MessagesComponent
+    MessagesComponent,
+    RedirectComponent
   ]
 })
 export class SharedModule { }

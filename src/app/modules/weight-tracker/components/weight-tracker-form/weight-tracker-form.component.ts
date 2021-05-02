@@ -25,6 +25,7 @@ export class WeightTrackerFormComponent implements OnInit, OnDestroy {
   userId: number;
   nid: number;
   formMode: WeightTrackerFormMode;
+  reditectTo: string;
 
   constructor(
     private router: Router,
@@ -34,6 +35,7 @@ export class WeightTrackerFormComponent implements OnInit, OnDestroy {
    }
 
   ngOnInit(): void {
+    this.reditectTo = `/trainees/${this.userId}/weight-monitor`;
     this.buildFormbyMode(this.formMode);
   }
 
@@ -68,19 +70,16 @@ export class WeightTrackerFormComponent implements OnInit, OnDestroy {
     /* Load default values */
     this.weightTrackerService.loadDefaultForm()
     .pipe(takeWhile(() => this.isAlive))
-    .subscribe( ({form}) => this.weightTrackerFormModel = form
-    );
+    .subscribe( ({form}) => this.weightTrackerFormModel = form );
   }
 
   /*
   * Renders only on EDIT mode
   */
   private  weightTrackerFormFieldsOnEdit() {
-    this.weightTrackerService.loadEditForm(this.nid)
+    this.weightTrackerService.loadEditForm(this.userId, this.nid)
     .pipe(takeWhile(() => this.isAlive))
-    .subscribe( fields => {
-      console.log("Output", fields);
-    })
+    .subscribe( ({form}) => this.weightTrackerFormModel = form );
   }
 
   /*
@@ -90,17 +89,12 @@ export class WeightTrackerFormComponent implements OnInit, OnDestroy {
   submit(payload: WeightTrackerFormFieldGroup) {
     const { field_weight_date } = payload;
     const formattedDate = moment(field_weight_date).format('YYYY-MM-DD');
-    const reditectTo = `/trainees/${this.userId}/weight-monitor`;
     const args = {
       trainee: this.userId,
       field_weight_date: formattedDate
     };
-    return this.weightTrackerService.saveWeightTrackerForm(payload, {...args}, reditectTo);
-  }
-
-  navigateBack(){
-    this.router.navigateByUrl(`/trainees/${this.userId}/weight-monitor`,
-    { skipLocationChange: true });
+    return this.weightTrackerService.saveWeightTrackerForm(payload, {...args},
+    this.reditectTo);
   }
 
 }

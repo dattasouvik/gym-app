@@ -1,0 +1,30 @@
+.float-right {
+  position: fixed;
+  top: 50%;
+  right: 0;
+  z-index: 99;
+  button {
+    height: 3rem;
+    padding: 0;
+    opacity: 0.5;
+    transition: transform 100ms ease;
+    transform: translate(4vw, 0);
+    &:hover,
+    &:focus,
+    &:active {
+      opacity: 1;
+      animation: nudge 500ms linear;
+    }
+  }
+}
+
+@keyframes nudge {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+
+  50% {
+    transform: translate(-2vw, 0);
+  }
+}

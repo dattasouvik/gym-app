@@ -28,6 +28,8 @@
 @import 'overrides/full-calendar-override';
 @import 'overrides/override';
 
+/* Load material icons offline */
+@import 'icons/material-icons';
 
 // Override typography for all Angular Material, including mat-base-typography and all components.
 @include angular-material-typography($typography);

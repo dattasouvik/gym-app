@@ -6,6 +6,6 @@
 }
 
 .profile__icon {
-  @include profile__avatar( $width: 75px, $zoom: 1.2 );
+  @include profile__avatar( $width: 75px, $zoom: 1.1 );
   height: 100%;
 }

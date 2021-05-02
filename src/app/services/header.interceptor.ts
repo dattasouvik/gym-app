@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HttpErrorResponse } from '@angular/common/http';
-import { Observable, throwError, BehaviorSubject } from 'rxjs';
-import { catchError, filter, take, switchMap } from 'rxjs/operators';
+import { Observable, throwError } from 'rxjs';
 
 @Injectable()
 export class HeaderInterceptor implements HttpInterceptor {
@@ -15,6 +14,6 @@ export class HeaderInterceptor implements HttpInterceptor {
         }
       });
      }
-      return next.handle(req);
+     return next.handle(req);
   }
 }

@@ -2,11 +2,12 @@ import { HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { of } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { ApiHandlerService } from 'src/app/services/api-handler.service';
 import { HttpService } from 'src/app/services/http.service';
 import { LoadingService } from '../../shared/services/loading.service';
-import { ListWeightTrackersResponse, WeightTrackerFormFieldGroup } from '../models/weight-tracker-response.model';
+import { ListWeightTrackersResponse, WeightTrackerFormFieldGroup,
+WeightTrackerFormResponse } from '../models/weight-tracker-response.model';
 
 @Injectable({
   providedIn: 'root'
@@ -35,13 +36,20 @@ export class WeightTrackerService {
     return this.loading.showLoaderUntilCompleted(form$);
   }
 
-  loadEditForm( nodeId: number) {
+  loadEditForm(userId: number, nodeId: number) {
     let params = new HttpParams();
     params = params.set('_format', `json`);
-    const fields$ = this.httpService.get<any>
-      (`weight-chart-details/${nodeId}`, { params })
+    const fields$ = this.httpService.get<WeightTrackerFormResponse>
+      (`weight-chart-details/${userId}/${nodeId}`, { params })
       .pipe(
-        catchError(error => this.apiHandlerService.onApiError(error))
+        catchError(error => this.apiHandlerService.onApiError(error)),
+        map((response) => {
+          const clonedResponse = JSON.parse(JSON.stringify(response));
+          const {field_weight_date} = clonedResponse.form;
+          const formattedfieldWeightDate = new Date(+field_weight_date * 1000);
+          clonedResponse.form.field_weight_date = formattedfieldWeightDate;
+          return clonedResponse;
+        })
       );
     return this.loading.showLoaderUntilCompleted(fields$);
   }

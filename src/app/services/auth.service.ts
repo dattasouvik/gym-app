@@ -1,4 +1,4 @@
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
@@ -37,7 +37,6 @@ export class AuthService {
   public readonly user$: Observable<UserResponse> = this.userSubject.asObservable();
 
   constructor(
-    private http: HttpClient,
     private router: Router,
     private httpService: HttpService,
     private loading: LoadingService,
@@ -50,18 +49,18 @@ export class AuthService {
 
   login(user: { username: string, password: string }): Observable<any> {
     let body= new FormData();
-    body.append("grant_type", 'password');
-    body.append("client_id", AuthConfig.CLIENT_ID);
-    body.append("client_secret", AuthConfig.CLIENT_SECRET);
-    body.append("scope", AuthConfig.SCOPE);
-    body.append("username", user.username);
-    body.append("password", user.password);
+    body.append('grant_type', 'password');
+    body.append('client_id', AuthConfig.CLIENT_ID);
+    body.append('client_secret', AuthConfig.CLIENT_SECRET);
+    body.append('scope', AuthConfig.SCOPE);
+    body.append('username', user.username);
+    body.append('password', user.password);
 
     const userLoggdInfo$ = this.httpService.post<any>('oauth/token', body)
       .pipe(
         catchError(this.handleError),
-        exhaustMap( (tokenInfo:Tokens) => {
-          let headers = new HttpHeaders().set('Authorization', `Bearer ${tokenInfo.access_token}`);
+        exhaustMap( (tokenInfo: Tokens) => {
+          const headers = new HttpHeaders().set('Authorization', `Bearer ${tokenInfo.access_token}`);
           return this.httpService.get<any>('user-extra-data?_format=json',{
             headers
           }).pipe(
@@ -70,13 +69,13 @@ export class AuthService {
                 return {
                   tokenInfo,
                   userInfo
-                }
-              })
+                };
+              });
             }),
           );
         }),
         catchError(this.handleError),
-        tap(([{userInfo,tokenInfo}]) => this.handleAuthentication(userInfo,tokenInfo))
+        tap(([{userInfo, tokenInfo}]) => this.handleAuthentication(userInfo,tokenInfo))
       );
     return this.loading.showLoaderUntilCompleted(userLoggdInfo$);
   }
@@ -85,13 +84,13 @@ export class AuthService {
     const logout$ = this.httpService.get('user-logout?_format=json').pipe(
       catchError((error => this.apiHandlerService.onApiError(error))),
       tap((response)=>{
-        //TBD
+        // TBD
         this.removeTokens();
         this.authStatusListenerSubject.next(false);
         this.userSubject.next(null);
-        //navigate to login
+        // navigate to login
         this.router.navigate(['/login']);
-        //clear timer
+        // clear timer
         if (this.tokenExpirationTimer) {
           clearTimeout(this.tokenExpirationTimer);
         }
@@ -102,17 +101,17 @@ export class AuthService {
   }
 
   refreshToken() {
-    let body= new FormData();
-    body.append("grant_type", 'refresh_token');
-    body.append("client_id", AuthConfig.CLIENT_ID);
-    body.append("client_secret", AuthConfig.CLIENT_SECRET);
-    body.append("scope", AuthConfig.SCOPE);
-    body.append("refresh_token", this.getRefreshToken());
+    const body= new FormData();
+    body.append('grant_type', 'refresh_token');
+    body.append('client_id', AuthConfig.CLIENT_ID);
+    body.append('client_secret', AuthConfig.CLIENT_SECRET);
+    body.append('scope', AuthConfig.SCOPE);
+    body.append('refresh_token', this.getRefreshToken());
     return this.httpService.post('oauth/token', body)
     .pipe(
       catchError(this.handleError),
       exhaustMap( (tokenInfo:Tokens) => {
-        let headers = new HttpHeaders().set('Authorization', `Bearer ${tokenInfo.access_token}`);
+        const headers = new HttpHeaders().set('Authorization', `Bearer ${tokenInfo.access_token}`);
         return this.httpService.get<any>('user-extra-data?_format=json',{
           headers
         }).pipe(
@@ -127,7 +126,7 @@ export class AuthService {
         );
       }),
       catchError(this.handleError),
-      tap(([{userInfo,tokenInfo}]) => this.handleAuthentication(userInfo,tokenInfo))
+      tap(([{userInfo, tokenInfo}]) => this.handleAuthentication(userInfo, tokenInfo))
     );
   }
 
@@ -137,7 +136,7 @@ export class AuthService {
 
 
   private checkStorageData(accessToken, expirationDate,
-    refreshToken,userData):Boolean{
+                           refreshToken, userData): boolean{
       const access_token = localStorage.getItem(accessToken);
       const expiration_date = localStorage.getItem(expirationDate);
       const refresh_token = localStorage.getItem(refreshToken);
@@ -148,7 +147,7 @@ export class AuthService {
       return true;
   }
 
-  isTokenExpired():boolean{
+  isTokenExpired(): boolean{
 
     const storageStatus = this.checkStorageData(
       this.ACCESS_TOKEN,
@@ -157,7 +156,7 @@ export class AuthService {
       this.USER_DATA
       );
 
-    console.log("Storage Valdity", storageStatus);
+    console.log('Storage Valdity', storageStatus);
     if(!storageStatus){
       this.authStatusListenerSubject.next(false);
       return true;
@@ -167,7 +166,8 @@ export class AuthService {
     const now = new Date();
     const expiresIn = new Date(expirationDate).getTime() - now.getTime();
     if (expiresIn > 0) {
-      console.log("Token expires in", expiresIn);
+      console.log('Token expires in', expiresIn);
+      console.log('Token expires date', new Date(expirationDate));
       this.authStatusListenerSubject.next(true);
       return false;
     }else{
@@ -178,8 +178,8 @@ export class AuthService {
 
   autoLogin(){
     const tokenExpired = this.isTokenExpired();
-    console.log("Expiry", tokenExpired);
-    if(!tokenExpired){
+    console.log('Expiry', tokenExpired);
+    if (!tokenExpired){
       const user: UserResponse = JSON.parse(localStorage.getItem(this.USER_DATA));
       this.authStatusListenerSubject.next(true);
       this.userSubject.next(user);
@@ -233,7 +233,7 @@ export class AuthService {
     tokens: Tokens
   ){
     const expirationDate = new Date(new Date().getTime() + tokens.expires_in * 1000);
-    //Notify user is authenticated
+    // Notify user is authenticated
     this.authStatusListenerSubject.next(true);
     this.userSubject.next(user);
     this.autoLogout(tokens.expires_in * 1000);
@@ -247,7 +247,7 @@ export class AuthService {
     if (!errorRes.error || !errorRes.error.error) {
       return throwError(errorRes);
     }
-    //Modify error messages
+    // Modify error messages
     switch (errorRes.error.message) {
       case 'The user credentials were incorrect.':
         errorMessage = 'Invalid Credentials';

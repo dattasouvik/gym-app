@@ -15,7 +15,7 @@ import { takeWhile } from 'rxjs/operators';
 export class FitnessTestFormComponent implements OnInit, OnDestroy {
 
   /* To track subscriptions & clear on destroy */
-  private isAlive : boolean = true;
+  private isAlive = true;
 
   fitnessTestForm: FormGroup;
   fitnessTestFormModel: any;
@@ -24,6 +24,7 @@ export class FitnessTestFormComponent implements OnInit, OnDestroy {
   userId: number;
   nid: number;
   formMode: FitnessTestFormMode;
+  reditectTo: string;
 
   constructor(
     private router: Router,
@@ -33,6 +34,7 @@ export class FitnessTestFormComponent implements OnInit, OnDestroy {
     }
 
   ngOnInit(): void {
+    this.reditectTo = `/trainees/${this.userId}/fitness`;
     this.buildFormbyMode(this.formMode);
   }
 
@@ -88,7 +90,6 @@ export class FitnessTestFormComponent implements OnInit, OnDestroy {
   * Add/edit form
   */
   submit(payload: FitnessTestForm) {
-    const reditectTo = `/trainees/${this.userId}/fitness`;
     const args = {
       node: this.formMode,
       trainee: this.userId
@@ -100,16 +101,11 @@ export class FitnessTestFormComponent implements OnInit, OnDestroy {
         nid: this.nid
       }
       return this.fitnessTestService
-      .saveFitnessTestForm(payload, {...updatedArgs}, reditectTo );
+      .saveFitnessTestForm(payload, {...updatedArgs}, this.reditectTo );
     }
 
     return this.fitnessTestService
-    .saveFitnessTestForm(payload,{...args}, reditectTo);
-  }
-
-  navigateBack(){
-    this.router.navigateByUrl(`/trainees/${this.userId}/fitness`,
-    { skipLocationChange: true });
+    .saveFitnessTestForm(payload,{...args}, this.reditectTo);
   }
 
 }

@@ -71,7 +71,6 @@ export class WeightTrackerReportsComponent implements OnInit {
       mode: WeightTrackerFormMode.EDIT,
       nid
     };
-    console.log(data);
     this.router.navigateByUrl('/weight-tracker/form',{
       state: data,
       skipLocationChange: true

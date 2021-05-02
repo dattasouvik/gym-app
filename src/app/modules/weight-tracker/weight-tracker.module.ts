@@ -11,9 +11,10 @@ import { MaterialDesignModule } from 'src/app/modules/material-design/material-d
 import { FormlyModule } from '@ngx-formly/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormlyMatDatepickerModule } from '@ngx-formly/material/datepicker';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
-  declarations: [WeightTrackerFormComponent, WeightTrackerReportsComponent],
+  declarations: [WeightTrackerFormComponent, WeightTrackerReportsComponent,  ],
   imports: [
     CommonModule,
     WeightTrackerRoutingModule,
@@ -21,7 +22,7 @@ import { FormlyMatDatepickerModule } from '@ngx-formly/material/datepicker';
     ReactiveFormsModule,
     MaterialDesignModule,
     FormlyMaterialModule,
-    FlexLayoutModule,
+    SharedModule,
     FormlyModule.forChild({
       validationMessages: [
         { name: 'required', message: 'This field is required' },

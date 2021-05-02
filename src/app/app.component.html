@@ -30,7 +30,13 @@
           <mat-list-item routerLink="/trainers" routerLinkActive='active'
           (click)="sidenav.toggle()">
             <mat-icon matListIcon>assignment_ind</mat-icon>
-            <a matLine>View my trainer</a>
+            <a matLine>My trainer</a>
+          </mat-list-item>
+
+          <mat-list-item routerLink="/view/reports/health-report" routerLinkActive='active'
+          (click)="sidenav.toggle()">
+            <mat-icon matListIcon>straighten</mat-icon>
+            <a matLine>My Health Report</a>
           </mat-list-item>
 
           <mat-list-item routerLink="/view/reports/food-chart" routerLinkActive='active'
@@ -39,13 +45,31 @@
             <a matLine>My Food Chart</a>
           </mat-list-item>
 
+          <mat-list-item routerLink="/view/reports/workout-routine" routerLinkActive='active'
+          (click)="sidenav.toggle()">
+            <mat-icon matListIcon>accessibility</mat-icon>
+            <a matLine>My Workout Routine</a>
+          </mat-list-item>
+
+          <mat-list-item routerLink="/view/reports/fitness-test" routerLinkActive='active'
+          (click)="sidenav.toggle()">
+            <mat-icon matListIcon>fitness_center</mat-icon>
+            <a matLine>My Fitness Reports</a>
+          </mat-list-item>
+
+          <mat-list-item routerLink="/view/reports/weight-monitor" routerLinkActive='active'
+          (click)="sidenav.toggle()">
+            <mat-icon matListIcon>monitor_weight</mat-icon>
+            <a matLine>My Weight Tracker</a>
+          </mat-list-item>
+
         </ng-container>
 
         <ng-container *ngIf="user.role.includes('trainer')">
           <mat-list-item routerLink="/trainees" routerLinkActive='active'
           (click)="sidenav.toggle()">
             <mat-icon matListIcon>assignment_ind</mat-icon>
-            <a matLine>View my trainees</a>
+            <a matLine>My trainees</a>
           </mat-list-item>
         </ng-container>
         <!-- Member Roles End Here -->
