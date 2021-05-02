@@ -1,5 +1,5 @@
-<div class="content content__center 
-    content__full-height wrapper__container 
+<div class="content content__center
+    content__full-height wrapper__container
     py-2">
   <mat-card class="register-card  mat-elevation-z5 form">
     <mat-card-header>
@@ -25,7 +25,7 @@
                     <input
                     matInput
                     required
-                    placeholder="Enter firstname"
+                    placeholder="Enter lastname"
                     formControlName="last_name">
                 </mat-form-field>
               </p>
@@ -35,20 +35,20 @@
                     <input
                     matInput
                     required
-                    placeholder="Enter firstname"
+                    placeholder="Enter email address"
                     formControlName="email">
                     <mat-icon matSuffix>email</mat-icon>
                 </mat-form-field>
               </p>
               <p>
                 <mat-form-field class="field-full-width">
-                    <mat-label>Telephone</mat-label>
+                    <mat-label>Mobile</mat-label>
                     <span matPrefix>+91 &nbsp;</span>
                     <input
                     type="tel"
                     matInput
                     required
-                    placeholder="Telephone"
+                    placeholder="Enter mobile number"
                     formControlName="phone">
                     <mat-icon matSuffix>call</mat-icon>
                 </mat-form-field>
@@ -59,7 +59,7 @@
                     <textarea
                     matInput
                     #about_me
-                    placeholder="Tell us something about yourself" 
+                    placeholder="Tell us something about yourself"
                     formControlName="about_me"></textarea>
                     <mat-icon
                     matSuffix
@@ -121,13 +121,13 @@
                                       [password]="password.value">
                 </mat-password-strength>
                 <!--Password's strength info-->
-  
+
                 <mat-password-strength-info
-  
+
                   [passwordComponent]="passwordComponent">
                 </mat-password-strength-info>
               </p>
-  
+
               <p>
                 <mat-form-field class="field-full-width">
                     <!-- <mat-label>Confirm Password</mat-label> -->
@@ -143,7 +143,7 @@
                     </mat-error>
                 </mat-form-field>
               </p>
-  
+
               <div class="actions__center">
                   <button mat-raised-button color="warn" type="button"
                   routerLink="/login">
@@ -157,5 +157,5 @@
               </div>
           </form>
       </mat-card-content>
-  </mat-card>  
+  </mat-card>
 </div>

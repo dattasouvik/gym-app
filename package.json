@@ -6,8 +6,11 @@
     "start": "ng serve",
     "build": "ng build",
     "build:prod": "ng build --prod --output-path dist/stay-fit --base-href /stay-fit/",
+    "build:qa": "ng build --configuration qa --output-path dist/qa/stay-fit --base-href /stay-fit/",
     "copy:htaccess": "cp src/.htaccess dist/stay-fit/.htaccess",
+    "copy:qahtaccess": "cp src/.htaccess dist/qa/stay-fit/.htaccess",
     "bundle:prod": "npm run build:prod && npm run copy:htaccess",
+    "bundle:qa": "npm run build:qa && npm run copy:qahtaccess",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
