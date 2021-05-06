@@ -31,7 +31,7 @@ export class AppComponent implements OnInit {
     this.hideVersionTag();
     this.authService.autoLogin();
     this.logoIcon = this.domSanitizer.
-    bypassSecurityTrustResourceUrl("../assets/images/logo.jpg");  
+    bypassSecurityTrustResourceUrl('assets/images/logo.jpg');
   }
 
   logout(){
