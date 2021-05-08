@@ -15,7 +15,7 @@ import 'src/assets/login-animation.js';
 export class LoginComponent implements OnInit,AfterViewInit,OnDestroy {
 
   hide = true;
-  private isAlive : boolean = true;
+  private isAlive = true;
 
   loginForm = this.fb.group({
     username: ['', Validators.required],
@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit,AfterViewInit,OnDestroy {
     .pipe(takeWhile(() => this.isAlive))
     .subscribe( success => {
           this.router.navigate(['/profile']);
-    },error => this.apiHandlerService.onApiError(error));
+    }, error => this.apiHandlerService.onApiError(error));
   }
 
 }
