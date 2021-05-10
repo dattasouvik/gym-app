@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
-import { APP_CONFIG, AppConfig } from 'src/app/modules/app-config/app-config.module';
+import { DefaultImageTypes } from 'src/app/modules/default-image/directives/default-image-model.ts';
 import { UserRatingEvent } from 'src/app/modules/trainers/model/rating-event.model';
 import { TrainerResponse } from 'src/app/modules/trainers/model/trainer-response.model';
 
@@ -15,9 +15,11 @@ export class ViewMyTrainersComponent implements OnInit {
   @Output() pageChange: EventEmitter<PageEvent> = new EventEmitter();
   @Output() displayRating: EventEmitter<UserRatingEvent> = new EventEmitter();
 
-  hideContact=[];
+  public altProfileImage: DefaultImageTypes = DefaultImageTypes.PROFILE;
 
-  constructor(@Inject(APP_CONFIG) public config: AppConfig) { }
+  hideContact = [];
+
+  constructor() { }
 
   ngOnInit(): void {}
 

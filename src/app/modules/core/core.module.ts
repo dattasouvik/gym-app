@@ -1,21 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NotFoundComponent } from './components/not-found/not-found.component';
-import { ImagePreloadDirective } from './directives/image-preload.directive';
-
+import { DefaultImageModule } from '../default-image/default-image.module';
 
 
 @NgModule({
   declarations: [
-    NotFoundComponent,
-    ImagePreloadDirective
+    NotFoundComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    DefaultImageModule
   ],
   exports:[
     NotFoundComponent,
-    ImagePreloadDirective
+    DefaultImageModule
   ]
 })
 export class CoreModule { }

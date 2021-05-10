@@ -17,7 +17,6 @@ import { MessagesService } from 'src/app/modules/shared/services/messages.servic
 import { TokenInterceptor } from 'src/app/services/token.interceptor';
 import { HeaderInterceptor } from 'src/app/services/header.interceptor';
 import { CoreModule } from 'src/app/modules/core/core.module';
-import { AppConfigModule } from 'src/app/modules/app-config/app-config.module';
 import { FormlyModule } from '@ngx-formly/core';
 
 
@@ -32,7 +31,6 @@ import { FormlyModule } from '@ngx-formly/core';
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    AppConfigModule,
     CoreModule,
     MaterialDesignModule,
     SharedModule,

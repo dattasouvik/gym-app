@@ -2,7 +2,7 @@ import { EventEmitter, Inject, Input, Output } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { filter, tap } from 'rxjs/operators';
-import { AppConfig, APP_CONFIG } from 'src/app/modules/app-config/app-config.module';
+import { DefaultImageTypes } from 'src/app/modules/default-image/directives/default-image-model.ts';
 import { EditProfileComponent } from 'src/app/modules/user-profile/components/edit-profile/edit-profile.component';
 import { UserProfile } from 'src/app/modules/user-profile/model/user-profile.model';
 import { EditProfilePictureComponent } from '../edit-profile-picture/edit-profile-picture.component';
@@ -17,9 +17,10 @@ export class ViewProfileComponent implements OnInit {
   @Input() profile: UserProfile[] = [];
   @Output() private profileChanged = new EventEmitter();
 
+  public altProfileImage: DefaultImageTypes = DefaultImageTypes.PROFILE;
+
   constructor(
-    private dialog: MatDialog,
-    @Inject(APP_CONFIG) public config: AppConfig
+    private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {}
@@ -30,7 +31,7 @@ export class ViewProfileComponent implements OnInit {
 
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.width = "100%";
+    dialogConfig.width = '100%';
 
 
     dialogConfig.data = profile;
