@@ -1,5 +1,5 @@
 import { HttpParams } from '@angular/common/http';
-import { Injectable, OnDestroy } from '@angular/core';
+import { ComponentFactoryResolver, Injectable, OnDestroy, ViewContainerRef } from '@angular/core';
 import { Observable, Subject, timer } from 'rxjs';
 import { catchError, share, switchMap, takeUntil, tap } from 'rxjs/operators';
 import { Pager } from 'src/app/models/pager.model';
@@ -42,7 +42,8 @@ export class NotificationService implements OnDestroy {
   constructor(
     private httpService: HttpService,
     private loading: LoadingService,
-    private apiHandlerService: ApiHandlerService
+    private apiHandlerService: ApiHandlerService,
+    private cfr: ComponentFactoryResolver
   ) {
     this.notificationInfo$ = timer(1, 900000)
       .pipe(
@@ -57,9 +58,7 @@ export class NotificationService implements OnDestroy {
   }
 
   getNotificationCount(): Observable<any> {
-    return this.notificationInfo$.pipe(
-      tap(() => console.log('data sent to subscriber'))
-    );
+    return this.notificationInfo$;
   }
 
   getNotifications(page: number = 0) {
@@ -83,8 +82,27 @@ export class NotificationService implements OnDestroy {
     this.stopPolling.next();
   }
 
+  /* Render Notification component for loggedin user */
+  async loadComponent(vcr: ViewContainerRef, isLoggedIn: boolean) {
+    const { NotificationComponent } = await
+      import('../components/notification/notification.component');
+    vcr.clear();
+    /* Remove component forcefully */
+    if (!isLoggedIn) {
+      return false;
+    }
+    const component = vcr.createComponent(
+      this.cfr.resolveComponentFactory(NotificationComponent));
+
+    if (!isLoggedIn && component) {
+      component.destroy();
+    }
+    return component;
+  }
+
   ngOnDestroy(): void {
     this.stopPolling.next();
+    this.stopPolling.complete();
   }
 
 }

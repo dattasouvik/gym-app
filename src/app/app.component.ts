@@ -1,7 +1,9 @@
 import { Component, ComponentFactoryResolver, OnInit, Renderer2, ViewChild, ViewContainerRef } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { DomSanitizer } from '@angular/platform-browser';
-import { distinctUntilChanged, tap } from 'rxjs/operators';
+import { distinctUntilChanged, mergeMap, tap } from 'rxjs/operators';
+import { HostDirective } from './modules/shared/directives/host.directive';
+import { NotificationService } from './modules/notifications/services/notification.service';
 // import { FullCalendarModule } from '@fullcalendar/angular'; // the main connector. must go first
 // import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin
 // import interactionPlugin from '@fullcalendar/interaction'; // a plugin
@@ -12,14 +14,15 @@ import { distinctUntilChanged, tap } from 'rxjs/operators';
 //   interactionPlugin
 // ]);
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  @ViewChild('notification', { read: ViewContainerRef })
-  private notificationvRef: ViewContainerRef;
+  @ViewChild(HostDirective, { static: true })
+  private notificationHost: HostDirective;
 
   logoTitle = 'Health World';
   logoIcon: any;
@@ -29,8 +32,7 @@ export class AppComponent implements OnInit {
     public authService: AuthService,
     private domSanitizer: DomSanitizer,
     private renderer: Renderer2,
-    private vcref: ViewContainerRef,
-    private cfr: ComponentFactoryResolver
+    private notificationService: NotificationService,
   ) { }
 
   ngOnInit(): void {
@@ -40,12 +42,17 @@ export class AppComponent implements OnInit {
     this.logoIcon = this.domSanitizer.
       bypassSecurityTrustResourceUrl('assets/images/logo.jpg');
 
+    const viewContainerRef = this.notificationHost.viewContainerRef;
+
     this.authService.isLoggedIn$
       .pipe(
         distinctUntilChanged(),
-        tap((isLoggedIn) => this.isLoggedIn = isLoggedIn)
+        tap((isLoggedIn) => this.isLoggedIn = isLoggedIn),
+        mergeMap(isLoggedIn =>
+          this.notificationService.loadComponent(viewContainerRef, isLoggedIn)
+        )
       )
-      .subscribe(isLoggedIn => this.renderNotification(isLoggedIn));
+      .subscribe();
   }
 
   logout() {
@@ -55,24 +62,6 @@ export class AppComponent implements OnInit {
   private hideVersionTag(): void {
     const rootEl = this.renderer.selectRootElement('app-root', true);
     this.renderer.removeAttribute(rootEl, 'ng-version');
-  }
-
-
-  /*
-  * Renders (Lazy Loading) NotificationComponent in ng-template
-  */
-  async renderNotification(isLoggedIn: boolean) {
-     const { NotificationComponent } = await
-      import('./modules/notifications/components/notification/notification.component');
-     this.notificationvRef.clear();
-     const   notificationComp = await this.notificationvRef.createComponent(
-      this.cfr.resolveComponentFactory(NotificationComponent)
-     );
-     /* if not loggedin notification is removed */
-     if (!isLoggedIn && notificationComp){
-      // this.notificationvRef.clear();
-      notificationComp.destroy();
-    }
   }
 
 }

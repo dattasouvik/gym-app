@@ -5,12 +5,13 @@ import { MaterialDesignModule } from 'src/app/modules/material-design/material-d
 import { MessagesComponent } from './components/messages/messages.component';
 import { RedirectComponent } from './components/redirect/redirect.component';
 import { BackButtonDirective } from './directives/back-button.directive';
+import { HostDirective } from './directives/host.directive';
 
 
 
 @NgModule({
   declarations: [
-    LoadingComponent, MessagesComponent, RedirectComponent, BackButtonDirective
+    LoadingComponent, MessagesComponent, RedirectComponent, BackButtonDirective, HostDirective
   ],
   imports: [
     CommonModule,
@@ -20,7 +21,8 @@ import { BackButtonDirective } from './directives/back-button.directive';
     LoadingComponent,
     MessagesComponent,
     RedirectComponent,
-    BackButtonDirective
+    BackButtonDirective,
+    HostDirective
   ]
 })
 export class SharedModule { }
