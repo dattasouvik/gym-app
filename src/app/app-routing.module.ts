@@ -21,66 +21,74 @@ const routes: Routes = [
   {
     path: 'profile',
     loadChildren: () => import('./modules/user-profile/user-profile.module')
-    .then(m => m.UserProfileModule),
+      .then(m => m.UserProfileModule),
     canActivate: [AuthGuard],
     canLoad: [CanLoadAuthGuard]
   },
   {
     path: 'login',
     loadChildren: () => import('./modules/login/login.module')
-    .then(m => m.LoginModule),
+      .then(m => m.LoginModule),
     canActivate: [LoginGuard]
   },
   {
     path: 'register',
     loadChildren: () => import('./modules/user-registration/user-registration.module')
-    .then(m => m.UserRegistrationModule),
+      .then(m => m.UserRegistrationModule),
     canActivate: [LoginGuard]
   },
   {
     path: 'forgot-password',
     loadChildren: () => import('./modules/forgot-password/forgot-password.module')
-    .then(m => m.ForgotPasswordModule),
+      .then(m => m.ForgotPasswordModule),
     canActivate: [LoginGuard]
   },
-  { path: 'reset-password',
+  {
+    path: 'reset-password',
     loadChildren: () => import('./modules/reset-password/reset-password.module')
-    .then(m => m.ResetPasswordModule),
+      .then(m => m.ResetPasswordModule),
     canActivate: [LoginGuard]
   },
   {
     path: 'trainers',
     loadChildren: () => import('./modules/trainers/trainers.module')
-    .then(m => m.TrainersModule),
+      .then(m => m.TrainersModule),
     canLoad: [CanLoadAuthGuard]
   },
   {
     path: 'trainees',
     loadChildren: () => import('./modules/trainees/trainees.module')
-    .then(m => m.TraineesModule),
+      .then(m => m.TraineesModule),
     canLoad: [CanLoadAuthGuard]
   },
   {
     path: 'health-status', //To be moved to trainees module later
     loadChildren: () => import('./modules/health-card/health-card.module')
-    .then(m => m.HealthCardModule),
+      .then(m => m.HealthCardModule),
     canLoad: [CanLoadAuthGuard]
   },
   {
     path: 'view',
     loadChildren: () => import('./modules/trainee-reports/trainee-reports.module')
-    .then(m => m.TraineeReportsModule),
+      .then(m => m.TraineeReportsModule),
     canLoad: [CanLoadAuthGuard]
   },
   {
     path: 'fitness-test',
     loadChildren: () => import('./modules/fitness-test/fitness-test.module')
-    .then(m => m.FitnessTestModule),
+      .then(m => m.FitnessTestModule),
     canLoad: [CanLoadAuthGuard]
   },
-  { path: 'weight-tracker',
+  {
+    path: 'weight-tracker',
     loadChildren: () => import('./modules/weight-tracker/weight-tracker.module')
-    .then(m => m.WeightTrackerModule),
+      .then(m => m.WeightTrackerModule),
+    canLoad: [CanLoadAuthGuard]
+  },
+  {
+    path: 'notifications',
+    loadChildren: () => import('./modules/notifications/notifications.module')
+    .then(m => m.NotificationsModule),
     canLoad: [CanLoadAuthGuard]
   },
   {
@@ -92,7 +100,7 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(routes,
     {
-      scrollPositionRestoration:'enabled',
+      scrollPositionRestoration: 'enabled',
       paramsInheritanceStrategy: 'always',
       relativeLinkResolution: 'corrected'
     })

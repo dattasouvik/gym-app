@@ -1,0 +1,72 @@
+/************************************************************/
+/************************************************************/
+/*********Created for Notification Component ****************/
+/************************************************************/
+/************************************************************/
+/************************************************************/
+
+.notification-box {
+  display: grid;
+  grid-template-columns: 1.5rem 1fr 1.5rem;
+  align-items: center;
+  grid-column-gap: 0.5rem;
+
+  .message {
+    b {
+      font-weight: 500;
+      text-transform: uppercase;
+    }
+  }
+}
+/* alerts */
+
+.alert {
+  border: 0;
+  border-radius: 0;
+  padding: 20px 15px;
+  line-height: 20px;
+  font-weight: 300;
+  color: #fff;
+
+  &.alert-info {
+    background-color: #00cae3;
+  }
+
+  &.alert-success {
+    background-color: #55b559;
+  }
+
+  &.alert-warning {
+    background-color: #ff9e0f;
+  }
+
+  &.alert-danger {
+    background-color: #f55145;
+  }
+
+  &.alert-primary {
+    background-color: #a72abd;
+  }
+}
+
+.close {
+  font-size: 1.5rem;
+  color: #000;
+  text-shadow: 0 1px 0 #fff;
+  opacity: 0.5;
+}
+
+.alert .close {
+  color: #fff;
+  text-shadow: none;
+  opacity: 0.9;
+
+  i {
+    font-size: 0.8rem;
+  }
+
+  &:hover {
+    opacity: 1;
+    color: #fff;
+  }
+}

@@ -13,7 +13,7 @@
   </mat-toolbar>
   <mat-nav-list class="p-0">
     <!-- Menu loaded when user is logged in starts here -->
-    <ng-container *ngIf="authService.isLoggedIn$ | async">
+    <ng-container *ngIf="isLoggedIn">
 
       <mat-list-item routerLink="/profile" routerLinkActive='active'
       (click)="sidenav.toggle()">
@@ -87,7 +87,7 @@
     <!-- Menu loaded when user is logged in ends here-->
 
     <!-- Menu loaded when user is logged out starts here -->
-    <ng-container *ngIf="authService.isLoggedOut$ | async">
+    <ng-container *ngIf="!isLoggedIn">
       <mat-list-item
       routerLink="/register" routerLinkActive='active'
       (click)="sidenav.toggle()">
@@ -119,6 +119,8 @@
         </h1>
         <div class="spacer"></div>
         <toggle-theme></toggle-theme>
+        <!--Notification renders here-->
+        <ng-template #notification></ng-template>
       </mat-toolbar-row>
     </mat-toolbar>
     <main class="content__full-height">

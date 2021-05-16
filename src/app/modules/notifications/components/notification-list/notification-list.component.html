@@ -1,0 +1,61 @@
+<div class="wrapper__container">
+    <section class="header">
+      <mat-toolbar class="px-1">
+        <mat-toolbar-row>
+          <span>Notifications</span>
+          <span class="spacer"></span>
+          <button
+            backButton
+            mat-icon-button
+            matTooltip="Back"
+            color="warning">
+            <mat-icon>arrow_back_ios_new</mat-icon>
+            <span>Back</span>
+          </button>
+        </mat-toolbar-row>
+      </mat-toolbar>
+    </section>
+    <section class="content content__full-height content__align_pager">
+      <div class="notification-list" *ngIf="notifications?.length > 0 else noResult">
+        <ng-container *ngFor="let notification of notifications">
+              <div class="alert {{ notification?.class}}">
+                <div class="container notification-box">
+                  <div class="alert-icon">
+                    <i class="material-icons">{{ showIcon(notification.class) }}</i>
+                  </div>
+                  <div class="message">
+                    <p class="m-0">
+                      <b>{{ notification.notification_type}}:</b>
+                      <span class="pl-1">
+                        {{ notification?.field_notification_description }}</span>
+                    </p>
+                    <p class="m-0 created" *ngIf="notification.created">
+                      ~ {{ notification.created }}
+                    </p>
+                  </div>
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true"><i class="material-icons">clear</i></span>
+                  </button>
+                </div>
+              </div>
+        </ng-container>
+      </div>
+      <!-- No Result section -->
+      <ng-template #noResult>
+        <div class="no-results content__full-height">
+          <p class="content__center mat-elevation-z10 content__full-height">
+            No data available
+          </p>
+        </div>
+      </ng-template>
+      <!-- Pager section starts here  -->
+      <div class="pager" *ngIf="pager && notifications.length > 0">
+        <mat-paginator
+          [length]="pager.total_items"
+          [pageSize]="pager.items_per_page"
+          (page)="onChangedPage($event)">
+        </mat-paginator>
+      </div>
+    </section>
+</div>
+<!-- https://bootsnipp.com/snippets/0ebmD -->
