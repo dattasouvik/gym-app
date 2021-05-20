@@ -23,7 +23,7 @@ export class NotificationComponent implements OnInit, OnDestroy {
     this.notifySubscription = this.notificationService.getNotificationCount()
       .subscribe(
         response => {
-          console.log(`Output at ${new Date()}`, response.pager);
+          console.log(`Output at ${new Date()}`, response.pager.total_items);
           this.notification = response.pager;
         });
   }
@@ -36,9 +36,13 @@ export class NotificationComponent implements OnInit, OnDestroy {
   }
 
   onRedirect() {
-    this.router.navigateByUrl('/notifications');
+    /* TBD */
+    this.router.navigateByUrl('/profile', {skipLocationChange: true}).then(() => {
+      this.router.navigateByUrl('/notifications');
+    });
   }
 
 
 }
 // https://blog.angulartraining.com/how-to-do-polling-with-rxjs-and-angular-50d635574965
+// https://medium.com/angular-in-depth/refresh-current-route-in-angular-512a19d58f6e

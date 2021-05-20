@@ -1,12 +1,12 @@
 <ng-container *ngIf="notification">
   <div class="notification">
-      <button *ngIf="notification.total_items > 0; else noNotification"
+      <button
         mat-icon-button aria-label="Notification"
         color="warning" (click)="onRedirect()">
-        <mat-icon [matBadge]="notification.total_items" matBadgeColor="warn">notifications</mat-icon>
+        <mat-icon
+        [matBadge]="notification?.total_items"
+        [matBadgeHidden]="notification.total_items === 0"
+        matBadgeColor="warn">notifications</mat-icon>
       </button>
-    <ng-template #noNotification>
-      <mat-icon matBadgeColor="warn">notifications</mat-icon>
-    </ng-template>
   </div>
 </ng-container>

@@ -33,9 +33,22 @@
                       ~ {{ notification.created }}
                     </p>
                   </div>
-                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true"><i class="material-icons">clear</i></span>
+                  <button
+                    mat-icon-button
+                    *ngIf="+notification.field_notification_read_status === 0"
+                    aria-label="Click here for more options"
+                    matTooltip="Click here for more options"
+                    [matMenuTriggerFor]="options">
+                    <mat-icon>more_vert</mat-icon>
                   </button>
+                  <mat-menu #options="matMenu">
+                      <button
+                        (click)="markNotificaion(notification.nid)"
+                        mat-menu-item>
+                        <mat-icon>done</mat-icon>
+                        <span>Mark as read</span>
+                      </button>
+                  </mat-menu>
                 </div>
               </div>
         </ng-container>
@@ -44,7 +57,7 @@
       <ng-template #noResult>
         <div class="no-results content__full-height">
           <p class="content__center mat-elevation-z10 content__full-height">
-            No data available
+            No Notification available
           </p>
         </div>
       </ng-template>

@@ -1,7 +1,7 @@
 import { HttpParams } from '@angular/common/http';
 import { ComponentFactoryResolver, Injectable, OnDestroy, ViewContainerRef } from '@angular/core';
 import { Observable, Subject, timer } from 'rxjs';
-import { catchError, share, switchMap, takeUntil, tap } from 'rxjs/operators';
+import { catchError, share, switchMap, takeUntil, tap, mergeMap } from 'rxjs/operators';
 import { Pager } from 'src/app/models/pager.model';
 import { ApiHandlerService } from 'src/app/services/api-handler.service';
 import { HttpService } from 'src/app/services/http.service';
@@ -45,13 +45,14 @@ export class NotificationService implements OnDestroy {
     private apiHandlerService: ApiHandlerService,
     private cfr: ComponentFactoryResolver
   ) {
-    this.notificationInfo$ = timer(1, 900000)
+    this.startPolling();
+  }
+
+
+  private startPolling(){
+    this.notificationInfo$ = timer(1, 30000)
       .pipe(
-        switchMap(() => {
-          let params = new HttpParams();
-          params = params.set('_format', `json`);
-          return this.httpService.get<Pager>('notification-count');
-        }),
+        switchMap(() => this.readNotificationCount()),
         share(),
         takeUntil(this.stopPolling)
       );
@@ -59,6 +60,17 @@ export class NotificationService implements OnDestroy {
 
   getNotificationCount(): Observable<any> {
     return this.notificationInfo$;
+  }
+
+  readNotificationCount(){
+    let params = new HttpParams();
+    params = params.set('_format', `json`);
+    const notification$ = this.httpService
+    .get<Pager>('notification-count')
+      .pipe(
+        catchError(error => this.apiHandlerService.onApiError(error))
+      );
+    return notification$;
   }
 
   getNotifications(page: number = 0) {
@@ -71,6 +83,18 @@ export class NotificationService implements OnDestroy {
         catchError(error => this.apiHandlerService.onApiError(error))
       );
     return this.loading.showLoaderUntilCompleted(notifications$);
+  }
+
+  readNotification(nid: number){
+    let params = new HttpParams();
+    params = params.set('_format', `json`);
+    const data = {nid};
+    const updateStatus$ = this.httpService.post<any>
+      ('read-notification', data, { params })
+      .pipe(
+        catchError(error => this.apiHandlerService.onApiError(error)),
+      );
+    return this.loading.showLoaderUntilCompleted(updateStatus$);
   }
 
   getNotificationIcon(type: string) {

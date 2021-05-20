@@ -102,7 +102,8 @@ const routes: Routes = [
     {
       scrollPositionRestoration: 'enabled',
       paramsInheritanceStrategy: 'always',
-      relativeLinkResolution: 'corrected'
+      relativeLinkResolution: 'corrected',
+      onSameUrlNavigation: 'reload',
     })
   ],
   exports: [RouterModule]

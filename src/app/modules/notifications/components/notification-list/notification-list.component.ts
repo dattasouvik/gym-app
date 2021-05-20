@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { Subscription } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { Pager } from 'src/app/models/pager.model';
 import { ListNotificationsResponse, Notification } from '../../models/notifications.model';
 import { NotificationService } from '../../services/notification.service';
@@ -38,6 +39,14 @@ export class NotificationListComponent implements OnInit {
 
   showIcon(type: string){
     return this.notificationService.getNotificationIcon(type);
+  }
+
+  markNotificaion(nid: number){
+    this.notificationService.readNotification(nid)
+    .pipe(
+      tap(() => this.loadNotifications(this.pageNumber))
+    )
+    .subscribe();
   }
 
 }
