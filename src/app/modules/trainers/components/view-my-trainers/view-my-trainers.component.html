@@ -17,7 +17,7 @@
        <mat-card-title>
          {{trainer.first_name}} {{trainer.last_name}}
        </mat-card-title>
-       <mat-card-subtitle >
+       <mat-card-subtitle>
           Ratings:
           <span
             class="rating-container stars-{{ trainer.rating * 10 }}">
@@ -32,10 +32,10 @@
          <div class="card-header mat-elevation-z2">
            Contacts
          </div>
-         <ul class="list-group list-group-flush ">
-           <li class="list-group-item">Email: {{trainer.email}}</li>
-           <li class="list-group-item">Phone: {{trainer.phone}}</li>
-         </ul>
+        <ul class="list-group list-group-flush ">
+          <li class="list-group-item" *ngIf="trainer.email">Email: {{trainer.email}}</li>
+          <li class="list-group-item" *ngIf="trainer.phone">Phone: {{trainer.phone}}</li>
+        </ul>
        </ng-container>
      </mat-card-content>
      <mat-card-actions class="d-flex justify-content-center">

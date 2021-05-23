@@ -1,5 +1,5 @@
 import { HttpParams } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { ComponentFactoryResolver, Injectable, ViewContainerRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
@@ -7,7 +7,8 @@ import { ApiHandlerService } from 'src/app/services/api-handler.service';
 import { HttpService } from 'src/app/services/http.service';
 import { LoadingService } from '../../shared/services/loading.service';
 import { ListWeightTrackersResponse, WeightTrackerFormFieldGroup,
-WeightTrackerFormResponse } from '../models/weight-tracker-response.model';
+WeightTrackerFormResponse,
+WeightTrackerPermission} from '../models/weight-tracker-response.model';
 
 @Injectable({
   providedIn: 'root'
@@ -22,10 +23,16 @@ export class WeightTrackerService {
     }
   };
 
+  private readonly defaultPermission: WeightTrackerPermission = {
+    isTrainer: false,
+    uid: null
+  };
+
   constructor(
     private httpService: HttpService,
     private loading: LoadingService,
     private apiHandlerService: ApiHandlerService,
+    private cfr: ComponentFactoryResolver,
     private router: Router
   ) { }
 
@@ -109,6 +116,24 @@ export class WeightTrackerService {
         catchError(error => this.apiHandlerService.onApiError(error))
       );
     return this.loading.showLoaderUntilCompleted(report$);
+  }
+
+
+  /*
+  * Render WeightTrackerReports  component
+  * based on permission
+  */
+  async loadWTReports(vcr: ViewContainerRef, permission: WeightTrackerPermission = this.defaultPermission) {
+    const { WeightTrackerReportsComponent } = await
+      import('../components/weight-tracker-reports/weight-tracker-reports.component');
+    vcr.clear();
+    const component = vcr.createComponent(
+      this.cfr.resolveComponentFactory(WeightTrackerReportsComponent));
+    if (permission.isTrainer && permission.uid) {
+      component.instance.userId = permission.uid;
+      component.instance.isTrainer = true;
+    }
+    return component;
   }
 
 }

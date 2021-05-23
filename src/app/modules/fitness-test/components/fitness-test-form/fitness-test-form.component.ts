@@ -28,13 +28,14 @@ export class FitnessTestFormComponent implements OnInit, OnDestroy {
 
   constructor(
     private router: Router,
-    private fitnessTestService : FitnessTestService
+    private fitnessTestService: FitnessTestService
     ) {
       this.getFormState(this.router.getCurrentNavigation().extras.state as FitnessTestFormState);
     }
 
   ngOnInit(): void {
     this.reditectTo = `/trainees/${this.userId}/fitness`;
+    this.fitnessTestService.setRedirectUrl(this.reditectTo);
     this.buildFormbyMode(this.formMode);
   }
 

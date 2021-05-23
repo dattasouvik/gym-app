@@ -1,5 +1,11 @@
 <div [ngClass]="className">
-  <button mat-raised-button color="accent" (click)="navigate()">
+  <button
+    type="button"
+    mat-icon-button
+    [matTooltip]="altText"
+    color="warning"
+    (click)="navigate()">
     <mat-icon>{{ icon }}</mat-icon>
+    <span *ngIf="text">{{ text }}</span>
   </button>
 </div>

@@ -1,42 +1,41 @@
-import { Component, ComponentFactoryResolver, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { HostDirective } from 'src/app/modules/shared/directives/host.directive';
+import { WeightTrackerService } from 'src/app/modules/weight-tracker/services/weight-tracker.service';
 
 @Component({
   selector: 'app-weight-monitor',
   templateUrl: './weight-monitor.component.html',
   styleUrls: ['./weight-monitor.component.scss']
 })
-export class WeightMonitorComponent implements OnInit {
-  @ViewChild('weightTracker', { read: ViewContainerRef })
-  private weightTrackerReportviewContainerRef: ViewContainerRef;
+export class WeightMonitorComponent implements OnInit,OnDestroy {
 
-  traineeId: number;
+  @ViewChild(HostDirective, { static: true })
+  private reportsHost: HostDirective;
+
+  private subscription: Subscription;
+  private traineeId: number;
 
   constructor(
     private route: ActivatedRoute,
-    private vcref: ViewContainerRef,
-    private cfr: ComponentFactoryResolver
+    private weightTrackerService: WeightTrackerService
   ) { }
 
+
   ngOnInit(): void {
-    this.route.params.subscribe(params => {
+    const viewContainerRef = this.reportsHost.viewContainerRef;
+    this.subscription = this.route.params.subscribe(params => {
       this.traineeId = +params.id;
-      this.loadReportComponent(this.traineeId);
+      this.weightTrackerService.loadWTReports(viewContainerRef, {
+        isTrainer: true,
+        uid: this.traineeId
+      });
     });
   }
 
-  /*
-  * Renders Lazy Loading Components in ng-template
-  */
-  async loadReportComponent(uid: number) {
-    this.vcref.clear();
-    const { WeightTrackerReportsComponent } = await
-      import('../../../weight-tracker/components/weight-tracker-reports/weight-tracker-reports.component');
-    const weightTrackerReportComp = this.weightTrackerReportviewContainerRef.createComponent(
-      this.cfr.resolveComponentFactory(WeightTrackerReportsComponent)
-    );
-    weightTrackerReportComp.instance.userId = uid;
-    weightTrackerReportComp.instance.isTrainer = true;
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
 }

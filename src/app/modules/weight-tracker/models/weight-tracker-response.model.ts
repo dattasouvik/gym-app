@@ -18,3 +18,9 @@ export interface ListWeightTrackersResponse{
   rows: ListWeightTrackers[];
   pager: Pager;
 }
+
+
+export interface WeightTrackerPermission{
+  isTrainer: boolean;
+  uid: number | null;
+}

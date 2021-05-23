@@ -1,3 +1,4 @@
+import { SharedModule } from 'src/app/modules/shared/shared.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TraineeReportsRoutingModule } from './trainee-reports-routing.module';
@@ -25,6 +26,7 @@ import { TrWeightMonitorComponent } from './components/tr-weight-monitor/tr-weig
   imports: [
     CommonModule,
     TraineeReportsRoutingModule,
+    SharedModule,
     MaterialDesignModule,
     UserFoodChartModule,
     HealthCardModule,

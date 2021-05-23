@@ -1,10 +1,9 @@
-<form [formGroup]="fitnessTestForm" (ngSubmit)="submit(fitnessTestFormModel)">
-  <formly-form [model]="fitnessTestFormModel"
-  [fields]="fitnessTestFormFields"
-  [options]="options"
-  [form]="fitnessTestForm">
-  </formly-form>
-</form>
-
-<redirect [className]="['float-right', 'actions']" [url]="reditectTo">
-</redirect>
+<div class="wrapper__container">
+  <form [formGroup]="fitnessTestForm" (ngSubmit)="submit(fitnessTestFormModel)">
+    <formly-form [model]="fitnessTestFormModel"
+    [fields]="fitnessTestFormFields"
+    [options]="options"
+    [form]="fitnessTestForm">
+    </formly-form>
+  </form>
+</div>

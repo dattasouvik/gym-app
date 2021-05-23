@@ -6,7 +6,7 @@ import { Pager } from 'src/app/models/pager.model';
 import { ApiHandlerService } from 'src/app/services/api-handler.service';
 import { HttpService } from 'src/app/services/http.service';
 import { LoadingService } from '../../shared/services/loading.service';
-import { ListNotificationsResponse } from '../models/notifications.model';
+import { ListNotificationsResponse, NotificationIcon } from '../models/notifications.model';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +16,7 @@ export class NotificationService implements OnDestroy {
   private stopPolling = new Subject();
   private notificationInfo$: Observable<Pager>;
 
-  private notificationIcons = [
+  private readonly notificationIcons: NotificationIcon[] = [
     {
       class: 'alert-danger',
       icon: 'error_outline'

@@ -4,7 +4,10 @@ import { Router } from '@angular/router';
 import { of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { FitnessTestFormMode } from 'src/app/modules/fitness-test/models/fitness-test-form.model';
-import { FitnessTestFormFieldGroup, FitnessTestFormResponse, MonitorFitnessTestReportResponse,TraineeFitnessReportDetailsResponse,TraineeFitnessReportsResponse } from 'src/app/modules/fitness-test/models/fitness-test-response.model';
+import { FitnessTestFormResponse,
+MonitorFitnessTestReportResponse,
+TraineeFitnessReportDetailsResponse,
+TraineeFitnessReportsResponse } from 'src/app/modules/fitness-test/models/fitness-test-response.model';
 import { LoadingService } from 'src/app/modules/shared/services/loading.service';
 import { ApiHandlerService } from 'src/app/services/api-handler.service';
 import { HttpService } from 'src/app/services/http.service';
@@ -14,38 +17,40 @@ import { HttpService } from 'src/app/services/http.service';
 })
 export class FitnessTestService {
 
+  private redirectUrl: string;
+
   private defaultFitnessForm = {
     form: {
       cardio: [
         {
-          'field_rhr1': null,
-          'field_rhr2': null,
-          'field_rhr3': null,
+          field_rhr1: null,
+          field_rhr2: null,
+          field_rhr3: null,
         }
       ],
       field_crunches: [
         {
-          "value": null
+          value: null
         }
       ],
       field_push_ups: [
         {
-          "value": null
+          value: null
         }
       ],
       field_chest_press_fitness_test: [
         {
-          "value": null
+          value: null
         }
       ],
       field_core_balancer: [
         {
-          "value": null
+          value: null
         }
       ],
       field_sit_and_rest: [
         {
-          "value": null
+          value: null
         }
       ],
     }
@@ -59,7 +64,7 @@ export class FitnessTestService {
   ) { }
 
 
-  loadDefaultFitnessTestForm():any {
+  loadDefaultFitnessTestForm(): any {
 
     const form$ = of({
      ...this.defaultFitnessForm
@@ -87,7 +92,7 @@ export class FitnessTestService {
     },
     redirectTo?: string
   ) {
-    let filteredPayload = { ...payload };
+    const filteredPayload = { ...payload };
     /* consent field is only for UI validation */
     delete filteredPayload['consent'];
 
@@ -95,7 +100,7 @@ export class FitnessTestService {
     params = params.set('_format', `json`);
     const fitnessFormData = {
       ...args,
-      "form": filteredPayload
+      form: filteredPayload
     };
 
     const update$ = this.httpService
@@ -118,7 +123,7 @@ export class FitnessTestService {
     params = params.set('page', `${page}`);
     params = params.set('_format', `json`);
     const report$ = this.httpService.get<MonitorFitnessTestReportResponse>
-      ("monitor-fitness-test", { params })
+      ('monitor-fitness-test', { params })
       .pipe(
         catchError(error => this.apiHandlerService.onApiError(error))
       );
@@ -130,7 +135,7 @@ export class FitnessTestService {
     params = params.set('page', `${page}`);
     params = params.set('_format', `json`);
     const report$ = this.httpService.get<TraineeFitnessReportsResponse>
-      ("fitness-reports-for-trainee", { params })
+      ('fitness-reports-for-trainee', { params })
       .pipe(
         catchError(error => this.apiHandlerService.onApiError(error))
       );
@@ -146,6 +151,20 @@ export class FitnessTestService {
         catchError(error => this.apiHandlerService.onApiError(error))
       );
     return this.loading.showLoaderUntilCompleted(details$);
+  }
+
+ /*
+ * Helper function to set url based redirection
+ */
+  setRedirectUrl(value: string){
+    this.redirectUrl = value;
+  }
+
+ /*
+ * Helper function to fetch url based redirection
+ */
+  fetchRedirectUrl(){
+    return this.redirectUrl ?? '/trainees';
   }
 
 }

@@ -14,6 +14,12 @@ export class RedirectComponent implements OnInit {
   className = '';
 
   @Input()
+  altText = '';
+
+  @Input()
+  text = '';
+
+  @Input()
   icon = 'arrow_back_ios';
 
   constructor(

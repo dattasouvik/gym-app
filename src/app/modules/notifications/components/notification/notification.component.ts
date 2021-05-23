@@ -36,8 +36,8 @@ export class NotificationComponent implements OnInit, OnDestroy {
   }
 
   onRedirect() {
-    /* TBD */
-    this.router.navigateByUrl('/profile', {skipLocationChange: true}).then(() => {
+    /* Fix to redirect existing component */
+    this.router.navigate(['..'], {skipLocationChange: true}).then(() => {
       this.router.navigateByUrl('/notifications');
     });
   }

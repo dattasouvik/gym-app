@@ -1,7 +1,19 @@
-<mat-tab-group>
+<mat-tab-group class="fitness-field-tabs">
   <mat-tab *ngFor="let tab of field.fieldGroup; let i = index; let last = last;"
     [label]="tab.templateOptions.label">
     <div class="container-fluid">
+      <section class="header">
+        <mat-toolbar>
+          <mat-toolbar-row>
+            <redirect
+            [icon]="'arrow_back_ios_new'"
+            [text]="'Back'"
+            [altText]="'Back'"
+            [url]="reditectTo">
+            </redirect>
+          </mat-toolbar-row>
+        </mat-toolbar>
+      </section>
       <formly-field [field]="tab"></formly-field>
       <div class="actions center">
         <button *ngIf="last"

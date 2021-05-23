@@ -13,3 +13,8 @@ export interface ListNotificationsResponse {
   rows: Notification[];
   pager: Pager;
 }
+
+export interface NotificationIcon {
+  class: string;
+  icon: string;
+}

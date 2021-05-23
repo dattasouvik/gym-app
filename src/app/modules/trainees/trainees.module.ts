@@ -21,6 +21,7 @@ import { UserFoodChartModule } from 'src/app/modules/user-food-chart/user-food-c
 import { FitnessReportsComponent } from './components/fitness-reports/fitness-reports.component';
 import { CoreModule } from 'src/app/modules/core/core.module';
 import { WeightMonitorComponent } from './components/weight-monitor/weight-monitor.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { WeightMonitorComponent } from './components/weight-monitor/weight-monit
     CommonModule,
     TraineesRoutingModule,
     CoreModule,
+    SharedModule,
     FlexLayoutModule,
     MaterialDesignModule,
     UserAttendanceModule,

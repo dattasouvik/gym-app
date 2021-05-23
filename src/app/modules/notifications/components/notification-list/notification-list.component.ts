@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { Subscription } from 'rxjs';
 import { tap } from 'rxjs/operators';
@@ -11,12 +11,12 @@ import { NotificationService } from '../../services/notification.service';
   templateUrl: './notification-list.component.html',
   styleUrls: ['./notification-list.component.scss']
 })
-export class NotificationListComponent implements OnInit {
+export class NotificationListComponent implements OnInit,OnDestroy {
 
   notifications: Notification[];
   pager: Pager;
   pageNumber = 0;
-  private subscription: Subscription;
+  private subscriptionList: Subscription[] = [];
 
   constructor(private notificationService: NotificationService) { }
 
@@ -29,24 +29,30 @@ export class NotificationListComponent implements OnInit {
   }
 
   private loadNotifications(page: number) {
-    this.subscription = this.notificationService.getNotifications(page)
+    this.subscriptionList.push(this.notificationService.getNotifications(page)
       .subscribe((response: ListNotificationsResponse) => {
         const { rows, pager } = response;
         this.notifications = rows;
         this.pager = pager;
-      });
+      }));
   }
 
   showIcon(type: string){
     return this.notificationService.getNotificationIcon(type);
   }
 
-  markNotificaion(nid: number){
-    this.notificationService.readNotification(nid)
-    .pipe(
-      tap(() => this.loadNotifications(this.pageNumber))
-    )
-    .subscribe();
+  markNotificaion(nid: number) {
+    this.subscriptionList.push(
+      this.notificationService.readNotification(nid)
+        .pipe(
+          tap(() => this.loadNotifications(this.pageNumber))
+        )
+        .subscribe()
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptionList.map(subscription => subscription.unsubscribe());
   }
 
 }

@@ -1,4 +1,6 @@
-import { Component, ComponentFactoryResolver, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { WeightTrackerService } from './../../../weight-tracker/services/weight-tracker.service';
+import { HostDirective } from 'src/app/modules/shared/directives/host.directive';
 
 @Component({
   selector: 'app-tr-weight-monitor',
@@ -6,28 +8,17 @@ import { Component, ComponentFactoryResolver, OnInit, ViewChild, ViewContainerRe
   styleUrls: ['./tr-weight-monitor.component.scss']
 })
 export class TrWeightMonitorComponent implements OnInit {
-  @ViewChild('weightTracker', { read: ViewContainerRef })
-  private weightTrackerReportviewContainerRef: ViewContainerRef;
+
+  @ViewChild(HostDirective, { static: true })
+  private reportsHost: HostDirective;
 
   constructor(
-    private vcref: ViewContainerRef,
-    private cfr: ComponentFactoryResolver
+    private weightTrackerService: WeightTrackerService
   ) { }
 
   ngOnInit(): void {
-    this.loadReportComponent();
-  }
-
-  /*
-  * Renders Lazy Loading Components in ng-template
-  */
-  async loadReportComponent() {
-    this.vcref.clear();
-    const { WeightTrackerReportsComponent } = await
-      import('../../../weight-tracker/components/weight-tracker-reports/weight-tracker-reports.component');
-    const weightTrackerReportComp = this.weightTrackerReportviewContainerRef.createComponent(
-      this.cfr.resolveComponentFactory(WeightTrackerReportsComponent)
-    );
+    const viewContainerRef = this.reportsHost.viewContainerRef;
+    this.weightTrackerService.loadWTReports(viewContainerRef);
   }
 
 }

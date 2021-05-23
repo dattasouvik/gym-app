@@ -7,3 +7,15 @@
   background: unset;
   color: unset;
 }
+
+/*
+* Override height for fitness-test-form tabs height
+*/
+.fitness-field-tabs.mat-tab-group {
+  flex-grow: 1;
+  min-height: 100%;
+
+  .mat-tab-body-wrapper {
+    flex-grow: 1;
+  }
+}

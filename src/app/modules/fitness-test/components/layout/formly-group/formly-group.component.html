@@ -1,10 +1,10 @@
 <div class="title" *ngIf="to?.label">
-  <h5>{{ to.label }}</h5>
+  <h4>{{ to.label }}</h4>
 </div>
 
 <div *ngFor="let field of field.fieldGroup; let i = index;" class="row">
-  <formly-field class="col" [field]="field"></formly-field>
-  <div class="actions">
+  <formly-field class="col-md-11 col-sm-10 col-xs-10" [field]="field"></formly-field>
+  <div class="actions col-md-1 col-sm-1 col-xs-2">
     <button mat-mini-fab aria-label="delete"
     color="warn"
     [disabled]="i < 1"
