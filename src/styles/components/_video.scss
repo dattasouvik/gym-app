@@ -1,0 +1,39 @@
+.video-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.video-bg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  transform: translate(-50%, -50%);
+  min-height: 100%;
+  z-index: -1;
+  -webkit-filter: blur(5px);
+  -moz-filter: blur(5px);
+  -o-filter: blur(5px);
+  -ms-filter: blur(5px);
+  filter: blur(5px);
+}
+
+.light-theme {
+  .video-container {
+    background-image: linear-gradient(
+      90deg,
+      rgba(255, 0, 0, 0.35),
+      rgba(0, 0, 255, 0.65)
+    );
+  }
+}
+
+.dark-theme {
+  .video-container {
+    background-image: linear-gradient(
+      90deg,
+      rgba(127, 140, 141, 0.75),
+      rgba(0, 0, 0, 0.65),
+    );
+  }
+}
