@@ -42,7 +42,7 @@ export class WorkoutPlan {
                       templateOptions: {
                         label: 'Field',
                         required: true,
-                        disabled: true,
+                        readonly: true,
                       },
                       hide: true,
                     },
@@ -53,7 +53,7 @@ export class WorkoutPlan {
                       templateOptions: {
                         label: 'Activity',
                         required: true,
-                        disabled: true,
+                        readonly: true,
                       },
                     },
                     {
@@ -63,7 +63,7 @@ export class WorkoutPlan {
                       templateOptions: {
                         type: 'number',
                         label: 'Minutes',
-                        disabled: true,
+                        readonly: true,
                         addonRight: {
                           icon: 'query_builder',
                         },
@@ -88,7 +88,7 @@ export class WorkoutPlan {
                       templateOptions: {
                         label: 'Field',
                         required: true,
-                        disabled: true,
+                        readonly: true,
                       },
                       hide: true,
                     },
@@ -99,7 +99,7 @@ export class WorkoutPlan {
                       templateOptions: {
                         label: 'Activity',
                         required: true,
-                        disabled: true,
+                        readonly: true,
                       },
                     },
                     {
@@ -109,7 +109,7 @@ export class WorkoutPlan {
                       templateOptions: {
                         type: 'number',
                         label: 'Sets',
-                        disabled: true,
+                        readonly: true,
                       },
                     },
                     {
@@ -119,7 +119,7 @@ export class WorkoutPlan {
                       templateOptions: {
                         type: 'number',
                         label: 'Reps',
-                        disabled: true,
+                        readonly: true,
                       },
                     },
                   ],
@@ -141,7 +141,7 @@ export class WorkoutPlan {
                       templateOptions: {
                         label: 'Field',
                         required: true,
-                        disabled: true,
+                        readonly: true,
                       },
                       hide: true,
                     },
@@ -152,7 +152,7 @@ export class WorkoutPlan {
                       templateOptions: {
                         label: 'Activity',
                         required: true,
-                        disabled: true,
+                        readonly: true,
                       },
                     },
                     {
@@ -162,7 +162,7 @@ export class WorkoutPlan {
                       templateOptions: {
                         type: 'number',
                         label: 'Sets',
-                        disabled: true,
+                        readonly: true,
                       },
                     },
                     {
@@ -172,7 +172,7 @@ export class WorkoutPlan {
                       templateOptions: {
                         type: 'number',
                         label: 'Reps',
-                        disabled: true,
+                        readonly: true,
                       },
                     },
                   ],
@@ -194,7 +194,7 @@ export class WorkoutPlan {
                       templateOptions: {
                         label: 'Field',
                         required: true,
-                        disabled: true,
+                        readonly: true,
                       },
                       hide: true,
                     },
@@ -205,7 +205,7 @@ export class WorkoutPlan {
                       templateOptions: {
                         label: 'Activity',
                         required: true,
-                        disabled: true,
+                        readonly: true,
                       },
                     },
                     {
@@ -215,7 +215,7 @@ export class WorkoutPlan {
                       templateOptions: {
                         type: 'number',
                         label: 'Sets',
-                        disabled: true,
+                        readonly: true,
                       },
                     },
                     {
@@ -225,7 +225,7 @@ export class WorkoutPlan {
                       templateOptions: {
                         type: 'number',
                         label: 'Reps',
-                        disabled: true,
+                        readonly: true,
                       },
                     },
                   ],
@@ -247,7 +247,7 @@ export class WorkoutPlan {
                       templateOptions: {
                         label: 'Field',
                         required: true,
-                        disabled: true,
+                        readonly: true,
                       },
                       hide: true,
                     },
@@ -258,7 +258,7 @@ export class WorkoutPlan {
                       templateOptions: {
                         label: 'Activity',
                         required: true,
-                        disabled: true,
+                        readonly: true,
                       },
                     },
                     {
@@ -268,7 +268,7 @@ export class WorkoutPlan {
                       templateOptions: {
                         type: 'number',
                         label: 'Sets',
-                        disabled: true,
+                        readonly: true,
                       },
                     },
                     {
@@ -278,7 +278,7 @@ export class WorkoutPlan {
                       templateOptions: {
                         type: 'number',
                         label: 'Reps',
-                        disabled: true,
+                        readonly: true,
                       },
                     },
                   ],
@@ -300,7 +300,7 @@ export class WorkoutPlan {
                       templateOptions: {
                         label: 'Field',
                         required: true,
-                        disabled: true,
+                        readonly: true,
                       },
                       hide: true,
                     },
@@ -311,7 +311,7 @@ export class WorkoutPlan {
                       templateOptions: {
                         label: 'Activity',
                         required: true,
-                        disabled: true,
+                        readonly: true,
                       },
                     },
                     {
@@ -321,7 +321,7 @@ export class WorkoutPlan {
                       templateOptions: {
                         type: 'number',
                         label: 'Sets',
-                        disabled: true,
+                        readonly: true,
                       },
                     },
                     {
@@ -331,7 +331,7 @@ export class WorkoutPlan {
                       templateOptions: {
                         type: 'number',
                         label: 'Reps',
-                        disabled: true,
+                        readonly: true,
                       },
                     },
                   ],
@@ -353,7 +353,7 @@ export class WorkoutPlan {
                       templateOptions: {
                         label: 'Field',
                         required: true,
-                        disabled: true,
+                        readonly: true,
                       },
                       hide: true,
                     },
@@ -364,7 +364,7 @@ export class WorkoutPlan {
                       templateOptions: {
                         label: 'Activity',
                         required: true,
-                        disabled: true,
+                        readonly: true,
                       },
                     },
                     {
@@ -374,7 +374,7 @@ export class WorkoutPlan {
                       templateOptions: {
                         type: 'number',
                         label: 'Sets',
-                        disabled: true,
+                        readonly: true,
                       },
                     },
                     {
@@ -384,7 +384,7 @@ export class WorkoutPlan {
                       templateOptions: {
                         type: 'number',
                         label: 'Reps',
-                        disabled: true,
+                        readonly: true,
                       },
                     },
                   ],
@@ -406,7 +406,7 @@ export class WorkoutPlan {
                       templateOptions: {
                         label: 'Field',
                         required: true,
-                        disabled: true,
+                        readonly: true,
                       },
                       hide: true,
                     },
@@ -417,7 +417,7 @@ export class WorkoutPlan {
                       templateOptions: {
                         label: 'Activity',
                         required: true,
-                        disabled: true,
+                        readonly: true,
                       },
                     },
                     {
@@ -427,7 +427,7 @@ export class WorkoutPlan {
                       templateOptions: {
                         type: 'number',
                         label: 'Sets',
-                        disabled: true,
+                        readonly: true,
                       },
                     },
                     {
@@ -437,7 +437,7 @@ export class WorkoutPlan {
                       templateOptions: {
                         type: 'number',
                         label: 'Reps',
-                        disabled: true,
+                        readonly: true,
                       },
                     },
                   ],
@@ -459,7 +459,7 @@ export class WorkoutPlan {
                       templateOptions: {
                         label: 'Field',
                         required: true,
-                        disabled: true,
+                        readonly: true,
                       },
                       hide: true,
                     },
@@ -470,7 +470,7 @@ export class WorkoutPlan {
                       templateOptions: {
                         label: 'Activity',
                         required: true,
-                        disabled: true,
+                        readonly: true,
                       },
                     },
                     {
@@ -480,7 +480,7 @@ export class WorkoutPlan {
                       templateOptions: {
                         type: 'number',
                         label: 'Sets',
-                        disabled: true,
+                        readonly: true,
                       },
                     },
                     {
@@ -490,7 +490,7 @@ export class WorkoutPlan {
                       templateOptions: {
                         type: 'number',
                         label: 'Reps',
-                        disabled: true,
+                        readonly: true,
                       },
                     },
                   ],
@@ -512,7 +512,7 @@ export class WorkoutPlan {
                       templateOptions: {
                         label: 'Field',
                         required: true,
-                        disabled: true,
+                        readonly: true,
                       },
                       hide: true,
                     },
@@ -523,7 +523,7 @@ export class WorkoutPlan {
                       templateOptions: {
                         label: 'Activity',
                         required: true,
-                        disabled: true,
+                        readonly: true,
                       },
                     },
                     {
@@ -533,7 +533,7 @@ export class WorkoutPlan {
                       templateOptions: {
                         type: 'number',
                         label: 'Sets',
-                        disabled: true,
+                        readonly: true,
                       },
                     },
                     {
@@ -543,7 +543,7 @@ export class WorkoutPlan {
                       templateOptions: {
                         type: 'number',
                         label: 'Reps',
-                        disabled: true,
+                        readonly: true,
                       },
                     },
                   ],
@@ -574,7 +574,7 @@ export class WorkoutPlan {
                       templateOptions: {
                         label: 'Field',
                         required: true,
-                        disabled: true,
+                        readonly: true,
                       },
                       hide: true,
                     },
@@ -585,7 +585,7 @@ export class WorkoutPlan {
                       templateOptions: {
                         label: 'Activity',
                         required: true,
-                        disabled: true,
+                        readonly: true,
                       },
                     },
                     {
@@ -620,7 +620,7 @@ export class WorkoutPlan {
                       templateOptions: {
                         label: 'Field',
                         required: true,
-                        disabled: true,
+                        readonly: true,
                       },
                       hide: true,
                     },
@@ -631,7 +631,7 @@ export class WorkoutPlan {
                       templateOptions: {
                         label: 'Activity',
                         required: true,
-                        disabled: true,
+                        readonly: true,
                       },
                     },
                     {
@@ -673,7 +673,7 @@ export class WorkoutPlan {
                       templateOptions: {
                         label: 'Field',
                         required: true,
-                        disabled: true,
+                        readonly: true,
                       },
                       hide: true,
                     },
@@ -684,7 +684,7 @@ export class WorkoutPlan {
                       templateOptions: {
                         label: 'Activity',
                         required: true,
-                        disabled: true,
+                        readonly: true,
                       },
                     },
                     {
@@ -726,7 +726,7 @@ export class WorkoutPlan {
                       templateOptions: {
                         label: 'Field',
                         required: true,
-                        disabled: true,
+                        readonly: true,
                       },
                       hide: true,
                     },
@@ -737,7 +737,7 @@ export class WorkoutPlan {
                       templateOptions: {
                         label: 'Activity',
                         required: true,
-                        disabled: true,
+                        readonly: true,
                       },
                     },
                     {
@@ -779,7 +779,7 @@ export class WorkoutPlan {
                       templateOptions: {
                         label: 'Field',
                         required: true,
-                        disabled: true,
+                        readonly: true,
                       },
                       hide: true,
                     },
@@ -790,7 +790,7 @@ export class WorkoutPlan {
                       templateOptions: {
                         label: 'Activity',
                         required: true,
-                        disabled: true,
+                        readonly: true,
                       },
                     },
                     {
@@ -832,7 +832,7 @@ export class WorkoutPlan {
                       templateOptions: {
                         label: 'Field',
                         required: true,
-                        disabled: true,
+                        readonly: true,
                       },
                       hide: true,
                     },
@@ -843,7 +843,7 @@ export class WorkoutPlan {
                       templateOptions: {
                         label: 'Activity',
                         required: true,
-                        disabled: true,
+                        readonly: true,
                       },
                     },
                     {
@@ -885,7 +885,7 @@ export class WorkoutPlan {
                       templateOptions: {
                         label: 'Field',
                         required: true,
-                        disabled: true,
+                        readonly: true,
                       },
                       hide: true,
                     },
@@ -896,7 +896,7 @@ export class WorkoutPlan {
                       templateOptions: {
                         label: 'Activity',
                         required: true,
-                        disabled: true,
+                        readonly: true,
                       },
                     },
                     {
@@ -938,7 +938,7 @@ export class WorkoutPlan {
                       templateOptions: {
                         label: 'Field',
                         required: true,
-                        disabled: true,
+                        readonly: true,
                       },
                       hide: true,
                     },
@@ -949,7 +949,7 @@ export class WorkoutPlan {
                       templateOptions: {
                         label: 'Activity',
                         required: true,
-                        disabled: true,
+                        readonly: true,
                       },
                     },
                     {
@@ -991,7 +991,7 @@ export class WorkoutPlan {
                       templateOptions: {
                         label: 'Field',
                         required: true,
-                        disabled: true,
+                        readonly: true,
                       },
                       hide: true,
                     },
@@ -1002,7 +1002,7 @@ export class WorkoutPlan {
                       templateOptions: {
                         label: 'Activity',
                         required: true,
-                        disabled: true,
+                        readonly: true,
                       },
                     },
                     {
@@ -1044,7 +1044,7 @@ export class WorkoutPlan {
                       templateOptions: {
                         label: 'Field',
                         required: true,
-                        disabled: true,
+                        readonly: true,
                       },
                       hide: true,
                     },
@@ -1055,7 +1055,7 @@ export class WorkoutPlan {
                       templateOptions: {
                         label: 'Activity',
                         required: true,
-                        disabled: true,
+                        readonly: true,
                       },
                     },
                     {
