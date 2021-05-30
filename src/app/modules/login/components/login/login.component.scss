@@ -4,9 +4,11 @@
 
 .svgContainer {
   position: relative;
-  min-width: 6rem;
-  min-height: 6rem;
-  top: 0.75rem;
+  max-width: 6rem;
+  margin: 0 auto;
+  position: relative;
+  max-width: 6rem;
+  top: 1rem;
   z-index: 1;
   border-radius: 50%;
   background: none;
@@ -50,5 +52,41 @@
       transform: scale(0.95);
       box-shadow: 0 0 0 0 var(--primary);
     }
+  }
+}
+
+/*
+*  TBD
+*  https://www.sliderrevolution.com/resources/css-animated-background/
+*/
+
+.bg {
+  animation:slide 3s ease-in-out infinite alternate;
+  background-image: linear-gradient(-60deg, var(--accent) 50%, var(--primary) 50%);
+  bottom:0;
+  left:-50%;
+  opacity:.5;
+  position:fixed;
+  right:-50%;
+  top:0;
+  z-index:-5;
+}
+
+.bg2 {
+  animation-direction:alternate-reverse;
+  animation-duration:4s;
+}
+
+.bg3 {
+  animation-duration:5s;
+}
+
+
+@keyframes slide {
+  0% {
+    transform:translateX(-25%);
+  }
+  100% {
+    transform:translateX(25%);
   }
 }
