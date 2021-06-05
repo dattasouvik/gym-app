@@ -1,0 +1,19 @@
+.home__page {
+  & section {
+    padding: 0.5rem 0 0.5rem 0;
+  }
+  .section-title {
+    padding: 1rem;
+  }
+
+  .card__rounded {
+    border-radius: 20px;
+  }
+}
+
+.dark-them {
+  .home__page .section-title > img {
+    filter: invert(21%) sepia(52%) saturate(6931%) hue-rotate(351deg)
+      brightness(109%) contrast(78%);
+  }
+}

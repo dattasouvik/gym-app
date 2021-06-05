@@ -12,6 +12,15 @@
     </div>
   </mat-toolbar>
   <mat-nav-list class="p-0">
+    
+    <!-- Home menu for all users -->
+    <mat-list-item
+      routerLink="/home" routerLinkActive='active'
+      (click)="sidenav.toggle()">
+      <mat-icon matListIcon>home</mat-icon>
+      <a matLine>Home</a>
+    </mat-list-item>
+
     <!-- Menu loaded when user is logged in starts here -->
     <ng-container *ngIf="isLoggedIn">
 

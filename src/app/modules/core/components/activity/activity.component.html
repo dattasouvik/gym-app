@@ -1,0 +1,13 @@
+<mat-card [ngClass]="className">
+  <mat-card-content>
+    <div class="s-single-services text-center active">
+      <div class="services-icon">
+        <img [src]="activity.image" [alt]="activity.title">
+      </div>
+      <div class="second-services-content">
+        <h5>{{ activity.title }}</h5>
+        <p>{{activity.description  }}</p>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

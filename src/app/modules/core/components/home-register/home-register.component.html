@@ -1,0 +1,25 @@
+<section class="register">
+  <div class="section-title content__center">
+    <h2>Be a member</h2>
+    <img src="assets/images/icons/circle-line.png" alt="circle" />
+  </div>
+  <ng-container>
+    <div class="content">
+      <div fxLayout="row wrap" fxLayoutGap="5px grid">
+        <div fxFlex="50%" fxFlex.lt-xs="100%" *ngFor="let item of links;let even = even;">
+          <div class="card animate__delay animate__animated"
+            [ngClass]="even ? ' animate__fadeInLeft ' : 'animate__fadeInRight'">
+            <div class="d-flex body">
+              <button (click)="redirect(item.path)"
+                color="primary"
+                class="btn-fill content__center__row btn-flicker">
+                <mat-icon *ngIf="item.icon">{{item.icon}}</mat-icon>
+                <span *ngIf="item.title">{{item.title}}</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</section>

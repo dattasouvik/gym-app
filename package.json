@@ -45,6 +45,7 @@
     "@ngx-formly/material": "^5.10.14",
     "@ngx-formly/schematics": "^5.10.14",
     "@syncfusion/ej2-angular-grids": "^18.2.44",
+    "animate.css": "^4.1.1",
     "bootstrap": "^4.5.0",
     "gsap": "2.1.0",
     "gtoken": "^5.0.1",

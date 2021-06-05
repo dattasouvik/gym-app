@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit,AfterViewInit,OnDestroy {
     )
     .pipe(takeWhile(() => this.isAlive))
     .subscribe( success => {
-          this.router.navigate(['/profile']);
+          this.router.navigate(['/']);
     }, error => this.apiHandlerService.onApiError(error));
   }
 

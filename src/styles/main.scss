@@ -18,19 +18,27 @@
 
 
 @import 'themes/theme';
+/* Load Fluid animation */
+@import 'themes/fluid';
 
+/* Load Pages */
+@import 'pages/home';
 
 /* Load components */
 @import 'components/card';
 @import 'components/buttons';
 @import 'components/links';
 @import 'components/video';
+@import 'components/activities';
 
 @import 'overrides/full-calendar-override';
 @import 'overrides/override';
 
 /* Load material icons offline */
 @import 'icons/material-icons';
+
+/* Load animation library */
+@import '~animate.css/animate.min';
 
 // Override typography for all Angular Material, including mat-base-typography and all components.
 @include angular-material-typography($typography);

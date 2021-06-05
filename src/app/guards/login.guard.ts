@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, 
-  CanActivate, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { ActivatedRouteSnapshot,
+  CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { MessagesService } from 'src/app/modules/shared/services/messages.service';
 import { map, take } from 'rxjs/operators';
@@ -14,7 +14,8 @@ export class LoginGuard implements CanActivate {
 
   constructor(
     private authService: AuthService,
-    private messages: MessagesService
+    private messages: MessagesService,
+    private router: Router
   ) { }
 
   canActivate(
@@ -32,8 +33,9 @@ export class LoginGuard implements CanActivate {
         map(loggedIn => {
           if (loggedIn) {
             this.messages.showErrors("Access forbidden");
+            this.router.navigateByUrl('/');
           }
-          return !loggedIn ? true : false;
+          return true;
         })
       );
   }

@@ -1,0 +1,56 @@
+.activities {
+  .services-icon {
+    width: 70px;
+    height: 90px;
+    background: var(--primary,#8368ff);
+    display: inline-block;
+    padding-top: 30px;
+    margin-bottom: 30px;
+    @include border-radius(0 0 35px 35px);
+  }
+
+  .carousel-item.active {
+    & .services-icon {
+      background: var(--warning,#ffae25);
+    }
+    & .services-icon img {
+      transition: transform 1s ease-in;
+      transform: rotateY(360deg);
+    }
+  }
+
+  .s-single-services {
+    transition: 0.3s;
+    padding: 0 2rem 2rem;
+    box-shadow: 3px 4px 15px #00000026;
+
+    @include border-radius(10px);
+  }
+
+
+  /* Overide carousal icons */
+  .carousel-control-prev-icon,
+  .carousel-control-next-icon {
+    height: 100px;
+    width: 100px;
+    background-size: 100%, 100%;
+    border-radius: 50%;
+    background-image: none;
+  }
+
+  .carousel-control-next-icon:after {
+    content: ">";
+    font-size: 55px;
+    color: var(--accent);
+  }
+
+  .carousel-control-prev-icon:after {
+    content: "<";
+    font-size: 55px;
+    color: var(--accent);
+  }
+
+  .carousel-indicators li{
+    background-color: var(--accent);
+  }
+}

@@ -1,0 +1,22 @@
+<section class="home-navigation">
+  <div class="section-title content__center">
+    <h2>Follow our links</h2>
+    <img src="assets/images/icons/circle-line.png" alt="circle" />
+  </div>
+  <ng-container>
+    <div class="content">
+      <div fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutGap="5px grid">
+        <div fxFlex="25%" fxFlex.xs="100%" fxFlex.lt-md="50%"
+          *ngFor="let item of [1,2,3,4,5,6];let even = even;let i = index">
+          <div class="animate__animated animate__fadeInDown animate__delay-2s">
+            <div class="navigation-actions content__center__row btn-cta">
+              <span>Action</span>
+              <span class="spacer"></span>
+              <mat-icon>arrow_forward_ios</mat-icon>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</section>

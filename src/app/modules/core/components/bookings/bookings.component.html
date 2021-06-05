@@ -1,0 +1,32 @@
+<section class="bookings">
+  <div class="section-title content__center">
+    <h2>{{ title }}</h2>
+    <img src="assets/images/icons/circle-line.png" alt="circle" />
+  </div>
+  <ng-container *ngIf="bookings">
+    <div class="content">
+      <div fxLayout="row wrap" fxLayoutGap="5px grid" fxLayoutAlign="center center">
+        <div
+          fxFlex="50%"
+          fxFlex.lt-md="100%"
+          *ngFor="let item of bookings;let i = index; last as isLast;">
+          <mat-card class="content__elevation
+          animate__animated animate__fadeInDown animate__delay-1s" *ngIf="!isLast">
+            <mat-card-content>
+              <p><b>{{i+1}}.</b> {{ item.text }}</p>
+            </mat-card-content>
+          </mat-card>
+          <div class="card animate__animated animate__fadeInDown animate__delay-2s" *ngIf="isLast">
+              <a
+              color="warn"
+              matRipple
+              mat-raised-button [href]="item.link" target="_blank">
+              <mat-icon>open_in_new</mat-icon>
+                {{ item.text}}
+              </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</section>

@@ -1,5 +1,17 @@
 @use './variables' as variables;
 
+/* Utility mixins starts here */
+@mixin border-radius($values...) {
+    @each $var in $values {
+        border-radius: #{$var};
+    }
+}
+/* Utility mixins ends here */
+
+
+
+
+
 /* Messages Section  starts here */
 
 @mixin error-message {
@@ -13,6 +25,12 @@
 }
 
 /* Messages Section  ends here */
+
+
+
+
+
+
 
 /* Profile image for trainer and trainee */
 @mixin profile__avatar( $width:50%, $border-radius: 50% , $zoom: 1) {

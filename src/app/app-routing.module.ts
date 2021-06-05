@@ -7,6 +7,7 @@ import { LoginGuard } from 'src/app/guards/login.guard';
 import { AuthGuard } from 'src/app/guards/auth.guard';
 import { CanLoadAuthGuard } from 'src/app/guards/can-load-auth.guard';
 import { NotFoundComponent } from 'src/app/modules/core/components/not-found/not-found.component';
+import { HomeComponent } from './modules/core/components/home/home.component';
 
 
 const routes: Routes = [
@@ -15,7 +16,7 @@ const routes: Routes = [
   // { path: 'schedule', component: ScheduleDaysComponent },
   {
     path: '',
-    redirectTo: 'profile',
+    redirectTo: 'home',
     pathMatch: 'full'
   },
   {
@@ -90,6 +91,10 @@ const routes: Routes = [
     loadChildren: () => import('./modules/notifications/notifications.module')
     .then(m => m.NotificationsModule),
     canLoad: [CanLoadAuthGuard]
+  },
+  {
+    path: 'home',
+    component: HomeComponent,
   },
   {
     path: '**',

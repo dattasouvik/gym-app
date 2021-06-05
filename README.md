@@ -47,6 +47,7 @@ https://itnext.io/using-renderer2-in-angular-8f80da6756f8
 ## SCSS Artifacts
 <b>https://miro.medium.com/max/958/1*0MP59mq0K_Hi2ECSb_Zwhg.png</b>
 <b>https://github.com/shhdharmen/indepth-theming-material-components</b>
+<b>https://gist.github.com/jareware/4738651</b>
 
 ## SCRIPT Template
 <b>https://gist.github.com/adamreisnz/9edf1f48e19c104b81f8102a27de0940</b>

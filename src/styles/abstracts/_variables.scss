@@ -1,5 +1,36 @@
+/**** GLOBAL *****/
+$defautt-text-color: #efefef;
+
+
+
 /* Messages Section  starts here */
 $error-bgcolor:#dc3545;
 $success-bgcolor:#20c997;
 $message-text: #f8f9fa;
 /* Messages Section  ends here */
+
+
+/* Fluid theme starts here */
+$light-primaryColor:#efefef;
+$light-altColor:#00897b69;
+
+$dark-primaryColor:var(--accent,#FFC107);
+$dark-altColor:var(--primary,#455a64);
+/* Fluid theme ends here */
+
+/* Button Configs starts here */
+
+$cta-default-shape: polygon(0% 0%, 5% 100%, 87% 88%, 99% 90%, 94% 4%);
+$cta-hover-shape: polygon(8% 2%, 1% 87%, 30% 70%, 88% 90%, 100% 4%);
+
+$cta-primaryColor: #1e5773;
+$cta-hover-primaryColor: rgba(0, 0, 0, 0.65);
+
+$cta-dark-primaryColor:rgba(0, 0, 0, 0.65);
+$cta-dark-hover-primaryColor: rgba(0, 0, 255, 0.65);
+
+$flicker-primaryColor:#FFC107;
+$flicker-altColor:rgba(0, 0, 0, 0.65);
+$flicker-dark-primaryColor:rgba(0, 0, 254, 0.65);
+
+/* Button Configs ends here */

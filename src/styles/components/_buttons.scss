@@ -1,4 +1,11 @@
-.actions__center{
+@import "./../abstracts//variables";
+
+:root {
+  --pos: center;
+  --size: 0;
+}
+
+.actions__center {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -8,21 +15,90 @@
   }
 }
 
-
-.btn-small{
-  padding: 0  0.5rem;
+.btn-small {
+  padding: 0 0.5rem;
 }
 
-.btn-medium{
-  padding: 0  1rem;
+.btn-medium {
+  padding: 0 1rem;
 }
 
-.btn-large{
-  padding: 0  2rem;
+.btn-large {
+  padding: 0 2rem;
 }
 
-
-
-.pointer{
+.pointer {
   cursor: pointer;
 }
+
+/* Button custom animation starts here */
+.btn-cta {
+  background: $cta-primaryColor;
+  color: $defautt-text-color;
+  cursor: pointer;
+  padding: 1em;
+  clip-path: $cta-default-shape;
+  transition: clip-path 0.5s ease-in-out;
+
+  &:hover,
+  &:focus,
+  &:active {
+    background: $cta-hover-primaryColor;
+    clip-path: $cta-hover-shape;
+  }
+}
+
+.btn-flicker {
+  position: relative;
+  background-color: $flicker-primaryColor;
+  border: 0;
+  border-radius: 10px;
+  box-shadow: 0px 3px 5px -1px rgb(0 0 0 / 20%),
+    0px 5px 8px 0px rgb(0 0 0 / 14%), 0px 1px 14px 0px rgb(0 0 0 / 12%);
+  overflow: hidden;
+  cursor: pointer;
+
+  &:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: $flicker-altColor;
+    clip-path: circle(var(--size) at var(--pos));
+    transition: 0.5s linear;
+  }
+  &:hover,
+  &:focus {
+    mat-icon,
+    span {
+      z-index: 1;
+      color: $defautt-text-color;
+    }
+    &:before {
+      --size: 100%;
+    }
+  }
+}
+
+/* Override for dark theme */
+
+.dark-theme {
+  .btn-cta {
+    background: $cta-dark-primaryColor;
+
+    &:hover,
+    &:focus,
+    &:active {
+      background: $cta-dark-hover-primaryColor;
+    }
+  }
+
+  .btn-flicker {
+    background-color: $flicker-dark-primaryColor;
+    color: $defautt-text-color;
+  }
+}
+
+/* Button custom animation ends here */
