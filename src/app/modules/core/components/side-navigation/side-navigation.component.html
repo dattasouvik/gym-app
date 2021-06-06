@@ -1,0 +1,29 @@
+<mat-nav-list class="side-navigation p-0">
+
+  <!-- Menu loaded when user is logged out starts here -->
+  <ng-container *ngIf="authService.isLoggedOut$ | async">
+    <ng-template [ngTemplateOutlet]="SideMenu"></ng-template>
+  </ng-container>
+  <!-- Menu loaded when user is logged out ends here-->
+
+  <!-- Menu loaded when user is logged in starts here -->
+  <ng-container *ngIf="authService.isLoggedIn$ | async">
+    <ng-template [ngTemplateOutlet]="SideMenu"></ng-template>
+  </ng-container>
+  <!-- Menu loaded when user is logged in ends here-->
+
+  <ng-template #SideMenu >
+    <ng-container *ngIf="sideMenus.length > 0">
+      <ng-container *ngFor="let navigation of sideMenus" >
+          <mat-list-item
+          [routerLink]="[navigation.url]"
+          routerLinkActive="menu-item-active"
+          (click)="handleNavigation(navigation.action)">
+            <mat-icon matListIcon>{{ navigation.icon }}</mat-icon>
+            <a matLine>{{ navigation.title }}</a>
+          </mat-list-item>
+      </ng-container>
+    </ng-container>
+</ng-template>
+
+</mat-nav-list>

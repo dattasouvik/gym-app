@@ -13,6 +13,8 @@ import { HomeRegisterComponent } from './components/home-register/home-register.
 import { AnonymousUserHomeComponent } from './components/anonymous-user-home/anonymous-user-home.component';
 import { LoggedinUserHomeComponent } from './components/loggedin-user-home/loggedin-user-home.component';
 import { SharedModule } from '../shared/shared.module';
+import { SideNavigationComponent } from './components/side-navigation/side-navigation.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -24,10 +26,12 @@ import { SharedModule } from '../shared/shared.module';
     HomeNavigationLinksComponent,
     HomeRegisterComponent,
     AnonymousUserHomeComponent,
-    LoggedinUserHomeComponent
+    LoggedinUserHomeComponent,
+    SideNavigationComponent
   ],
   imports: [
     CommonModule,
+    RouterModule,
     MaterialDesignModule,
     DefaultImageModule,
     SharedModule,
@@ -36,6 +40,7 @@ import { SharedModule } from '../shared/shared.module';
   exports: [
     NotFoundComponent,
     HomeComponent,
+    SideNavigationComponent,
     DefaultImageModule
   ]
 })
