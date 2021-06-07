@@ -15,6 +15,7 @@ import { LoggedinUserHomeComponent } from './components/loggedin-user-home/logge
 import { SharedModule } from '../shared/shared.module';
 import { SideNavigationComponent } from './components/side-navigation/side-navigation.component';
 import { RouterModule } from '@angular/router';
+import { FluidFormComponent } from './components/layout/fluid-form/fluid-form.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { RouterModule } from '@angular/router';
     HomeRegisterComponent,
     AnonymousUserHomeComponent,
     LoggedinUserHomeComponent,
-    SideNavigationComponent
+    SideNavigationComponent,
+    FluidFormComponent
   ],
   imports: [
     CommonModule,
@@ -41,6 +43,7 @@ import { RouterModule } from '@angular/router';
     NotFoundComponent,
     HomeComponent,
     SideNavigationComponent,
+    FluidFormComponent,
     DefaultImageModule
   ]
 })

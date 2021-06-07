@@ -7,12 +7,14 @@ import { MaterialDesignModule } from '../material-design/material-design.module'
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
+import { CoreModule } from '../core/core.module';
 
 @NgModule({
   declarations: [RegisterComponent],
   imports: [
     CommonModule,
     UserRegistrationRoutingModule,
+    CoreModule,
     ReactiveFormsModule,
     FormsModule,
     MatPasswordStrengthModule,

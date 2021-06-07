@@ -6,6 +6,7 @@ from 'src/app/modules/reset-password/components/reset-password/reset-password.co
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialDesignModule } from 'src/app/modules/material-design/material-design.module';
 import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
+import { CoreModule } from '../core/core.module';
 
 
 @NgModule({
@@ -13,6 +14,7 @@ import { MatPasswordStrengthModule } from '@angular-material-extensions/password
   imports: [
     CommonModule,
     ResetPasswordRoutingModule,
+    CoreModule,
     MaterialDesignModule,
     FormsModule,
     ReactiveFormsModule,
