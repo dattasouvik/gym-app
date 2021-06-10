@@ -1,9 +1,9 @@
 <section class="activities">
   <!-- Render title dynamically -->
-  <div class="section-title content__center">
-    <h2>{{ title }}</h2>
-    <img src="assets/images/icons/circle-line.png" alt="circle">
-  </div>
+  <core-banner-card-header
+  className="section-title content__center"
+  title="Build Your Body Transform Your Life">
+  </core-banner-card-header>
   <ng-container *ngIf="activities">
     <!-- Render for mobile screens only -->
     <div fxHide [fxShow.xs]="true"

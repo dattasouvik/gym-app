@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CanComponentDeactivate } from 'src/app/guards/can-deactivate.guard';
 import { ResetPassword } from 'src/app/modules/reset-password/models/reset-password.model';
 import { ResetPasswordService } from 'src/app/modules/reset-password/services/reset-password.service';
 import { SharedPasswordValidators } from 'src/app/modules/shared/validators/shared-password-validators';
@@ -10,12 +11,12 @@ import { SharedPasswordValidators } from 'src/app/modules/shared/validators/shar
   styleUrls: ['./reset-password.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ResetPasswordComponent implements OnInit {
+export class ResetPasswordComponent implements OnInit, CanComponentDeactivate {
 
   form: FormGroup;
   defaultMode = 'phone';
   numberPattern = '^[0-9]+$';
-  availableModes:{[key:string]:string}[] = [
+  availableModes: {[key: string]: string}[] = [
     {
       value: 'email',
       display: 'Email'
@@ -33,6 +34,14 @@ export class ResetPasswordComponent implements OnInit {
   ngOnInit(): void {
     this.buildForm();
     this.modeValidators();
+  }
+
+  canDeactivate(): boolean {
+    /* Reusable method to check for unsaved Data */
+    if (this.form.dirty) {
+      return confirm('Your changes are not saved yet. Do you like to leave ?');
+    }
+    return true;
   }
 
 
@@ -69,7 +78,7 @@ export class ResetPasswordComponent implements OnInit {
       confirmPassword: [null, Validators.compose([Validators.required])]
     },
     {
-      validator: SharedPasswordValidators.ComparePassword("password", "confirmPassword")
+      validator: SharedPasswordValidators.ComparePassword('password', 'confirmPassword')
     });
   }
 
@@ -108,7 +117,7 @@ export class ResetPasswordComponent implements OnInit {
     })
   }
 
-  showField(value: string):boolean {
+  showField(value: string): boolean {
     return this.form.get('mode').value === value;
   }
 

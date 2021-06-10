@@ -1,8 +1,8 @@
 <section class="bookings">
-  <div class="section-title content__center">
-    <h2>{{ title }}</h2>
-    <img src="assets/images/icons/circle-line.png" alt="circle" />
-  </div>
+  <!-- Render title dynamically -->
+  <core-banner-card-header className="section-title content__center" title="Build Your Body Transform Your Life">
+  </core-banner-card-header>
+
   <ng-container *ngIf="bookings">
     <div class="content">
       <div fxLayout="row wrap" fxLayoutGap="5px grid" fxLayoutAlign="center center">
@@ -19,6 +19,7 @@
           <div class="card animate__animated animate__fadeInDown animate__delay-2s" *ngIf="isLast">
               <a
               color="warn"
+              class="rounded-pill"
               matRipple
               mat-raised-button [href]="item.link" target="_blank">
               <mat-icon>open_in_new</mat-icon>

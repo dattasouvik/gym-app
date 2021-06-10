@@ -7,7 +7,7 @@
       <mat-card-subtitle>Be our member</mat-card-subtitle>
     </mat-card-header>
       <mat-card-content>
-          <form [formGroup]="regForm" (ngSubmit)="onSubmit()">
+          <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
               <p>
                 <mat-form-field class="field-full-width">
                     <mat-label>First Name</mat-label>
@@ -137,7 +137,7 @@
                       [type]="confirmPassword_toggle.type"
                       required
                       placeholder="Confirm Password">
-                    <mat-error *ngIf="regForm.controls['confirmPassword'].hasError('mustMatch')">
+                    <mat-error *ngIf="registrationForm.controls['confirmPassword'].hasError('mustMatch')">
                       Password do not match
                     </mat-error>
                 </mat-form-field>
@@ -150,7 +150,7 @@
                     Login
                   </button>
                   <button mat-raised-button color="primary"
-                  [disabled]="regForm.invalid">
+                  [disabled]="registrationForm.invalid">
                     <mat-icon>send</mat-icon>
                     Submit</button>
               </div>

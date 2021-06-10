@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { UserRegistration }
-from 'src/app/modules/user-registration/model/user-registration.model';
+import { UserRegistration } from 'src/app/modules/user-registration/model/user-registration.model';
 import { Roles, GenderType } from 'src/app/models/user.model';
 import { UserRegisterService } from 'src/app/modules/user-registration/services/user-register.service';
 import { SharedPasswordValidators } from 'src/app/modules/shared/validators/shared-password-validators';
+import { CanComponentDeactivate } from 'src/app/guards/can-deactivate.guard';
 
 interface Role {
   value: string;
@@ -17,9 +17,9 @@ interface Role {
   styleUrls: ['./register.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent implements OnInit, CanComponentDeactivate  {
 
-  regForm: FormGroup;
+  registrationForm: FormGroup;
   roles: Role[] = [
     {value: Roles.MEMBER, viewValue: 'Member'},
     {value: Roles.TRAINER, viewValue: 'Trainer'}
@@ -29,10 +29,18 @@ export class RegisterComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private userRegistration: UserRegisterService
-    ) {};
+    ) {}
+
+  canDeactivate(): boolean {
+    /* Reusable method to check for unsaved Data */
+    if (this.registrationForm.dirty) {
+      return confirm('Your changes are not saved yet. Do you like to leave ?');
+    }
+    return true;
+  }
 
   ngOnInit(): void {
-    this.regForm = this.fb.group({
+    this.registrationForm = this.fb.group({
       first_name: [ null, Validators.required],
       last_name: [null , Validators.required],
       role: [this.roles[0].value, Validators.required],
@@ -68,11 +76,11 @@ export class RegisterComponent implements OnInit {
     },
     {
       // check whether our password and confirm password match
-      validator: SharedPasswordValidators.ComparePassword("password", "confirmPassword")
+      validator: SharedPasswordValidators.ComparePassword('password', 'confirmPassword')
     });
   }
 
   onSubmit() {
-    this.userRegistration.register(this.regForm.value as UserRegistration);
+    this.userRegistration.register(this.registrationForm.value as UserRegistration);
   }
 }

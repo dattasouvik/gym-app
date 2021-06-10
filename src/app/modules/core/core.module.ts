@@ -16,6 +16,7 @@ import { SharedModule } from '../shared/shared.module';
 import { SideNavigationComponent } from './components/side-navigation/side-navigation.component';
 import { RouterModule } from '@angular/router';
 import { FluidFormComponent } from './components/layout/fluid-form/fluid-form.component';
+import { BannerCardHeaderComponent } from './components/layout/banner-card-header/banner-card-header.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { FluidFormComponent } from './components/layout/fluid-form/fluid-form.co
     AnonymousUserHomeComponent,
     LoggedinUserHomeComponent,
     SideNavigationComponent,
-    FluidFormComponent
+    FluidFormComponent,
+    BannerCardHeaderComponent
   ],
   imports: [
     CommonModule,

@@ -1,5 +1,5 @@
 import { CoreService } from './../../services/core.service';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Booking } from '../../models/booking.model';
 
 @Component({
@@ -9,9 +9,6 @@ import { Booking } from '../../models/booking.model';
   styleUrls: ['./bookings.component.scss']
 })
 export class BookingsComponent implements OnInit {
-  @Input()
-  title = 'Build Your Body Transform Your Life';
-
   bookings: Booking[];
 
   constructor(

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Activity } from '../../models/activity.model';
 import { CoreService } from './../../services/core.service';
 
@@ -9,8 +9,6 @@ import { CoreService } from './../../services/core.service';
   styleUrls: ['./activities-dashboard.component.scss']
 })
 export class ActivitiesDashboardComponent implements OnInit {
-  @Input()
-  title = 'Build Your Body Transform Your Life';
 
   activities: Activity[];
 
