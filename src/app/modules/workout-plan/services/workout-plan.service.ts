@@ -27,17 +27,17 @@ export class WorkoutPlanService {
     return this.loading.showLoaderUntilCompleted(workoutPlan$);
   }
 
-  saveWorkoutPlan(userId: number, response : WorkoutPlanResponse){
+  saveWorkoutPlan(userId: number, response: WorkoutPlanResponse){
     let params = new HttpParams();
     params = params.set('_format', `json`);
-    const workout_routine = {
-      "uid": userId,
-      "workout_plan" : response.workout_plan
+    const workoutRoutine = {
+      uid: userId,
+      workout_plan: response
     };
     const update$ = this.httpService
-    .post('workout-plan-save', workout_routine, {params})
+    .post('workout-plan-save', workoutRoutine, {params})
     .pipe(
-			catchError(error => this.apiHandlerService.onApiError(error))
+      catchError(error => this.apiHandlerService.onApiError(error))
     );
     this.loading.showLoaderUntilCompleted(update$)
     .subscribe(success =>

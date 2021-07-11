@@ -15,7 +15,6 @@ export interface WorkoutPlanFieldGroup {
   triceps: WorkoutPlanField[];
 }
 
-
 interface WorkoutPlanField {
   ActivityIdentifier: string;
   FieldIdentifier: string;

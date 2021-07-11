@@ -7,7 +7,7 @@ export enum  WorkoutPlanFormMode {
 }
 
 export class WorkoutPlan {
-  consent ?: boolean;
+  consent?: boolean;
   mode: WorkoutPlanFormMode;
   workout_plan: WorkoutPlanFieldGroup;
 
@@ -19,9 +19,9 @@ export class WorkoutPlan {
   * Renders Formly fields based on mode
   */
   formFields() {
-    switch(this.mode){
+    switch (this.mode){
       case 'view':
-        return <FormlyFieldConfig[]>[
+        return [
           {
             type: 'stepperView',
             fieldGroupClassName: 'row-custom',
@@ -551,9 +551,9 @@ export class WorkoutPlan {
               },
             ],
           }
-        ];
+        ] as FormlyFieldConfig[];
       case 'modify':
-        return <FormlyFieldConfig[]>[
+        return [
           {
             type: 'stepper',
             fieldGroupClassName: 'row-custom',
@@ -1105,7 +1105,7 @@ export class WorkoutPlan {
               },
             ],
           }
-        ];
+        ] as FormlyFieldConfig[];
     }
   }
 }
