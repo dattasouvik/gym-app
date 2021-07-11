@@ -1,7 +1,18 @@
-<form [formGroup]="workoutForm">
-  <formly-form [model]="createWorkoutPlanModel" 
+<form
+[formGroup]="workoutForm"
+[hidden]="!loadForm">
+  <formly-form [model]="createWorkoutPlanModel"
   [fields]="workoutFields"
-  [options]="options" 
+  [options]="options"
   [form]="workoutForm">
   </formly-form>
 </form>
+
+<!-- display when not suggested by trainer -->
+<div  *ngIf="!loadForm" class="card text-center d-flex justify-content-center align-items-center border-0">
+  <div class="card-body mat-elevation-z10">
+    <p class="text-danger">
+      Please contact your trainer for Workout Routine preparation
+    </p>
+  </div>
+</div>

@@ -1,4 +1,5 @@
 export interface WorkoutPlanResponse {
+  load?: boolean;
   workout_plan: WorkoutPlanFieldGroup;
 }
 

@@ -4,7 +4,7 @@ import { FormlyFieldConfig, FormlyFormOptions } from '@ngx-formly/core';
 import { Input } from '@angular/core';
 import { WorkoutPlanService } from 'src/app/modules/workout-plan/services/workout-plan.service';
 import { WorkoutPlan, WorkoutPlanFormMode } from 'src/app/modules/workout-plan/models/workout-plan.model';
-import { WorkoutPlanResponse } from 'src/app/modules/workout-plan/models/workout-plan-response.model';
+import { WorkoutPlanFieldGroup, WorkoutPlanResponse } from 'src/app/modules/workout-plan/models/workout-plan-response.model';
 
 
 @Component({
@@ -37,8 +37,9 @@ export class CreateWorkoutPlanComponent implements OnInit {
     this.workoutFields = this.createWorkoutPlanModel.formFields();
 
     this.workoutPlanService.fetchWorkoutPlan(this.userId)
-    .subscribe( fields => {
-      (this.createWorkoutPlanModel = fields.workout_plan) as WorkoutPlanResponse;
+    .subscribe(response => {
+      const { workout_plan} = response;
+      this.createWorkoutPlanModel = workout_plan;
     });
   }
 

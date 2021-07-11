@@ -24,7 +24,7 @@ export class RegisterComponent implements OnInit, CanComponentDeactivate  {
     {value: Roles.MEMBER, viewValue: 'Member'},
     {value: Roles.TRAINER, viewValue: 'Trainer'}
   ];
-
+  private submitted = false;
   showDetails: boolean;
   constructor(
     private fb: FormBuilder,
@@ -33,6 +33,10 @@ export class RegisterComponent implements OnInit, CanComponentDeactivate  {
 
   canDeactivate(): boolean {
     /* Reusable method to check for unsaved Data */
+    // fix to deactivate trigger on submit
+    if (this.registrationForm.valid && this.submitted){
+      return true;
+    }
     if (this.registrationForm.dirty) {
       return confirm('Your changes are not saved yet. Do you like to leave ?');
     }
@@ -81,6 +85,7 @@ export class RegisterComponent implements OnInit, CanComponentDeactivate  {
   }
 
   onSubmit() {
+    this.submitted = true;
     this.userRegistration.register(this.registrationForm.value as UserRegistration);
   }
 }

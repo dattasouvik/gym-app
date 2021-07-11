@@ -1,7 +1,9 @@
-<form [formGroup]="workoutForm" (ngSubmit)="submit(createWorkoutPlanModel)">
-    <formly-form [model]="createWorkoutPlanModel" 
+<form
+[formGroup]="workoutForm"
+(ngSubmit)="submit(createWorkoutPlanModel)">
+    <formly-form [model]="createWorkoutPlanModel"
     [fields]="workoutFields"
-    [options]="options" 
+    [options]="options"
     [form]="workoutForm">
     </formly-form>
 </form>

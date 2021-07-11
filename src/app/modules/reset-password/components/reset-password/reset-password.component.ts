@@ -14,6 +14,7 @@ import { SharedPasswordValidators } from 'src/app/modules/shared/validators/shar
 export class ResetPasswordComponent implements OnInit, CanComponentDeactivate {
 
   form: FormGroup;
+  private submitted = false;
   defaultMode = 'phone';
   numberPattern = '^[0-9]+$';
   availableModes: {[key: string]: string}[] = [
@@ -25,7 +26,8 @@ export class ResetPasswordComponent implements OnInit, CanComponentDeactivate {
       value: 'phone',
       display: 'Phone'
     }
-  ]
+  ];
+
   constructor(
     private fb: FormBuilder,
     private resetPassword: ResetPasswordService
@@ -38,6 +40,10 @@ export class ResetPasswordComponent implements OnInit, CanComponentDeactivate {
 
   canDeactivate(): boolean {
     /* Reusable method to check for unsaved Data */
+    // fix to deactivate trigger on submit
+    if (this.form.valid && this.submitted){
+      return true;
+    }
     if (this.form.dirty) {
       return confirm('Your changes are not saved yet. Do you like to leave ?');
     }
@@ -45,7 +51,7 @@ export class ResetPasswordComponent implements OnInit, CanComponentDeactivate {
   }
 
 
-  private buildForm():void{
+  private buildForm(): void{
     this.form =  this.fb.group({
       mode: [this.defaultMode],
       email: ['', Validators.email],
@@ -97,7 +103,7 @@ export class ResetPasswordComponent implements OnInit, CanComponentDeactivate {
   private modeValidators(){
     this.form.get('mode').valueChanges
     .subscribe(selected => {
-      if(selected === 'phone'){
+      if (selected === 'phone'){
         this._phone.setValidators(
           [
             Validators.required,
@@ -108,13 +114,13 @@ export class ResetPasswordComponent implements OnInit, CanComponentDeactivate {
         this._email.clearValidators();
         this._email.reset();
       } else{
-        this._email.setValidators([Validators.required,Validators.email]);
+        this._email.setValidators([Validators.required, Validators.email]);
         this._phone.clearValidators();
         this._phone.reset();
       }
       this._email.updateValueAndValidity();
       this._phone.updateValueAndValidity();
-    })
+    });
   }
 
   showField(value: string): boolean {
@@ -122,7 +128,7 @@ export class ResetPasswordComponent implements OnInit, CanComponentDeactivate {
   }
 
   onSubmit(){
-    const { mode, email, phone,code,password } = this._value;
+    const { mode, email, phone, code, password } = this._value;
     const value = mode === 'phone' ? phone : email;
     const data: ResetPassword = {
       resetType : mode,
@@ -130,6 +136,7 @@ export class ResetPasswordComponent implements OnInit, CanComponentDeactivate {
       value,
       code
     };
+    this.submitted = true;
     this.resetPassword.reset(data);
   }
 }
