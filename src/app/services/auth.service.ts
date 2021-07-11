@@ -48,7 +48,7 @@ export class AuthService {
 
 
   login(user: { username: string, password: string }): Observable<any> {
-    let body= new FormData();
+    const body = new FormData();
     body.append('grant_type', 'password');
     body.append('client_id', AuthConfig.CLIENT_ID);
     body.append('client_secret', AuthConfig.CLIENT_SECRET);
@@ -61,7 +61,7 @@ export class AuthService {
         catchError(this.handleError),
         exhaustMap( (tokenInfo: Tokens) => {
           const headers = new HttpHeaders().set('Authorization', `Bearer ${tokenInfo.access_token}`);
-          return this.httpService.get<any>('user-extra-data?_format=json',{
+          return this.httpService.get<UserResponse>('user-extra-data?_format=json',{
             headers
           }).pipe(
             map(response => {
@@ -83,13 +83,12 @@ export class AuthService {
   logout() {
     const logout$ = this.httpService.get('user-logout?_format=json').pipe(
       catchError((error => this.apiHandlerService.onApiError(error))),
-      tap((response)=>{
+      tap((response) => {
         // TBD
         this.removeTokens();
         this.authStatusListenerSubject.next(false);
         this.userSubject.next(null);
-        // navigate to login
-        this.router.navigate(['/login']);
+
         // clear timer
         if (this.tokenExpirationTimer) {
           clearTimeout(this.tokenExpirationTimer);
@@ -97,6 +96,7 @@ export class AuthService {
         this.tokenExpirationTimer = null;
       })
     );
+    this.router.navigateByUrl('/');
     return this.loading.showLoaderUntilCompleted(logout$);
   }
 
@@ -110,7 +110,7 @@ export class AuthService {
     return this.httpService.post('oauth/token', body)
     .pipe(
       catchError(this.handleError),
-      exhaustMap( (tokenInfo:Tokens) => {
+      exhaustMap( (tokenInfo: Tokens) => {
         const headers = new HttpHeaders().set('Authorization', `Bearer ${tokenInfo.access_token}`);
         return this.httpService.get<any>('user-extra-data?_format=json',{
           headers
@@ -242,6 +242,9 @@ export class AuthService {
     this.storeTokenExpiryDate(expirationDate);
   }
 
+  /*
+  * Handle error response
+  */
   private handleError(errorRes: HttpErrorResponse) {
     let errorMessage = 'An unknown error occurred!';
     if (!errorRes.error || !errorRes.error.error) {
@@ -250,7 +253,11 @@ export class AuthService {
     // Modify error messages
     switch (errorRes.error.message) {
       case 'The user credentials were incorrect.':
-        errorMessage = 'Invalid Credentials';
+        errorMessage = 'Please enter correct crendentials.';
+        errorRes.error.message = errorMessage;
+        break;
+      case 'The resource owner denied the request.':
+        errorMessage = 'Your account may be blocked.Please contact with support team for help.';
         errorRes.error.message = errorMessage;
         break;
     }

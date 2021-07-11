@@ -14,7 +14,7 @@ export class ApiHandlerService {
     private messages: MessagesService
   ) { }
 
-  onApiError(error, message = this.DEFAULT_ERROR_MSG ):Observable<any> {
+  onApiError(error, message = this.DEFAULT_ERROR_MSG ): Observable<any> {
     if(error.error && error.error.errorMessage){
       this.messages.showErrors(error.error.errorMessage);
     }
@@ -28,7 +28,7 @@ export class ApiHandlerService {
   }
 
   onApiSuccessMessage(success: {statusMessage: string },  message = this.DEFAULT_SUCCESS_MSG) {
-    if(success.statusMessage){
+    if (success.statusMessage){
       this.messages.showOnSuccess(success.statusMessage);
     } else {
       this.messages.showOnSuccess(message);

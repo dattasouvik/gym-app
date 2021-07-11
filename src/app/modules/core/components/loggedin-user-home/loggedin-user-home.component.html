@@ -1,15 +1,15 @@
 <div class="container">
   <core-activities-dashboard></core-activities-dashboard>
-  <section class="menu">
+  <section class="menu" themeDetector>
       <core-banner-card-header className="section-title content__center" title="Activities">
       </core-banner-card-header>
       <ng-container>
         <div class="grid-container grid-container--fit">
           <div class="grid-element" *ngFor="let item of [1,2,3,4,5,6,7,8,12]">
-            <div class="mat-card">
-              <div class="card-body text-center">
-                <mat-icon aria-hidden="false" aria-label="Example home icon">menu_book</mat-icon>
-                <h1>Workout</h1>
+              <div class="card-wrap mat-card">
+                <div class="card-body text-center">
+                  <mat-icon aria-hidden="false" aria-label="Example home icon">menu_book</mat-icon>
+                  <h3>Workout Activities</h3>
               </div>
             </div>
           </div>

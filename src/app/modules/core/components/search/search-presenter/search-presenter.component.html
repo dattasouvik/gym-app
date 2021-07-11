@@ -1,0 +1,14 @@
+<div class="search">
+    <!-- <mat-form-field class="form-field">
+      <mat-icon matPrefix inline="true" color="primary">search</mat-icon>
+      <mat-label>Search</mat-label>
+      <input matInput type="search" #input>
+    </mat-form-field> -->
+    <mat-form-field class="form-field">
+      <mat-placeholder>
+        <span>Search</span>
+      </mat-placeholder>
+      <mat-icon matPrefix inline="true" color="primary">search</mat-icon>
+      <input matInput [formControl]="this.searchField"/>
+    </mat-form-field>
+</div>

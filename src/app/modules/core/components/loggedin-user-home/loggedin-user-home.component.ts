@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { fromEvent } from 'rxjs';
+import { delay, map, mapTo, merge, repeat, share, switchMap, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-loggedin-user-home',
@@ -7,9 +9,6 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoggedinUserHomeComponent implements OnInit {
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
+  ngOnInit() {}
 
 }

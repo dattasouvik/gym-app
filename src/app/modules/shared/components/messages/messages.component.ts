@@ -5,39 +5,39 @@ import { Message, MessageType } from 'src/app/modules/shared/model/message.model
 import { MessagesService } from 'src/app/modules/shared/services/messages.service';
 
 @Component({
-	selector: 'messages',
-	templateUrl: './messages.component.html',
-	styleUrls: [ './messages.component.scss' ]
+  selector: 'messages',
+  templateUrl: './messages.component.html',
+  styleUrls: ['./messages.component.scss']
 })
 export class MessagesComponent implements OnInit {
-	showMessages = false;
-  clearMesaageTimer = 2500;
+  showMessages = false;
+  clearMesaageTimer = 4000;
 
-	messages$: Observable<Message>;
+  messages$: Observable<Message>;
 
-	constructor(public messagesService: MessagesService) {}
+  constructor(public messagesService: MessagesService) { }
 
-	ngOnInit() {
-		this.messages$ = this.messagesService.notify$.pipe(
+  ngOnInit() {
+    this.messages$ = this.messagesService.notify$.pipe(
       tap((_) => {
         this.showMessages = true;
         setTimeout(() => this.onClose(), this.clearMesaageTimer);
       }));
-	}
-
-	onClose() {
-		this.showMessages = false;
   }
 
-  setMessageColor(value: MessageType):string{
+  onClose() {
+    this.showMessages = false;
+  }
+
+  setMessageColor(value: MessageType): string {
     let color = 'NONE';
-    switch(value){
+    switch (value) {
       case MessageType.ERROR:
         color = 'ERROR';
-      break;
+        break;
       case MessageType.SUCCESS:
         color = 'SUCCESS';
-      break;
+        break;
       default:
         break;
     }

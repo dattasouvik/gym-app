@@ -29,6 +29,7 @@
 @import 'components/card';
 @import 'components/buttons';
 @import 'components/links';
+@import 'components/icons';
 @import 'components/video';
 @import 'components/activities';
 
@@ -36,7 +37,7 @@
 @import 'overrides/override';
 
 /* Load material icons offline */
-@import 'icons/material-icons';
+@import 'icons/offline-icons';
 
 /* Load animation library */
 @import '~animate.css/animate.min';
@@ -45,10 +46,10 @@
 @include angular-material-typography($typography);
 
 /* You can add global styles to this file, and also import other style files */
-
 html, body { height: 100%; }
 body {
   margin: 0;
+  padding: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 

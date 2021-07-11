@@ -16,14 +16,14 @@ export class MessagesService {
 
   showErrors(...errors: string[]) {
     this.subject.next({
-      body:errors,
+      body: errors,
       type: MessageType.ERROR
     });
   }
 
   showOnSuccess(...messages: string[]) {
     this.subject.next({
-      body:messages,
+      body: messages,
       type: MessageType.SUCCESS
     });
   }

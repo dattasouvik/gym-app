@@ -1,7 +1,12 @@
 @import './../abstracts/variables';
 
 /* Side navigation Styling starts here */
-.side-navigation {
+.sidenav-container .side-navigation {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
+
   .menu-item-active {
     background-color: $side-navigation-primaryColor;
   }
@@ -14,3 +19,9 @@
 }
 
 /* Side navigation Styling ends here */
+
+/* Side drawer display override */
+.sidenav-container .mat-drawer-inner-container {
+    display: flex;
+    flex-direction: column;
+}

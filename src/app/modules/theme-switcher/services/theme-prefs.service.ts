@@ -1,4 +1,5 @@
 import { Injectable, Renderer2, RendererFactory2 } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 export enum ThemeOption {
   LIGHT = 'light',
@@ -15,7 +16,10 @@ const DARK_THEME = 'dark-theme';
 })
 export class ThemePrefsService {
 
-  private _renderer: Renderer2;
+  private renderer: Renderer2;
+
+  private themeSubject = new BehaviorSubject<string>(LIGHT_THEME);
+  public readonly theme$: Observable<string> = this.themeSubject.asObservable();
 
   get preferredTheme(): ThemeOption {
     return (localStorage.getItem(KEY) as ThemeOption) || DEFAULT;
@@ -25,16 +29,18 @@ export class ThemePrefsService {
     localStorage.setItem(KEY, value);
 
     if (value === ThemeOption.DARK) {
-      this._renderer.addClass(document.body, DARK_THEME);
-      this._renderer.removeClass(document.body, LIGHT_THEME);
+      this.themeSubject.next(DARK_THEME);
+      this.renderer.addClass(document.body, DARK_THEME);
+      this.renderer.removeClass(document.body, LIGHT_THEME);
     } else {
-      this._renderer.addClass(document.body, LIGHT_THEME);
-      this._renderer.removeClass(document.body, DARK_THEME);
+      this.themeSubject.next(LIGHT_THEME);
+      this.renderer.addClass(document.body, LIGHT_THEME);
+      this.renderer.removeClass(document.body, DARK_THEME);
     }
   }
 
   constructor(rendererFactory: RendererFactory2) {
-    this._renderer = rendererFactory.createRenderer('body', null);
+    this.renderer = rendererFactory.createRenderer('body', null);
     this.preferredTheme = this.preferredTheme;
   }
 }

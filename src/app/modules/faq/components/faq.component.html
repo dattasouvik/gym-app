@@ -1,0 +1,42 @@
+<div class="example-action-buttons">
+  <core-search-presenter  (search)="this.search$.next($event)">
+  </core-search-presenter>
+  <!-- <mat-form-field class="example-form-field">
+  <mat-label>Clearable input</mat-label>
+  <input matInput type="text" [(ngModel)]="value" (blur)=filterAccordionList(value)>
+  <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-form-field> -->
+  <button mat-button (click)="openAllPanels()">Expand All</button>
+  <button mat-button (click)="closeAllPanels()">Collapse All</button>
+</div>
+<mat-accordion displayMode="flat" [multi]="true" #accordion="matAccordion">
+  <mat-expansion-panel [disabled]="panel.isDisabled"
+  [expanded]="step === i" [hideToggle]="false"
+    (opened)="beforePanelOpened(panel,i)" (closed)="beforePanelClosed(panel)" (afterCollapse)="afterPanelClosed($event)"
+    (afterExpand)="afterPanelOpened($event)" *ngFor="let panel of accordionList;let i =index;let isLast=last; let isFirst=first;" #mapanel="matExpansionPanel">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <b>Title: {{panel.title}}</b>
+      </mat-panel-title>
+      <mat-panel-description>
+
+        Currently I am {{panel.isExpanded ? 'open' : 'closed'}}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <p>{{panel.description}}</p>
+    <mat-action-row>
+      <button
+      mat-button color="warn"
+      *ngIf="!isFirst"
+      (click)="prevStep()">Previous</button>
+      <button
+      mat-button color="primary"
+      *ngIf="!isLast"
+      (click)="nextStep()">Next</button>
+      <button mat-flat-button (click)="mapanel.close()">Click to close</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+</mat-accordion>

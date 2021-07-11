@@ -10,7 +10,7 @@ export class TokenInterceptor implements HttpInterceptor {
   private isRefreshing = false;
   private refreshTokenSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
 
-  private errorStatusMessage: [string] = ['invalid_credentials'];
+  private errorStatusMessage: string[] = ['invalid_credentials', 'access_denied'];
 
   constructor(public authService: AuthService) { }
 

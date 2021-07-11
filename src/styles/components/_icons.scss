@@ -1,0 +1,9 @@
+@import './../abstracts/mixins';
+
+#faq-icon{
+  @include icon-effects(
+    $defautt-text-color,
+    #42378f,
+    linear-gradient(315deg, #42378f 0%, #f53844 74%)
+  );
+}

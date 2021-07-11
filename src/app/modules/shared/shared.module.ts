@@ -6,12 +6,13 @@ import { MessagesComponent } from './components/messages/messages.component';
 import { RedirectComponent } from './components/redirect/redirect.component';
 import { BackButtonDirective } from './directives/back-button.directive';
 import { HostDirective } from './directives/host.directive';
+import { ThemeDetectorDirective } from './directives/theme-detector.directive';
 
 
 
 @NgModule({
   declarations: [
-    LoadingComponent, MessagesComponent, RedirectComponent, BackButtonDirective, HostDirective
+    LoadingComponent, MessagesComponent, RedirectComponent, BackButtonDirective, HostDirective, ThemeDetectorDirective
   ],
   imports: [
     CommonModule,
@@ -22,7 +23,8 @@ import { HostDirective } from './directives/host.directive';
     MessagesComponent,
     RedirectComponent,
     BackButtonDirective,
-    HostDirective
+    HostDirective,
+    ThemeDetectorDirective
   ]
 })
 export class SharedModule { }

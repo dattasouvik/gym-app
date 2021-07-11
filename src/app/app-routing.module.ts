@@ -63,7 +63,7 @@ const routes: Routes = [
     canLoad: [CanLoadAuthGuard]
   },
   {
-    path: 'health-status', //To be moved to trainees module later
+    path: 'health-status', // To be moved to trainees module later
     loadChildren: () => import('./modules/health-card/health-card.module')
       .then(m => m.HealthCardModule),
     canLoad: [CanLoadAuthGuard]
@@ -95,6 +95,9 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
+  },
+  { path: 'faq',
+    loadChildren: () => import('./modules/faq/faq.module').then(m => m.FaqModule)
   },
   {
     path: '**',

@@ -17,6 +17,8 @@ import { SideNavigationComponent } from './components/side-navigation/side-navig
 import { RouterModule } from '@angular/router';
 import { FluidFormComponent } from './components/layout/fluid-form/fluid-form.component';
 import { BannerCardHeaderComponent } from './components/layout/banner-card-header/banner-card-header.component';
+import { SearchPresenterComponent } from './components/search/search-presenter/search-presenter.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,8 @@ import { BannerCardHeaderComponent } from './components/layout/banner-card-heade
     LoggedinUserHomeComponent,
     SideNavigationComponent,
     FluidFormComponent,
-    BannerCardHeaderComponent
+    BannerCardHeaderComponent,
+    SearchPresenterComponent
   ],
   imports: [
     CommonModule,
@@ -39,13 +42,16 @@ import { BannerCardHeaderComponent } from './components/layout/banner-card-heade
     MaterialDesignModule,
     DefaultImageModule,
     SharedModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: [
     NotFoundComponent,
     HomeComponent,
     SideNavigationComponent,
     FluidFormComponent,
+    SearchPresenterComponent,
     DefaultImageModule
   ]
 })

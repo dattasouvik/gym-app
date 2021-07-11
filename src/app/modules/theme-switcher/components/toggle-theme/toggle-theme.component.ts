@@ -13,7 +13,7 @@ export class ToggleThemeComponent implements OnInit,OnDestroy {
 
   toggleTheme = new FormControl(false);
   destroy$ = new Subject();
-  showtoggleIcon:string;
+  showtoggleIcon: string;
 
   constructor( private themePrefsService: ThemePrefsService ) { }
 
@@ -31,12 +31,12 @@ export class ToggleThemeComponent implements OnInit,OnDestroy {
         this.themePrefsService.preferredTheme = toggleValue
           ? ThemeOption.DARK
           : ThemeOption.LIGHT;
-          this.showtoggleIcon = this.updateIcon(this.themePrefsService.preferredTheme);  
+        this.showtoggleIcon = this.updateIcon(this.themePrefsService.preferredTheme);
       });
   }
 
-  updateIcon(themeName:string):string{
-    let iconName:string;
+  updateIcon(themeName: string): string{
+    let iconName: string;
     switch(themeName){
       case ThemeOption.LIGHT:
         iconName = `brightness_5`;

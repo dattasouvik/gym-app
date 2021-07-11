@@ -51,3 +51,7 @@ https://itnext.io/using-renderer2-in-angular-8f80da6756f8
 
 ## SCRIPT Template
 <b>https://gist.github.com/adamreisnz/9edf1f48e19c104b81f8102a27de0940</b>
+
+## Directives
+<b>https://codecraft.tv/courses/angular/custom-directives/inputs-and-configuration/</b>
+<b>https://coryrylan.com/blog/creating-a-custom-debounce-click-directive-in-angular</b>
